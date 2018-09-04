@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+</head>
+
+
+<body>
+
+		<section layout:fragment="content" >
+		
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">Blocos</li>
+			  </ol>
+			</nav>
+			
+		<div class="container">
+			<div class="row">
+						<div class="col-md-12">
+							<h1>
+								Cadastro bloco
+							</h1>
+						</div>
+					</div>
+		</div>
+			
+		<div class="container border rounded p-3" style="border-color: graytext;">
+				
+					<div class="row">
+						<div class="col-md-12">
+<!-- 							<h1> -->
+<!-- 								Cadastro bloco -->
+<!-- 							</h1> -->
+							<p>
+							* Campos obrigatórios
+							</p>
+						</div>
+					</div>
+				
+
+			
+				<div class="row">
+					<div class="col-md-12" >
+						<form method="POST" class="form-vertical"
+						th:object="${bloco}" th:action="@{/blocos/salvar}">
+						
+						<div class="alert  alert-danger  alert-dismissible" role="alert" 
+		                th:if="${#fields.hasAnyErrors()}">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+		
+							<div th:each="erro: ${#fields.detailedErrors()}">
+								<i class="fa fa-exclamation-circle"></i>
+								
+								<span th:text="${erro.message}">Mensagem erro.</span>
+							</div>
+						</div>
+						
+							 <div class="form-group">
+							 <label >*Nome Bloco</label>
+							  <input type="text" class="form-control" th:field="*{nome}"  placeholder="Informe o nome do bloco">		  
+							 </div>
+							 
+							 <div class="form-group">
+							 <label >*Numero máximo de vagas</label>
+							  <input type="number" class="form-control" th:field="*{maxVagas}"  placeholder="Numero máximo de vagas">		  
+							 </div>
+							 
+							 <hr />
+						
+							<div class="btn-group">
+							<button class="btn  btn-success" type="submit"><i class="fa fa-save"></i> Cadastrar</button>			
+							<a class="btn  btn-danger " role="group" th:href="@{/blocos}"><i class="fa fa-times"></i> Cancelar</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			
+		</div>
+		</section>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+<!-- 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-veiculos.css}" /> -->
+</head>
+
+
+<body>
+
+		<section layout:fragment="content">
+		
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">Relatórios</li>
+			  </ol>
+			</nav>
+
+			<div class="container">
+			
+			<div class="row" style="padding-top: 10px;">
+			
+				<div class="col-md-6">
+					
+					<button type="button" class="btn btn-success" >
+							  Validar
+							</button>
+						    <button type="button" class="btn btn-danger" >
+							  Remover
+					</button>
+				</div>
+				<div class="col-md-6">
+					
+				</div>
+			</div>
+			
+			
+			<div class="row" style="padding-top: 10px;">
+				<div class="col-md-12">
+					<div class="table-responsive">
+					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+						<thead>
+							<tr>
+								<th>Código</th>
+								<th>Nome</th>
+								<th>Data de realização</th>
+								<th>Excluir</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="relatorio : ${relatorios}">
+								<td class="text-center" th:text=${relatorio.id}>1</td>
+
+								<td th:text=${relatorio.nome}>Nome
+								</td>
+
+								<td  th:text=${relatorio.data}>Telefone</td>
+								
+								<td class="text-center">
+									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${relatorio.nome} + '?\');'"
+									th:action="@{/relatorios/{id}(id=${relatorio.id})}">
+										<input type="hidden" name="_method" value="DELETE" />
+									
+										<button type="submit" class="btn btn-danger btn-xs">
+											<span class="fa fa-trash"></span>
+										</button>
+									</form>
+								</td>
+							</tr>
+
+							<tr th:if="${relatorios == null}">
+								<td colspan="5">Nenhum relatorio cadastrado</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				</div>
+			</div>	
+			
+			</div>	
+			
+		</section>
+		
+
+</body>
+</html>

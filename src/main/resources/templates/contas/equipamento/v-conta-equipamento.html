@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+<!-- 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-veiculos.css}" /> -->
+</head>
+
+
+<body>
+
+		<section layout:fragment="content">
+		
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">Documentação de equipamentos</li>
+			  </ol>
+			</nav>
+
+			<div class="container">
+			
+			<div class="row" style="padding-top: 10px;">
+			
+				<div class="col-md-12">
+					<div class="alert  alert-info" th:if="${contas.empty}">
+						<i class="fa fa-info"></i>
+	
+						<span>Não existem contas cadastradas!</span>
+						<a th:href="@{/contas/equipamento/novo}" >Clique aqui para adicionar um novo documento</a>
+						
+					</div>
+					
+					<div th:if="${!contas.empty}" style="margin-bottom: 10px;" >
+						<a class="btn btn-outline-success" th:href="@{/contas/equipamento/novo}" > 
+	 							 <span class="fa fa-plus"></span> Adicionar conta 
+						</a>
+					</div>
+					
+					<form  th:object="${filtro}" th:action="@{/contas/equipamento}" method="POST" 
+						class="form-default form-horizontal" >
+					<div class="input-group mb-3">
+							  <input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do equipamento" >
+							  <div class="input-group-append">
+							    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
+<!-- 							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button> -->
+							  </div>
+					</div>
+					</form>
+				</div>
+			
+<!-- 				<div class="col-md-6"> -->
+<!-- 					<a class="btn btn-success  btn-lg" th:href="@{/contas/equipamento/novo}" > -->
+<!-- 							  Adicionar documento -->
+<!-- 							</a> -->
+					
+<!-- 				</div> -->
+<!-- 				<div class="col-md-6"> -->
+<!-- 				</div> -->
+			</div>
+			
+			
+			<div class="row" style="padding-top: 10px;">
+				<div class="col-md-12">
+					<div class="table-responsive">
+					<table  class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+						<thead>
+							<tr>
+								<th>Código</th>
+								<th>Equipamento</th>
+								<th>Estado</th>
+								<th>Lugar de reparos</th>
+								<th>Editar</th>
+								<th>Excluir</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="conta : ${contas}">
+								<td class="text-center" th:text=${conta.id}>1</td>
+
+								<td th:text=${conta.nome}>Nome
+								</td>
+
+								<td  th:text=${conta.estado}>Estado</td>
+								
+								<td  th:text=${conta.lugarReparo}>Lugar reparo</td>
+								
+								<td class="text-center">
+									<a class="btn btn-info btn-xs" th:href="@{/contas/equipamento/editar/{id}(id=${conta.id})}" ><span class="fa fa-pencil-alt"></span></a>
+								</td>
+								
+								<td class="text-center">
+									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${conta.nome} + '?\');'"
+									th:action="@{/contas/{id}(id=${conta.id})}">
+										<input type="hidden" name="_method" value="DELETE" />
+									
+										<button type="submit" class="btn btn-danger btn-xs">
+											<span class="fa fa-trash"></span>
+										</button>
+									</form>
+								</td>
+							</tr>
+
+							<tr th:if="${contas.empty}">
+								<td colspan="6">Nenhum conta cadastrado</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				</div>
+			</div>	
+			
+			</div>	
+			
+		</section>
+		
+
+</body>
+</html>

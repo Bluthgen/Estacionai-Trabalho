@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+</head>
+
+
+<body>
+
+		<section layout:fragment="content">
+			<div class="page-header">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-8">
+							<h1>
+								Cadastro veiculo
+							</h1>
+						</div>
+
+						<div class="col-xs-4">
+							<div class="aw-page-header-controls">
+								<a class="btn btn-primary" th:href="@{/veiculos}">
+									<i class="fa fa-table"></i>
+
+									<span class="hidden-xs hidden-sm">Lista veiculos</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<form method="POST" class="form-vertical  js-form-loading"
+				th:object="${veiculo}" th:action="@{/veiculos/novo}">
+				
+				<div class="alert  alert-danger  alert-dismissible" role="alert" 
+                th:if="${#fields.hasAnyErrors()}">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+					<div th:each="erro: ${#fields.detailedErrors()}">
+						<i class="fa fa-exclamation-circle"></i>
+						
+						<span th:text="${erro.message}">Mensagem erro.</span>
+					</div>
+				</div>
+				
+				
+				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+					<i class="fa fa-check-circle"></i>
+
+					<span th:text="${mensagem}">Mensagem sucesso!</span>
+				</div>
+				
+					<input id="id" type="hidden" th:field="*{id}" value="${veiculo.id}" />
+					<div class="form-group">
+						<label>*Placa</label>
+
+						<input id="placa" type="text" class="form-control" th:field="*{placa}" />
+					</div>
+					<div class="form-group">
+						<label >*Modelo</label>
+					      <input type="text" class="form-control" th:field="*{modelo}" placeholder="Digite o modelo">		  
+					 </div>
+					 <div class="form-group">
+					 <label >*Marca</label>
+					      <input type="text" class="form-control" th:field="*{marca}" placeholder="Digite a marca">		  
+					 </div>
+					 <div class="form-group">
+					 	<label>*Tipo:</label>
+						 <select id="tipo" th:field="*{tipo}">
+					    	<option value="CARRO" selected="selected">Carro</option>
+					    	<option value="MOTO">Moto</option>
+					    </select>
+				    </div>
+				    
+					 <div class="form-group">
+					 <label >*Ano</label>
+					      <input type="number" class="form-control" th:field="*{ano}" placeholder="Informe o ano">		  
+					 </div>
+					
+				
+
+					<div class="form-group">
+						<button class="btn  btn-primary" th:if="${veiculo.id == null}" type="submit">Salvar</button>
+						<button class="btn  btn-primary" th:if="${veiculo.id != null}" type="submit">Atualizar</button>
+						<a class="btn  btn-primary" th:if="${veiculo.id != null}" th:href="@{/veiculos/novo}">Novo</a>
+					</div>
+				</form>
+			</div>
+		</section>
+
+</body>
+</html>

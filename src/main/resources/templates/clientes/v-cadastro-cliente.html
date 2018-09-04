@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+</head>
+
+
+<body>
+
+		<section layout:fragment="content">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/clientes}">Clientes</a></li>
+			    <li class="breadcrumb-item active" aria-current="page" th:if="${cliente.id == null}">Cadastro</li>
+			    <li class="breadcrumb-item active" aria-current="page" th:if="${cliente.id != null}" th:text="${cliente.nome}">Editar</li>
+			  </ol>
+			</nav>
+			
+			<div class="container">
+				<div class="row">
+						<div class="col-md-12">
+						<h1 th:if="${cliente.id != null}">
+								Editar cliente
+							</h1>
+							<h1 th:if="${cliente.id == null}">
+								Cadastro cliente
+						</h1>
+						</div>
+					</div>
+			</div>
+			
+		
+				<div class="container border rounded p-3" style="border-color: graytext;">
+					<div class="row">
+						<div class="col-md-12">
+							
+							<p>
+							* Campos obrigatórios
+							</p>
+						</div>
+					</div>
+				
+
+			
+				<form method="POST" class="form-vertical"
+				th:object="${cliente}" th:action="@{/clientes/novo}">
+				
+				<div class="alert  alert-danger  alert-dismissible" role="alert" 
+                th:if="${#fields.hasAnyErrors()}">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+					<div th:each="erro: ${#fields.detailedErrors()}">
+						<i class="fa fa-exclamation-circle"></i>
+						
+						<span th:text="${erro.message}">Mensagem erro.</span>
+					</div>
+				</div>
+				
+				
+				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+					<i class="fa fa-check-circle"></i>
+
+					<span th:text="${mensagem}">Mensagem sucesso!</span>
+				</div>
+				
+					<input id="id" type="hidden" th:field="*{id}" value="${cliente.id}" />
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>*Nome</label>
+							<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome" />
+						</div>
+						<div class="form-group col-md-6">
+							<label >*Telefone</label>
+						      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">	
+						      <small class="form-text text-muted">
+						      	Exemplo: (99) 9999-9999
+							  </small>	  
+						 </div>
+					 </div>
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 <label >*Endereço</label>
+						      <input type="text" class="form-control" th:field="*{endereco}" placeholder="Digite o Endereço">		  
+						 </div>
+						 <div class="form-group col-md-6">
+						 <label >*CPF</label>
+						      <input type="text" class="form-control js-cpf" th:field="*{cpf}" placeholder="Digite o Cpf">		  
+						 	  <small class="form-text text-muted">
+						      	Exemplo: 999.999.999-99
+							  </small>	
+						 </div>
+					 </div>
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 	<label>*Tipo de pagamento:</label>
+							 <select id="tipo" th:field="*{tipoPagamento}" class="form-control">
+						    	<option value="1" selected="selected">Cartao de crédito</option>
+						    	<option value="2">Boleto</option>
+						    </select>
+					    </div>
+					    
+						 <div class="form-group col-md-6">
+						 <label >*Numero de vagas</label>
+						      <input type="number" class="form-control" th:field="*{numeroVagas}" placeholder="Informe o numero de vagas">		  
+						 </div>
+					 </div>
+					
+					<div th:if="${cliente.id != null}">
+					 	<div class="form-row">
+					 		<div class="form-group col-md-12">
+					 			<label >Cadastrar veiculo para <span th:text="${cliente.nome}"></span></label>
+					 		</div>
+					 		<div class="form-group col-md-3">	<a class="btn btn-block  btn-primary" th:href="@{/clientes/veiculos/{id}(id=${cliente.id})}"><i class="fa fa-angle-double-right"></i> Veiculos registrados</a>
+							</div>
+<!-- 					 		<div class="form-group col-md-3">	<button class="btn btn-block  btn-primary" type="submit"><i class="fa fa-users"></i> Dependente</button> -->
+<!-- 							</div> -->
+							<div class="form-group col-md-9"></div>
+					 	</div>					 
+					 </div>
+				
+					<hr />
+
+					<div class="btn-group">
+						<button class="btn  btn-success" role="group" th:if="${cliente.id == null}" type="submit"> <i class="fa fa-save"></i> Cadastrar</button>
+						<button class="btn  btn-success" th:if="${cliente.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
+						<a class="btn  btn-danger " role="group" th:href="@{/clientes}"><i class="fa fa-times"></i> Cancelar</a>
+					</div>
+				</form>
+			</div>
+		</section>
+
+</body>
+</html>

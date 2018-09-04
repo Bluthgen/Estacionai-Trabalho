@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+</head>
+
+
+<body>
+
+		<section layout:fragment="content">
+			<div class="page-header">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-8">
+							<h1>
+								Cadastro bloco
+							</h1>
+						</div>
+
+						<div class="col-xs-4">
+							<div class="aw-page-header-controls">
+								<a class="btn btn-primary" th:href="@{/blocos}">
+									<i class="fa fa-table"></i>
+
+									<span class="hidden-xs hidden-sm">Lista blocos</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<form method="POST" class="form-vertical  js-form-loading"
+				th:object="${bloco}" th:action="@{/blocos/novo}">
+				
+				<div class="alert  alert-danger  alert-dismissible" role="alert" 
+                th:if="${#fields.hasAnyErrors()}">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+					<div th:each="erro: ${#fields.detailedErrors()}">
+						<i class="fa fa-exclamation-circle"></i>
+						
+						<span th:text="${erro.message}">Mensagem erro.</span>
+					</div>
+				</div>
+				
+				
+				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+					<i class="fa fa-check-circle"></i>
+
+					<span th:text="${mensagem}">Mensagem sucesso!</span>
+				</div>
+				
+					<input id="id" type="hidden" th:field="*{id}" value="${bloco.id}" />
+					<input id="numVagas" type="hidden" th:field="*{numVagas}" value="1" />
+					 <div class="form-group">
+					 <label >*Numero maximo de vagas</label>
+					      <input type="number" class="form-control" th:field="*{maxVagas}" placeholder="Informe o numero maximo de vagas">		  
+					 </div>
+					
+					 <div class="form-group">
+					 	<label>*Selecione as vagas:</label>
+					    <select th:field="*{vagas}"  multiple >
+				            <option th:each="vaga : ${vagas}" 
+				                    th:value="${vaga.id}"
+				                    th:text="${vaga.id}">Vaga id</option>
+				        </select>
+				    </div>
+					
+				
+
+					<div class="form-group">
+						<button class="btn  btn-primary" th:if="${bloco.id == null}" type="submit">Salvar</button>
+						<button class="btn  btn-primary" th:if="${bloco.id != null}" type="submit">Atualizar</button>
+						<a class="btn  btn-primary" th:if="${bloco.id != null}" th:href="@{/blocos/novo}">Novo</a>
+					</div>
+				</form>
+			</div>
+		</section>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+<!-- 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-veiculos.css}" /> -->
+</head>
+
+
+<body>
+
+		<section layout:fragment="content">
+		<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">Funcionários</li>
+			  </ol>
+			</nav>
+				
+				<div class="container">
+					<div class="row">
+					
+					
+					<div class="col-md-12">
+						
+						<div class="alert  alert-info" th:if="${funcionarios.empty}">
+							<i class="fa fa-info"></i>
+		
+							<span>Não existem funcionários cadastrado!</span>
+							<a th:href="@{/funcionarios/novo}" >Clique aqui para adicionar um novo funcionário</a>
+							
+						</div>
+						
+						<div th:if="${!funcionarios.empty}" style="margin-bottom: 10px;" >
+						<a class="btn btn-outline-success" th:href="@{/funcionarios/novo}" > 
+	 							 <span class="fa fa-plus"></span> Adicionar funcionario 
+						</a>
+						</div>
+						
+						<form  th:object="${filtro}" th:action="@{/funcionarios}" method="POST" 
+						class="form-default form-horizontal" >
+						<div class="collapse" id="collapseNormalFuncionario" >
+							<div class="input-group mb-3">
+							  <input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do funcionario" >
+							  <div class="input-group-append">
+							    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
+							   	<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseAvancadaFuncionario" th:onclick="${'expandirFuncionario()'}"><span class="fa fa-angle-double-down"></span> Avançada</button>
+							  </div>
+							</div>
+						</div>
+						</form>
+						
+						
+						<form  th:object="${filtro}" th:action="@{/funcionarios}" method="POST" 
+						class="form-default form-horizontal" >
+							<div class="collapse" id="collapseAvancadaFuncionario">
+							 
+						<h5>Busca avançada</h5>
+						<hr />
+						<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>*Nome</label>
+	
+							<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome" />
+						</div>
+						<div class="form-group col-md-6">
+							<label >*Telefone</label>
+						      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">		  
+						 <small class="form-text text-muted">
+						      	Exemplo: (99) 9999-9999
+							  </small>	
+						 </div>
+					 </div>
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 <label >*Função</label>
+						      <input type="text" class="form-control" th:field="*{funcao}" placeholder="Digite a Função">		  
+						 	<small class="form-text text-muted">
+						      	Exemplo: Caixa, Cobrador...
+							  </small>	
+						 </div>
+						 <div class="form-group col-md-6">
+						 <label >*CPF</label>
+						      <input type="text" class="form-control js-cpf" th:field="*{cpf}" placeholder="Digite o Cpf">		  
+						 	<small class="form-text text-muted">
+						      	Exemplo: 999.999.999-99
+							  </small>	
+						 </div>
+					 </div>
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 	<label>*PIS:</label>
+							 <input type="text" class="form-control js-cpf" th:field="*{pis}" placeholder="Digite o PIS">
+					    	<small class="form-text text-muted">
+						      	Exemplo: 999.999.999-99
+							  </small>	
+					    </div>
+					    
+						 <div class="form-group col-md-6">
+						 <label >*Nível de Permissão</label>
+						 <select id="nivelPermissao" th:field="*{nivelPermissao}" th:onchange="${'showSenha()'}" class="form-control">
+						    	<option value="1" selected="selected">Normal</option>
+						    	<option value="2" >Gerente</option>
+						    </select>
+<!-- 						      <input type="number" class="form-control" th:field="*{nivelPermissao}" placeholder="Informe o nível de permissão">		   -->
+						 </div>
+					 </div>
+					 
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 	<button class="btn btn-outline-secondary" type="submit" th:onclick="${'expandirFuncionario()'}"><span class="fa fa-search"></span> Pesquisar</button>
+							  
+					    </div>
+					    
+						 <div class="form-group col-md-6">
+						  	<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseAvancadaFuncionario" th:onclick="${'despandirFuncionario()'}"  ><span class="fa fa-angle-double-up"></span> Normal</button>
+							  
+						 </div>
+					 </div>
+					 
+					 </div>
+					</form>
+						
+						
+						
+						</div>
+					
+					
+<!-- 						<div class="col-md-6"> -->
+<!-- 								<button class="btn btn-block  btn-primary" type="submit"><i class="fa fa-user"></i> Adicionar funcionário</button>						 -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-6"> -->
+<!-- 							<form method="POST" class="form-vertical"> -->
+							
+<!-- 							 <div class="form-group"> -->
+<!-- 							 <label >Data</label> -->
+<!-- 							  <input type="datetime-local" readonly="readonly" class="form-control" >		   -->
+<!-- 							 </div> -->
+							 
+<!-- 							 <div class="form-group"> -->
+<!-- 							 <label >Hora</label> -->
+<!-- 							  <input type="datetime" readonly="readonly" class="form-control">		   -->
+<!-- 							 </div> -->
+							
+<!-- 							<div class="form-group"> -->
+<!-- 							 <label >Procurar</label> -->
+<!-- 							  <input type="text"  class="form-control" placeholder="Informe o nome do funcionário">		   -->
+<!-- 							 </div> -->
+						
+		
+<!-- 							<div class="form-group"> -->
+<!-- 								<button class="btn  btn-success btn-block" type="submit"><i class="fa fa-search"></i> Buscar</button> -->
+<!-- 							</div> -->
+<!-- 						</form> -->
+<!-- 						</div> -->
+					</div>
+				</div>
+
+			<div class="container">
+			<div class="row">
+			<div class="col-md-12">
+			
+<!-- 				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}"> -->
+<!-- 					<i class="fa fa-check-circle"></i> -->
+
+<!-- 					<span th:text="${mensagem}">Mensagem sucesso!</span> -->
+<!-- 				</div> -->
+				
+<!-- 				<form  th:object="${filtro}" th:action="@{/funcionarios}" method="POST" -->
+<!-- 							class="form-default form-horizontal" > -->
+					
+<!-- 					<div class="form-group"> -->
+<!-- 						<label>Nome</label> -->
+
+<!-- 						<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome"/> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label >Telefone</label> -->
+<!-- 					      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">		   -->
+<!-- 					 </div> -->
+<!-- 					 <div class="form-group"> -->
+<!-- 					 <label >Função</label> -->
+<!-- 					      <input type="text" class="form-control" th:field="*{funcao}" placeholder="Digite a Função">		   -->
+<!-- 					 </div> -->
+<!-- 					 <div class="form-group"> -->
+<!-- 					 <label >CPF</label> -->
+<!-- 					      <input type="text" class="form-control js-cpf" th:field="*{cpf}" placeholder="Digite o Cpf">		   -->
+<!-- 					 </div> -->
+<!-- 					 <div class="form-group"> -->
+<!-- 					      <input type="text" class="form-control js-cpf" th:field="*{pis}" placeholder="Digite o PIS">		   --><!-- 				    </div> -->
+				    
+<!-- 					 <div class="form-group"> -->
+<!-- 					 <label >Nível de Permissão</label> -->
+<!-- 					      <input type="number" class="form-control" th:field="*{nivelPermissao}" placeholder="Informe o nível de permissão">		   -->
+<!-- 					 </div> -->
+					
+<!-- 					<div class="form-group"> -->
+<!-- 					      <button class="btn  btn-primary" type="submit"><i class="fa fa-search"></i> Pesquisar</button> -->
+<!-- 					      <a class="btn btn-primary" th:href="@{/funcionarios}"> -->
+<!-- 							<span class="hidden-xs hidden-sm"><i class="fa fa-search"></i> Buscar todos</span> -->
+<!-- 						</a> -->
+<!-- 					</div>    -->
+<!-- 				</form> -->
+				
+<!-- 				<hr /> -->
+
+				<div class="table-responsive">
+					<table id="tabela-funcionarios" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+						<thead>
+							<tr>
+								<th>Código</th>
+								<th>Nome</th>
+								<th >Telefone</th>
+								<th >CPF</th>
+								<th>Editar</th>
+								<th>Excluir</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="funcionario : ${funcionarios}">
+								<td class="text-center" th:text=${funcionario.id}>1</td>
+
+								<td th:text=${funcionario.nome}>Nome
+								</td>
+
+								<td  th:text=${funcionario.telefone}>Telefone</td>
+
+								<td  th:text=${funcionario.cpf}>CPF</td>
+
+								<td class="text-center">
+									<a class="btn btn-info btn-xs" th:href="@{/funcionarios/editar/{id}(id=${funcionario.id})}" ><span class="fa fa-pencil-alt"></span></a>
+								</td>
+								
+								<td class="text-center">
+									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${funcionario.nome} + '?\');'"
+									th:action="@{/funcionarios/{id}(id=${funcionario.id})}">
+										<input type="hidden" name="_method" value="DELETE" />
+									
+										<button type="submit" class="btn btn-danger btn-xs">
+											<span class="fa fa-trash"></span>
+										</button>
+									</form>
+								</td>
+							</tr>
+
+							<tr th:if="${funcionarios.empty}">
+								<td colspan="6">Nenhum funcionário cadastrado</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+			</div>
+			
+			
+			<script type="text/javascript">
+			
+				function expandirFuncionario()
+				{
+					
+					$('#collapseNormalFuncionario').collapse('hide');
+									
+				}
+				
+				function despandirFuncionario()
+				{
+					
+					$('#collapseNormalFuncionario').collapse('show');
+									
+				}
+			
+			</script>
+			
+		</section>
+
+</body>
+</html>

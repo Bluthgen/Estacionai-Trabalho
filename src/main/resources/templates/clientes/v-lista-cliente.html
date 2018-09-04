@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+<!-- 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-veiculos.css}" /> -->
+</head>
+
+
+<body>
+
+		<section layout:fragment="content">
+		<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+			  </ol>
+			</nav>
+<!-- 				<div class="container"> -->
+<!-- 					<div class="row"> -->
+<!-- 						<div class="col-md-12"> -->
+<!-- 							<h1> -->
+<!-- 								Lista clientes -->
+<!-- 							</h1> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+				
+				<div class="container">
+					<div class="row">
+					
+					
+					
+					
+						<div class="col-md-12">
+						
+						<div class="alert  alert-info" th:if="${clientes.empty}">
+							<i class="fa fa-info"></i>
+		
+							<span>Não existem veiculos cadastrado para este cliente!</span>
+							<a th:href="@{/clientes/novo}" >Clique aqui para adicionar um novo veiculo</a>
+							
+						</div>
+						
+						<div th:if="${!clientes.empty}" style="margin-bottom: 10px;" >
+						<a class="btn btn-outline-success" th:href="@{/clientes/novo}" > 
+	 							 <span class="fa fa-plus"></span> Adicionar cliente 
+						</a>
+						</div>
+						
+						<form  th:object="${filtro}" th:action="@{/clientes}" method="POST" 
+						class="form-default form-horizontal" >
+						
+						<div class="collapse" id="collapseNormalCliente" >
+							<div class="input-group mb-3">
+							  <input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do cliente" >
+							  <div class="input-group-append">
+							    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
+							   	<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseAvancadaCliente" th:onclick="${'expandirCliente()'}" ><span class="fa fa-angle-double-down"></span> Avançada</button>
+							  </div>
+							</div>
+						</div>
+						</form>
+						
+						<form  th:object="${filtro}" th:action="@{/clientes}" method="POST" 
+						class="form-default form-horizontal" >
+							<div class="collapse" id="collapseAvancadaCliente">
+							 
+							 <h5>Busca avançada</h5>
+							 <hr />
+							 <div class="form-row">
+						<div class="form-group col-md-6">
+							<label>Nome</label>
+							<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome" />
+						</div>
+						<div class="form-group col-md-6">
+							<label >Telefone</label>
+						      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">	
+						      <small class="form-text text-muted">
+						      	Exemplo: (99) 9999-9999
+							  </small>	  
+						 </div>
+					 </div>
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 <label >Endereço</label>
+						      <input type="text" class="form-control" th:field="*{endereco}" placeholder="Digite o Endereço">		  
+						 </div>
+						 <div class="form-group col-md-6">
+						 <label >CPF</label>
+						      <input type="text" class="form-control js-cpf" th:field="*{cpf}" placeholder="Digite o Cpf">		  
+						 	  <small class="form-text text-muted">
+						      	Exemplo: 999.999.999-99
+							  </small>	
+						 </div>
+					 </div>
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 	<label>Tipo de pagamento:</label>
+							 <select id="tipo" th:field="*{tipoPagamento}" class="form-control">
+						    	<option value="1" selected="selected">Cartao de crédito</option>
+						    	<option value="2">Boleto</option>
+						    </select>
+					    </div>
+					    
+						 <div class="form-group col-md-6">
+						 <label >Numero de vagas</label>
+						      <input type="number" class="form-control" th:field="*{numeroVagas}" placeholder="Informe o numero de vagas">		  
+						 </div>
+					 </div>
+					 
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 	<button class="btn btn-outline-secondary" type="submit" th:onclick="${'expandirCliente()'}"><span class="fa fa-search"></span> Pesquisar</button>
+							  
+					    </div>
+					    
+						 <div class="form-group col-md-6">
+						  	<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseAvancadaCliente" th:onclick="${'despandirCliente()'}"  ><span class="fa fa-angle-double-up"></span> Normal</button>
+							  
+						 </div>
+					 </div> 
+							 
+							</div>
+							
+						</form>
+						</div>
+					</div>
+				</div>
+						
+						
+
+
+			<div class="container">
+			<div class="row">
+			<div class="col-md-12">
+			
+
+				<div class="table-responsive">
+					<table id="tabela-clientes" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+						<thead>
+							<tr>
+								<th>Código</th>
+								<th>Nome</th>
+								<th >Telefone</th>
+								<th >CPF</th>
+								<th>Editar</th>
+								<th>Excluir</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="cliente : ${clientes}">
+								<td class="text-center" th:text=${cliente.id}>1</td>
+
+								<td th:text=${cliente.nome}>Nome
+								</td>
+
+								<td  th:text=${cliente.telefone}>Telefone</td>
+
+								<td  th:text=${cliente.cpf}>CPF</td>
+
+								<td class="text-center">
+									<a class="btn btn-info btn-xs" th:href="@{/clientes/editar/{id}(id=${cliente.id})}" ><span class="fa fa-pencil-alt"></span></a>
+								</td>
+								
+								<td class="text-center">
+									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${cliente.nome} + '?\');'"
+									th:action="@{/clientes/{id}(id=${cliente.id})}">
+										<input type="hidden" name="_method" value="DELETE" />
+									
+										<button type="submit" class="btn btn-danger btn-xs">
+											<span class="fa fa-trash"></span>
+										</button>
+									</form>
+								</td>
+							</tr>
+
+							<tr th:if="${clientes.empty}">
+								<td colspan="6">Nenhum cliente cadastrado</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+			</div>
+			
+			<script type="text/javascript">
+			
+				function expandirCliente()
+				{
+					
+					$('#collapseNormalCliente').collapse('hide');
+									
+				}
+				
+				function despandirCliente()
+				{
+					
+					$('#collapseNormalCliente').collapse('show');
+									
+				}
+			
+			</script>
+			
+			
+		</section>
+
+</body>
+</html>
