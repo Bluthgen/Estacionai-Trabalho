@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,8 +35,22 @@ public class LoginController {
 	@GetMapping
 	public ModelAndView index(Funcionario funcionario)
 	{		
+		
+
 		ModelAndView mv = new ModelAndView("login/v-login");
 		mv.addObject("funcionario", funcionario);
+		
+		return mv;
+	}
+	
+	@GetMapping("/erro")
+	public ModelAndView indexErro(Funcionario funcionario)
+	{		
+		
+
+		ModelAndView mv = new ModelAndView("login/v-login");
+		mv.addObject("funcionario", funcionario);
+		mv.addObject("mensagem", "Usuário ou senha incorretos! Tente novamente!");
 		return mv;
 	}
 	
@@ -60,33 +75,4 @@ public class LoginController {
 	
 	
 	
-	
-//	@PostMapping("/logar")
-//	public ModelAndView logar(Funcionario funcionario, BindingResult result, RedirectAttributes attributes)
-//	{
-//		
-//		return new ModelAndView("redirect:/sigem/usuarios");
-//		
-////		funcionario.setNivelPermissao(2); //usuários de nivel gerencial
-////		if(result.hasErrors())
-////		{
-////			return index(funcionario);
-////		}
-////		
-////		
-////			if(service.filtrar(funcionario).size() > 0)
-////			{
-////				
-////				return new ModelAndView("redirect:/");
-////			}
-////			else
-////			{
-////				attributes.addFlashAttribute("mensagem", "CPF ou senha incorretas! Tente novamente.");
-////				
-////				return new ModelAndView("redirect:/login");
-////			}
-//			
-//			
-//		
-//	}
 }
