@@ -22,7 +22,7 @@ import com.projeto.estacionai.repository.FuncionarioRepositorySearch;
 
 /**
 *
-* @author Gui
+* @author ALISSON
 */
 @Controller
 @RequestMapping("/login")
