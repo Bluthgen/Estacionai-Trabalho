@@ -3,10 +3,8 @@ package com.projeto.estacionai.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -87,14 +85,14 @@ public class EquipamentoController {
 		{
 			
 			this.service.salvar(equipamento);
-			redirectAttributes.addFlashAttribute("mensagem", "A conta foi cadastrada com sucesso!");
-			return new ModelAndView("redirect:/contas/pagar/novo");
+			redirectAttributes.addFlashAttribute("mensagem", "O equipamento foi cadastrado com sucesso!");
+			return new ModelAndView("redirect:/equipamentos/novo");
 		}
 		else
 		{
 			this.service.salvar(equipamento);
-			redirectAttributes.addFlashAttribute("mensagem", "A conta foi atualizada com sucesso!");
-			return new ModelAndView("redirect:/contas/pagar/editar/" + equipamento.getId());
+			redirectAttributes.addFlashAttribute("mensagem", "O equipamento foi atualizado com sucesso!");
+			return new ModelAndView("redirect:/equipamentos/editar/" + equipamento.getId());
 		}
 		
 	}
