@@ -22,6 +22,8 @@ public class Equipamento {
 	
 	@NotBlank
 	private String status;
+	
+	private Boolean ativo;
 
 	public Equipamento(@NotBlank String descricao, @NotBlank String tipo, @NotBlank String status) {
 		this.descricao = descricao;
@@ -53,5 +55,13 @@ public class Equipamento {
 		this.status = status;
 	}
 	
+	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 	
 }

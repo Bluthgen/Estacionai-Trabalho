@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+</head>
+
+<body>
+
+	<section layout:fragment="content" >
+	
+		<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">Equipamentos</li>
+			  </ol>
+		</nav>
+		
+		<div class="container">
+			<div class="row">
+						<div class="col-md-12">
+							<h1>
+								Cadastro Equipamento
+							</h1>
+						</div>
+					</div>
+		</div>
+		
+		<div class="container border rounded p-3" style="border-color: graytext;">
+				
+			<div class="row">
+				<div class="col-md-12">
+					<p>
+						* Campos obrigatórios
+					</p>
+				</div>
+			</div>	
+			
+			 <div class="form-group">
+							 <label >*Nome Bloco</label>
+							  <input type="text" class="form-control" th:field="*{tipo}"  placeholder="Informe o nome do bloco">		  
+							 </div>
+			
+		</div>
+		
+	</section>
+	
+</body>
+
+</html>
