@@ -64,4 +64,8 @@ public class Equipamento {
 		this.ativo = ativo;
 	}
 	
+	public Long getId() {
+		return this.id;
+	}
+	
 }
