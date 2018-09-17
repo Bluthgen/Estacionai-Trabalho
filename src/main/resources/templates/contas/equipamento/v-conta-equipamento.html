@@ -15,7 +15,7 @@
 		
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/h}">Inicio</a></li>
 			    <li class="breadcrumb-item active" aria-current="page">Documentação de equipamentos</li>
 			  </ol>
 			</nav>
@@ -24,6 +24,14 @@
 			
 			<div class="row" style="padding-top: 10px;">
 			
+				<div class="col-md-10">
+				</div>
+				<div class="col-md-2" style="text-align: center;">
+					<button type="button" class="bnt bnt-outline-danger" style="color: red," data-toggle="popover" title="Ajuda" data-content="Nesta tela é apresentada a documentação dos equipamentos, assim como seu estado atual e necessidade de reparos">
+						<i class="fa fa-question"></i>Ajuda
+					</button>
+				
+				</div>
 				<div class="col-md-12">
 					<div class="alert  alert-info" th:if="${contas.empty}">
 						<i class="fa fa-info"></i>

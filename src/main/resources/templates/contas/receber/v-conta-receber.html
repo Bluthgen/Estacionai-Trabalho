@@ -15,7 +15,7 @@
 		
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
 			    <li class="breadcrumb-item active" aria-current="page">Contas à receber</li>
 			  </ol>
 			</nav>
@@ -24,6 +24,13 @@
 			
 			
 			<div class="row" style="padding-top: 10px;">
+			
+			<div class="col-md-10"> </div>
+				<div class="col-md-2" style="text-align: center;">
+					<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="Nesta tela é apresentada as contas que devem ser recebidas, assim como sua data de vencimento e o valor." >
+						<i class="fa fa-question"></i> Ajuda
+					</button>
+				</div>
 			
 			<div class="col-md-12">
 				<div class="alert  alert-info" th:if="${contas.empty}">
@@ -77,7 +84,9 @@
 							<tr>
 								<th>Código</th>
 								<th>Conta</th>
-								<th>Data de vencimento</th>
+								<th>Data de vencimento
+									<i class="fa fa-question" data-toggle="tootltip" data-placement="top" title="Data até qual deve ser feita a cobrança"></i>
+								</th>
 								<th>Valor</th>
 								<th>Editar</th>
 								<th>Excluir</th>

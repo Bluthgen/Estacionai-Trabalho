@@ -14,7 +14,7 @@
 		<section layout:fragment="content">
 		<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/home}">Início</a></li>
 			    <li class="breadcrumb-item active" aria-current="page">Funcionários</li>
 			  </ol>
 			</nav>
@@ -219,7 +219,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="funcionario : ${funcionarios}">
+							<tr th:each="funcionario : ${funcionarios}" th:if="${funcionario.id} != ${user.id}">
 								<td class="text-center" th:text=${funcionario.id}>1</td>
 
 								<td th:text=${funcionario.nome}>Nome

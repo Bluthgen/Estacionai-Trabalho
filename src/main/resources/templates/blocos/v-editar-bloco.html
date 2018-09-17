@@ -14,7 +14,7 @@
 		
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
 			    <li class="breadcrumb-item"><a th:href="@{/blocos}">Blocos</a></li>
 			    <li class="breadcrumb-item active" aria-current="page" th:text="${bloco.nome}">Blocos</li>
 			  </ol>
@@ -65,15 +65,15 @@
 						</div>
 					
 							<div class="form-group">
-								<a th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=1)}" class="btn btn-block  btn-primary" style="color: white;" ><i class="fa fa-motorcycle"></i> Adicionar vaga de moto</a>
+								<a th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=1)}" class="btn btn-block  btn-primary" style="color: white;" ><i class="fa fa-motorcycle"></i> Adicionar vaga para Moto</a>
 							</div>
 							
 							<div class="form-group">
-								<a th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=2)}" class="btn btn-block  btn-success" style="color: white;" ><i class="fa fa-car"></i> Adicionar vaga de carro</a>
+								<a th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=2)}" class="btn btn-block  btn-success" style="color: white;" ><i class="fa fa-car"></i> Adicionar vaga para Carro</a>
 							</div>
 							
 							<div class="form-group">
-								<a th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=3)}" class="btn btn-block  btn-warning" style="color: white;" ><i class="fab fa-accessible-icon" ></i> Adicionar vaga de deficiente</a>
+								<a th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=3)}" class="btn btn-block  btn-warning" style="color: white;" ><i class="fab fa-accessible-icon" ></i> Adicionar vaga para Deficiente Físico</a>
 							</div>
 						
 							<input type="hidden" th:field="*{id}" value="${bloco.id}" />
@@ -84,12 +84,12 @@
 							 
 							 <div class="form-group">
 							 <label >*Numero máximo de vagas</label>
-							  <input type="text" class="form-control" th:field="*{maxVagas}"   placeholder="Informe o nome do bloco">		  
+							  <input type="text" class="form-control" th:field="*{maxVagas}"   placeholder="Informe o número máximo de vagas do bloco">		  
 							 </div>
 							 
 							 <div class="form-group">
 							 <label >Vagas adicionadas</label>
-							  <input type="text" readonly="readonly" class="form-control" th:field="*{numVagas}"  placeholder="Numero de vagas adicionadas">		  
+							  <input type="text" readonly="readonly" class="form-control" th:field="*{numVagas}"  placeholder="Numero de vagas adicionadas até o momento">		  
 							 </div>
 							
 							<hr />
