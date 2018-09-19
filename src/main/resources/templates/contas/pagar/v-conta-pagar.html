@@ -25,15 +25,15 @@
 			<div class="row" style="padding-top: 10px;">
 			
 			<div class="col-md-12">
-				<div class="alert  alert-info" th:if="${contas.empty}">
-					<i class="fa fa-info"></i>
+<!-- 				<div class="alert  alert-info" th:if="${contas.empty}"> -->
+<!-- 					<i class="fa fa-info"></i> -->
 
-					<span>Não existem contas cadastradas!</span>
-					<a th:href="@{/contas/pagar/novo}" >Clique aqui para adicionar uma nova conta</a>
+<!-- 					<span>Não existem contas cadastradas!</span> -->
+<!-- 					<a th:href="@{/contas/pagar/novo}" >Clique aqui para adicionar uma nova conta</a> -->
 					
-				</div>
+<!-- 				</div> -->
 				
-				<div th:if="${!contas.empty}" style="margin-bottom: 10px;" >
+				<div style="margin-bottom: 10px;" >
 					<a class="btn btn-outline-success" th:href="@{/contas/pagar/novo}" > 
  							 <span class="fa fa-plus"></span> Adicionar conta 
 					</a>
@@ -43,6 +43,9 @@
 						class="form-default form-horizontal" >
 				<div class="input-group mb-3">
 							  <input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome da conta" >
+							  <input type="text" class="form-control js-data" th:field="*{dataInicio}" placeholder="Data de inicio (Exemplo: 10/11/2010)">
+				      		  <input type="text" class="form-control js-data" th:field="*{dataFim}" placeholder="Data de fim (Exemplo: 10/11/2010)">
+				      
 							  <div class="input-group-append">
 							    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
 <!-- 							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button> -->
