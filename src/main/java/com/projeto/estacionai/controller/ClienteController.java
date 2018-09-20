@@ -68,15 +68,31 @@ public class ClienteController {
 			return novo(service.buscar(id));
 		}
 		
-		@GetMapping("/veiculos/{id}")
-		public ModelAndView veiculos(@PathVariable Long id)
+		//metodo para fazer a busca de veiculos
+		@PostMapping("/veiculos/{id}")
+		public ModelAndView listarEspecificoVeiculo(@PathVariable Long id, Veiculo filtro)
 		{
-			Veiculo filtro = new Veiculo();
 			Cliente cliente = service.buscar(id);
 			filtro.setCliente(cliente);
 			filtro.setAtivo(true);
 			
 			ModelAndView mv = new ModelAndView("clientes/v-lista-veiculo");
+			mv.addObject("filtro", filtro);
+			mv.addObject("veiculos", searchVeiculo.filtrar(filtro));
+			mv.addObject("cliente", cliente);
+			return mv;
+		}
+		
+		@GetMapping("/veiculos/{id}")
+		public ModelAndView veiculos(@PathVariable Long id, Veiculo filtro)
+		{
+//			Veiculo veiculo = new Veiculo();
+			Cliente cliente = service.buscar(id);
+			filtro.setCliente(cliente);
+			filtro.setAtivo(true);
+			
+			ModelAndView mv = new ModelAndView("clientes/v-lista-veiculo");
+			mv.addObject("filtro", filtro);
 			mv.addObject("veiculos", searchVeiculo.filtrar(filtro));
 			mv.addObject("cliente", cliente);
 			return mv;
