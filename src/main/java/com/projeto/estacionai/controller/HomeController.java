@@ -6,26 +6,34 @@
 package com.projeto.estacionai.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.projeto.estacionai.observer.EntradaSaidaObserver;
 import com.projeto.estacionai.observer.TicketSujeito;
+import com.projeto.estacionai.service.VagaService;
 
 /**
  *
- * @author Alisson
+ * @author Alisson, Guilherme
  */
 @Controller
 @RequestMapping("/home")
 public class HomeController {
 	
+	@Autowired
+	private VagaService serviceVaga;
 	
 	@GetMapping
 	public ModelAndView index()
 	{		
 		ModelAndView mv = new ModelAndView("home/v-home");
+		mv.addObject("countMoto", this.serviceVaga.buscarPorTipo(1));
+		mv.addObject("countCarro", this.serviceVaga.buscarPorTipo(2));
+		mv.addObject("countDeficiente", this.serviceVaga.buscarPorTipo(3));
 		return mv;
 	}
 	
