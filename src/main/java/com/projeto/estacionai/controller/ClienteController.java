@@ -58,7 +58,7 @@ public class ClienteController {
 		public ModelAndView novo(Cliente cliente)
 		{
 			ModelAndView mv = new ModelAndView("clientes/v-cadastro-cliente");
-			mv.addObject(cliente);			
+			mv.addObject("cliente", cliente);			
 			return mv;
 		}
 		
@@ -174,7 +174,7 @@ public class ClienteController {
 		
 		@PostMapping("/novo")
 		public ModelAndView salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attributes)
-		{
+		{	
 			if(result.hasErrors())
 			{
 				return novo(cliente);
