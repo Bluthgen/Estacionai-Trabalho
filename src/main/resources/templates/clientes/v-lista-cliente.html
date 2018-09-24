@@ -146,6 +146,7 @@
 								<th>Nome</th>
 								<th >Telefone</th>
 								<th >CPF</th>
+								<th > E-mail </th>
 								<th>Editar</th>
 								<th>Excluir</th>
 							</tr>
@@ -160,6 +161,8 @@
 								<td  th:text=${cliente.telefone}>Telefone</td>
 
 								<td  th:text=${cliente.cpf}>CPF</td>
+								
+								<td th:text=${cliente.email}>E-mail</td>
 
 								<td class="text-center">
 									<a class="btn btn-info btn-xs" th:href="@{/clientes/editar/{id}(id=${cliente.id})}" ><span class="fa fa-pencil-alt"></span></a>
