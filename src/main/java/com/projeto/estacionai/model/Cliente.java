@@ -49,6 +49,8 @@ public class Cliente {
 	
 	private Boolean ativo;
 	
+	private Integer numeroCartao;
+	
 	@NotBlank
 	private String email;
 	
@@ -76,7 +78,7 @@ public class Cliente {
 	
 	
 	public Cliente(@NotBlank String nome, @NotBlank String telefone, @NotBlank String endereco, @NotBlank String cpf,
-			@NotNull Integer tipoPagamento, @NotNull Integer numeroVagas, @NotBlank String email) {
+			@NotNull Integer tipoPagamento, @NotNull Integer numeroVagas, @NotBlank String email, Integer numeroCartao) {
 		super();
 		this.nome = nome;
 		this.telefone = telefone;
@@ -85,10 +87,12 @@ public class Cliente {
 		this.tipoPagamento = tipoPagamento;
 		this.numeroVagas = numeroVagas;
 		this.email = email;
+		this.numeroCartao = numeroCartao;
 	}
 
 	public Cliente(@NotBlank String nome, @NotBlank String telefone, @NotBlank String endereco, @NotBlank String cpf,
-			@NotNull Integer tipoPagamento, @NotNull Integer numeroVagas, List<Veiculo> veiculos, @NotBlank String email) {
+			@NotNull Integer tipoPagamento, @NotNull Integer numeroVagas, List<Veiculo> veiculos, @NotBlank String email,
+			Integer numeroCartao) {
 		super();
 		this.nome = nome;
 		this.telefone = telefone;
@@ -98,6 +102,7 @@ public class Cliente {
 		this.numeroVagas = numeroVagas;
 		this.veiculos = veiculos;
 		this.email = email;
+		this.numeroCartao = numeroCartao;
 	}
 	
 	
@@ -189,6 +194,14 @@ public class Cliente {
 	public void setEmail(String email)
 	{
 		this.email = email;
+	}
+	
+	public Integer getnumeroCartao() {
+		return numeroCartao;
+	}
+	
+	public void setnumeroCartao(Integer numeroCartao) {
+		this.numeroCartao = numeroCartao;
 	}
 	
 	

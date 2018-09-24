@@ -64,7 +64,9 @@ public class ClienteRepositorySearch {
 		if(cliente.getAtivo() != null)	
 			predicates.add(builder.equal(root.get("ativo"), 
 					cliente.getAtivo()));
-		
+		if(cliente.getnumeroCartao() != null)
+			predicates.add(builder.equal(root.get("numeroCartao"), 
+					cliente.getnumeroCartao()));
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
