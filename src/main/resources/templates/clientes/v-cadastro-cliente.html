@@ -98,12 +98,9 @@
 					 </div>
 					 <div class="form-row">
 						 <div class="form-group col-md-6">
-						 	<label>*Tipo de pagamento:</label>
-							 <select id="tipo" th:field="*{tipoPagamento}" class="form-control">
-						    	<option value="1" selected="selected">Cartao de crédito</option>
-						    	<option value="2">Boleto</option>
-						    </select>
-					    </div>
+						 <label >*Email</label>
+						      <input type="email" class="form-control" th:field="*{email}" placeholder="Informe o e-mail">		  
+						 </div>
 					    
 						 <div class="form-group col-md-6">
 						 <label >*Numero de vagas</label>
@@ -113,9 +110,12 @@
 					 
 					 <div class="form-row">
 						 <div class="form-group col-md-6">
-						 <label >*Email</label>
-						      <input type="email" class="form-control" th:field="*{email}" placeholder="Informe o e-mail">		  
-						 </div>
+						 	<label>*Tipo de pagamento:</label>
+							 <select id="tipo" th:field="*{tipoPagamento}" class="form-control">
+						    	<option value="1" selected="selected">Cartao de crédito</option>
+						    	<option value="2">Boleto</option>
+						    </select>
+					    </div>			 
 					 </div>
 					 
 					 
