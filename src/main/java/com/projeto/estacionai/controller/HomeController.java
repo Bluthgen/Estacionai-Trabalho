@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.projeto.estacionai.observer.EntradaSaidaObserver;
 import com.projeto.estacionai.observer.TicketSujeito;
-
+import com.projeto.estacionai.service.VagaService;
 /**
  *
  * @author Alisson
@@ -21,11 +21,15 @@ import com.projeto.estacionai.observer.TicketSujeito;
 @RequestMapping("/home")
 public class HomeController {
 	
+	private VagaService serviceVaga;
 	
 	@GetMapping
 	public ModelAndView index()
 	{		
 		ModelAndView mv = new ModelAndView("home/v-home");
+		mv.addObject("countMotoOcup", this.serviceVaga.buscarPorTipoOcupadas(1));
+		mv.addObject("countCarroOcup", this.serviceVaga.buscarPorTipoOcupadas(2));
+		mv.addObject("countDeficienteOcup", this.serviceVaga.buscarPorTipoOcupadas(3));
 		return mv;
 	}
 	
