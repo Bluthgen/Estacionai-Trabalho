@@ -219,7 +219,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="funcionario : ${funcionarios}" th:if="${funcionario.id} != ${user.id}">
+							<tr th:each="funcionario : ${funcionarios}" th:if="${funcionario.login} != ${SecurityContextHolder.getContext().getAuthentication().getName()}">
 								<td class="text-center" th:text=${funcionario.id}>1</td>
 
 								<td th:text=${funcionario.nome}>Nome

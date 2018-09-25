@@ -128,15 +128,22 @@
 					 
 					 <div class="form-row">
 							 <div class="form-group col-md-12">
-							 	<label>Senha:</label>
+							 	<label>*Senha:</label>
 							 	<input id="senha" type="password" class="form-control" th:field="*{senha}" placeholder="Informe a senha">		  		 
+						    </div>
+					 </div>
+					 
+					 <div class="form-row">
+							 <div class="form-group col-md-12">
+							 	<label>*Confirmar Senha:</label>
+							 	<input id="senhaConfirm" type="password" class="form-control" th:field="*{senhaConfirm}" placeholder="Confirme a senha">		  		 
 						    </div>
 					 </div>
 							
 					<hr />
 
 					<div class="btn-group">
-						<button class="btn  btn-success" role="group" th:if="${funcionario.id == null}" type="submit"> <i class="fa fa-save"></i> Cadastrar</button>
+						<button class="btn  btn-success" role="group" th:if="${funcionario.id == null}" th:disabled="${!isValid()}" type="submit"> <i class="fa fa-save"></i> Cadastrar</button>
 						<button class="btn  btn-success" th:if="${funcionario.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
 						<a class="btn  btn-danger " role="group" th:href="@{/funcionarios}"><i class="fa fa-times"></i> Cancelar</a>
 					</div>
@@ -175,6 +182,18 @@
 				}
 				
 				
+			}
+			
+			function isValid(){
+				var senha = document.getElementById("senha").value;
+				var senhaConfirm = document.getElementBtId("senhaConfirm").value;
+				if(senha != null){
+					if(senha == senhaConfirm)
+					{
+						return true;
+					}
+				}
+				return false;
 			}
 			
 			</script>
