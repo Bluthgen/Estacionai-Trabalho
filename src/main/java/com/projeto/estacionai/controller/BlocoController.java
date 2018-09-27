@@ -118,17 +118,6 @@ public class BlocoController {
 		
 		Long idBloco = vagaService.buscar(id).getBloco().getId();
 		service.buscar(idBloco).setNumVagas(service.buscar(idBloco).getNumVagas() - 1);
-		switch(vagaService.buscar(id).getTipo()) {
-		case 1:
-			service.buscar(idBloco).setNumVagasMoto(service.buscar(idBloco).getNumVagasMoto() - 1);
-			break;
-		case 2:
-			service.buscar(idBloco).setNumVagasCarro(service.buscar(idBloco).getNumVagasCarro() - 1);
-			break;
-		case 3:
-			service.buscar(idBloco).setNumVagasDeficiente(service.buscar(idBloco).getNumVagasDeficiente() - 1);
-			break;
-		}
 		
 		vagaService.deletar(id);
 		
@@ -149,17 +138,6 @@ public class BlocoController {
 		
 		vagaService.salvar(vaga);
 		service.buscar(bloco).setNumVagas(service.buscar(bloco).getNumVagas() + 1);
-		switch(tipo) {
-		case 1:
-			service.buscar(bloco).setNumVagasMoto(service.buscar(bloco).getNumVagasMoto() + 1);
-			break;
-		case 2:
-			service.buscar(bloco).setNumVagasCarro(service.buscar(bloco).getNumVagasCarro() + 1);
-			break;
-		case 3:
-			service.buscar(bloco).setNumVagasDeficiente(service.buscar(bloco).getNumVagasDeficiente() + 1);
-			break;
-		}
 			
 		return new ModelAndView("redirect:/blocos/editar/" + bloco);
 		

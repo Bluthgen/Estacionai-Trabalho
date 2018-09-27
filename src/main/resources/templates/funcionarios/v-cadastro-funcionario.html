@@ -14,7 +14,7 @@
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
 			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
-			    <li class="breadcrumb-item"><a th:href="@{/funcionarios}">Funcionarios</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/funcionarios}">Funcionários</a></li>
 			    <li class="breadcrumb-item active" aria-current="page" th:if="${funcionario.id == null}">Cadastro</li>
 			    <li class="breadcrumb-item active" aria-current="page" th:if="${funcionario.id != null}" th:text="${funcionario.nome}">Editar</li>
 			  </ol>

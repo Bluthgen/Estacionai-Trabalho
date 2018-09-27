@@ -43,9 +43,6 @@ public class Bloco {
     private Integer maxVagas;
         
     private Integer numVagas;
-    private Integer numVagasMoto;
-    private Integer numVagasCarro;
-    private Integer numVagasDeficiente;
     
     @NotBlank
     private String nome;
@@ -67,15 +64,6 @@ public class Bloco {
 		this.numVagas = numVagas;
 	}
     
-    public Bloco(List<Vaga> vagas, @NotNull Integer maxVagas,Integer numVagas, Integer numVagasMoto, Integer numVagasCarro, Integer numVagasDeficiente) {
-		super();
-		this.vagas = vagas;
-		this.maxVagas = maxVagas;
-		this.numVagas = numVagas;
-		this.numVagasMoto = numVagasMoto;
-		this.numVagasCarro = numVagasCarro;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -98,30 +86,6 @@ public class Bloco {
     
     public void setNumVagas(Integer numVagas){
         this.numVagas = numVagas;
-    }
-    
-	public Integer getNumVagasMoto(){
-        return numVagasMoto;
-    }
-    
-    public void setNumVagasMoto(Integer numVagasMoto){
-        this.numVagasMoto = numVagasMoto;
-    }
-    
-	public Integer getNumVagasCarro(){
-        return numVagasCarro;
-    }
-    
-    public void setNumVagasCarro(Integer numVagasCarro){
-        this.numVagasCarro = numVagasCarro;
-    }
-
-	public Integer getNumVagasDeficiente(){
-        return numVagasDeficiente;
-    }
-    
-    public void setNumVagasDeficiente(Integer numVagasDeficiente){
-        this.numVagasDeficiente = numVagasDeficiente;
     }
 
     public Integer getMaxVagas(){
