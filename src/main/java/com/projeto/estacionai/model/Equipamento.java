@@ -68,7 +68,11 @@ public class Equipamento {
 	}
 	
 	public Long getId() {
-		return this.id;
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

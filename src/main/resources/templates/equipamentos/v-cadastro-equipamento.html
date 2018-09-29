@@ -22,8 +22,11 @@
 		<div class="container">
 			<div class="row">
 						<div class="col-md-12">
-							<h1>
+							<h1 th:if="${equipamento.id == null}">
 								Cadastro Equipamento
+							</h1>
+							<h1 th:if="${equipamento.id != null}">
+								Editar Equipamento
 							</h1>
 						</div>
 					</div>

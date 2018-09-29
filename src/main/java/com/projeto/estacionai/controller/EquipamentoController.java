@@ -55,9 +55,7 @@ public class EquipamentoController {
 	@GetMapping("/editar/{id}")
 	public ModelAndView editar(@PathVariable Long id)
 	{
-		ModelAndView mv = new ModelAndView("equipamentos/v-editar-equipamento");
-		mv.addObject("equipamento", service.buscar(id));
-		return mv;
+		return novo(service.buscar(id));
 	}
 	
 	@DeleteMapping("/{id}")
@@ -74,7 +72,7 @@ public class EquipamentoController {
 	public ModelAndView salvar(@Valid Equipamento equipamento, BindingResult result, RedirectAttributes redirectAttributes)
 	{
 				
-		
+		System.out.println(equipamento.getId());
 		if(result.hasErrors())
 		{
 			return novo(equipamento);
