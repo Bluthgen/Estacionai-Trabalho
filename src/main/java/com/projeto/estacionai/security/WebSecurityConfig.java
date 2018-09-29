@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.passwordParameter("senha")
 				.usernameParameter("login")
 				.defaultSuccessUrl("/home")
+				.failureUrl("/login/erro")
 				.permitAll() //permita todos acessar a página de login
 			.and()
 			.logout()
