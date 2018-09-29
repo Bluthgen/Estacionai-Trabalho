@@ -133,7 +133,7 @@
 								
 								<td class="text-center">
 									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${conta.nome} + '?\');'"
-									th:action="@{/contas/{id}(id=${conta.id})}">
+									th:action="@{/contas/equipamento/{id}(id=${conta.id})}">
 										<input type="hidden" name="_method" value="DELETE" />
 									
 										<button type="submit" class="btn btn-danger btn-xs">
