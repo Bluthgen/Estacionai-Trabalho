@@ -75,14 +75,14 @@
 							<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome" />
 						</div>
 						<div class="form-group col-md-6">
-+							<label >*Login</label>
-+						      <input type="tel" class="form-control" th:field="*{login}" placeholder="Digite o Login">		  
-+						 <small class="form-text text-muted">
-+						      	Exemplo: fulano123
-+							  </small>	
-+						 </div>
-+					 </div>
-+					 <div class="form-row">
+							<label >*Login</label>
+						      <input type="tel" class="form-control" th:field="*{login}" placeholder="Digite o Login">		  
+						 <small class="form-text text-muted">
+						      	Exemplo: fulano123
+							  </small>	
+						 </div>
+					 </div>
+					 <div class="form-row">
 						<div class="form-group col-md-6">
 							<label >*Telefone</label>
 						      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">		  
@@ -129,21 +129,21 @@
 					 <div class="form-row">
 							 <div class="form-group col-md-12">
 							 	<label>*Senha:</label>
-							 	<input id="senha" type="password" class="form-control" th:field="*{senha}" placeholder="Informe a senha">		  		 
+							 	<input id="senha" type="password" class="form-control" th:field="*{senha}"  onkeyup="isNotValid()" placeholder="Informe a senha">		  		 
 						    </div>
 					 </div>
 					 
 					 <div class="form-row">
 							 <div class="form-group col-md-12">
 							 	<label>*Confirmar Senha:</label>
-							 	<input id="senhaConfirm" type="password" class="form-control" th:field="*{senhaConfirm}" placeholder="Confirme a senha">		  		 
+							 	<input id="senhaConfirm" type="password" class="form-control" th:field="*{senhaConfirm}" onkeyup="isNotValid()" placeholder="Confirme a senha">		  		 
 						    </div>
 					 </div>
 							
 					<hr />
 
 					<div class="btn-group">
-						<button class="btn  btn-success" role="group" th:if="${funcionario.id == null}" th:disabled="${!isValid()}" type="submit"> <i class="fa fa-save"></i> Cadastrar</button>
+						<button id="btn_cadastrar" class="btn  btn-success" disabled="disabled" role="group" th:if="${funcionario.id == null}" type="submit"> <i class="fa fa-save"></i> Cadastrar</button>
 						<button class="btn  btn-success" th:if="${funcionario.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
 						<a class="btn  btn-danger " role="group" th:href="@{/funcionarios}"><i class="fa fa-times"></i> Cancelar</a>
 					</div>
@@ -151,6 +151,8 @@
 			</div>
 			
 			<script type="text/javascript">
+			
+			var ok = false;
 			
 			function alerta()
 			{
@@ -184,16 +186,28 @@
 				
 			}
 			
-			function isValid(){
+			function isNotValid(){
 				var senha = document.getElementById("senha").value;
-				var senhaConfirm = document.getElementBtId("senhaConfirm").value;
-				if(senha != null){
+				console.log(senha);
+				var senhaConfirm = document.getElementById("senhaConfirm").value;
+				console.log(senhaConfirm);
+				if(senha != "" && senhaConfirm != "")
+				{
 					if(senha == senhaConfirm)
-					{
-						return true;
-					}
+						{
+							document.getElementById("btn_cadastrar").disabled = false;
+						
+						}
+						else
+						{
+							document.getElementById("btn_cadastrar").disabled = true;
+						}
 				}
-				return false;
+				else
+				{
+					document.getElementById("btn_cadastrar").disabled = true;
+				}
+				
 			}
 			
 			</script>
