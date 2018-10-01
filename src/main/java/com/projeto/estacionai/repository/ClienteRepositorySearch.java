@@ -40,7 +40,9 @@ public class ClienteRepositorySearch {
 	private Predicate[] restricoes(Cliente cliente, CriteriaBuilder builder, Root<Cliente> root) {
 		List<Predicate> predicates	= new ArrayList<>();
 		
-		
+		if(!StringUtils.isEmpty(cliente.getEmail()))
+			predicates.add(builder.like(builder.lower(root.get("email")), 
+				cliente.getEmail().toLowerCase() ));
 		if(!StringUtils.isEmpty(cliente.getCpf()))
 			predicates.add(builder.like(builder.lower(root.get("cpf")), 
 				cliente.getCpf().toLowerCase() ));
@@ -62,7 +64,9 @@ public class ClienteRepositorySearch {
 		if(cliente.getAtivo() != null)	
 			predicates.add(builder.equal(root.get("ativo"), 
 					cliente.getAtivo()));
-		
+		if(cliente.getnumeroCartao() != null)
+			predicates.add(builder.equal(root.get("numeroCartao"), 
+					cliente.getnumeroCartao()));
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

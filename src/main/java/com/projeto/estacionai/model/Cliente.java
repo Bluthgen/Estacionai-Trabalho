@@ -49,6 +49,11 @@ public class Cliente {
 	
 	private Boolean ativo;
 	
+	private Integer numeroCartao;
+	
+	@NotBlank
+	private String email;
+	
 	// Funções
 	
 	public List<Veiculo> getVeiculos() {
@@ -71,8 +76,23 @@ public class Cliente {
 	}
 	
 	
+	
 	public Cliente(@NotBlank String nome, @NotBlank String telefone, @NotBlank String endereco, @NotBlank String cpf,
-			@NotNull Integer tipoPagamento, @NotNull Integer numeroVagas, List<Veiculo> veiculos) {
+			@NotNull Integer tipoPagamento, @NotNull Integer numeroVagas, @NotBlank String email, Integer numeroCartao) {
+		super();
+		this.nome = nome;
+		this.telefone = telefone;
+		this.endereco = endereco;
+		this.cpf = cpf;
+		this.tipoPagamento = tipoPagamento;
+		this.numeroVagas = numeroVagas;
+		this.email = email;
+		this.numeroCartao = numeroCartao;
+	}
+
+	public Cliente(@NotBlank String nome, @NotBlank String telefone, @NotBlank String endereco, @NotBlank String cpf,
+			@NotNull Integer tipoPagamento, @NotNull Integer numeroVagas, List<Veiculo> veiculos, @NotBlank String email,
+			Integer numeroCartao) {
 		super();
 		this.nome = nome;
 		this.telefone = telefone;
@@ -81,9 +101,26 @@ public class Cliente {
 		this.tipoPagamento = tipoPagamento;
 		this.numeroVagas = numeroVagas;
 		this.veiculos = veiculos;
+		this.email = email;
+		this.numeroCartao = numeroCartao;
 	}
+	
+	
 
 	// Gets e Sets Cliente	
+
+	public Cliente(@NotBlank String nome, @NotBlank String telefone, @NotBlank String endereco, @NotBlank String cpf,
+			@NotNull Integer tipoPagamento, @NotNull Integer numeroVagas, Boolean ativo, @NotBlank String email) {
+		super();
+		this.nome = nome;
+		this.telefone = telefone;
+		this.endereco = endereco;
+		this.cpf = cpf;
+		this.tipoPagamento = tipoPagamento;
+		this.numeroVagas = numeroVagas;
+		this.ativo = ativo;
+		this.email = email;
+	}
 
 	public String getNome() {
 		return nome;
@@ -150,6 +187,22 @@ public class Cliente {
 	}
 	
 	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+	
+	public Integer getnumeroCartao() {
+		return numeroCartao;
+	}
+	
+	public void setnumeroCartao(Integer numeroCartao) {
+		this.numeroCartao = numeroCartao;
+	}
 	
 	
 }

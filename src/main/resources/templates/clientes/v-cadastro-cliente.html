@@ -98,18 +98,39 @@
 					 </div>
 					 <div class="form-row">
 						 <div class="form-group col-md-6">
+						 <label >*Email</label>
+						      <input type="email" class="form-control" th:field="*{email}" placeholder="Informe o e-mail">	
+						      <small class="form-text text-muted">
+						      	Exemplo: nome@endereço.com
+						      </small>	  
+						 </div>
+					    
+						 <div class="form-group col-md-6">
+						 <label >*Número de vagas</label>
+						      <input type="number" min="1" class="form-control" th:field="*{numeroVagas}" placeholder="Informe o numero de vagas">		  
+						 </div>
+					 </div>
+					 
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
 						 	<label>*Tipo de pagamento:</label>
 							 <select id="tipo" th:field="*{tipoPagamento}" class="form-control">
-						    	<option value="1" selected="selected">Cartao de crédito</option>
-						    	<option value="2">Boleto</option>
+						    	<option value="2" selected="selected">Boleto</option>
+						    	<option value="1">Cartão de Crédito</option>
 						    </select>
 					    </div>
 					    
-						 <div class="form-group col-md-6">
-						 <label >*Numero de vagas</label>
-						      <input type="number" class="form-control" th:field="*{numeroVagas}" placeholder="Informe o numero de vagas">		  
+					    <div class="form-group col-md-6">
+						 <label >Número do Cartão</label>
+						      <input type="text" class="form-control" th:field="*{numeroCartao}" placeholder="Informe o numero do Cartão">
+						      <small class="form-text text-muted">
+						      	Obrigatório somente para pagamentos com cartão
+						      </small>		  
 						 </div>
+					    		 
 					 </div>
+					 
+					 
 					
 					<div th:if="${cliente.id != null}">
 					 	<div class="form-row">
@@ -118,8 +139,6 @@
 					 		</div>
 					 		<div class="form-group col-md-3">	<a class="btn btn-block  btn-primary" th:href="@{/clientes/veiculos/{id}(id=${cliente.id})}"><i class="fa fa-angle-double-right"></i> Veiculos registrados</a>
 							</div>
-<!-- 					 		<div class="form-group col-md-3">	<button class="btn btn-block  btn-primary" type="submit"><i class="fa fa-users"></i> Dependente</button> -->
-<!-- 							</div> -->
 							<div class="form-group col-md-9"></div>
 					 	</div>					 
 					 </div>
