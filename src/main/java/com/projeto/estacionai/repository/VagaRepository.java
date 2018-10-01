@@ -22,8 +22,13 @@ public interface VagaRepository extends JpaRepository<Vaga, Long> {
 
     public List<Vaga> findByOcupadaFalse();
     
+<<<<<<< HEAD
     @Query("select COUNT(u.id) from Vaga u where u.ocupada = 0 and u.ativo = 1 and u.tipo = ?1")
     public Integer findByOcupadaFalseAndAtivoTrueAndTipo(Integer tipo);
+=======
+    @Query("select COUNT(u.id) from Vaga u where u.ocupada = 1 and u.ativo = 1 and u.tipo = ?1")
+    public Integer findByOcupadaTrueAndAtivoTrueAndTipo(Integer tipo);
+>>>>>>> Eduardo
     
     public List<Vaga> findByAtivoTrue();
 }

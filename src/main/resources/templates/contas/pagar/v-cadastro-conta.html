@@ -14,7 +14,7 @@
 		
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
 			    <li class="breadcrumb-item"><a th:href="@{/contas/pagar}">Contas à pagar</a></li>
 			    <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
 			  </ol>
@@ -86,7 +86,12 @@
 					 </div>
 					 <div class="form-group">
 					 <label >*Valor</label>
+					 	<div class="input-group mb-3">
+					 	<div class="input-group-prepend">
+					    	<span class="input-group-text" id="basic-addon1">R$</span>
+					  	</div>
 					      <input type="text" class="form-control" th:field="*{valor}" placeholder="Digite o valor">		  
+					 </div>
 					 </div>
 							
 						

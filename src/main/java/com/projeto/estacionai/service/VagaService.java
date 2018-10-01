@@ -46,6 +46,11 @@ public class VagaService {
     {
         return this.repository.findByOcupadaFalse();
     }
+    
+    public Integer buscarPorTipoOcupadas(Integer tipo)
+    {
+    	return this.repository.findByOcupadaTrueAndAtivoTrueAndTipo(tipo);
+    }
 	
     public Integer buscarPorTipo(Integer tipo)
     {

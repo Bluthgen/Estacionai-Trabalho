@@ -19,43 +19,8 @@
 			  </ol>
 			</nav>
 
-			<div class="container">
-			
-			<div class="row" style="padding-top: 5px;">
-			<div class="col-md-6">
-				<div class="card text-center" style="min-height: 250px;" >
-					  <div class="card-body">
-					  <div class="row">
-						  <div class="col-md-10" >
-						  	<h5 class="card-title">Tickets </h5> 
-						  </div>
-						  <div class="col-md-2">
-						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="Neste módulo é gerado e valido os tickets do estacionamento." ><i class="fa fa-life-ring"></i> </button>
-						  </div>
-					  </div>
-					    <hr />
-					    <div class="row">
-					    	<div class="col-md-6">
-					    		<img th:src="@{/images/ticket.png}" class="img-fluid" style="height: 150px;" />								
-							</div>
-							<div class="col-md-6">
-							<p>Opções</p>
-							<hr />
-								<div class="btn-group-vertical btn-block">
-									 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalValidarTicket">
-									  <i class="fa fa-check" ></i> Validar Ticket
-									</button>
-									<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalGerarTicket">
-								  		<i class="fa fa-cog" ></i> Gerar Ticket
-									</button>
-								</div>
-							</div>
-					    </div>
-					    
-					  </div>
-				</div>
-			</div>
-			<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-6" >
 				<div class="card text-center" >
 					  <div class="card-body" style="min-height: 250px;">
 					  <div class="row">
@@ -63,11 +28,13 @@
 					    <h5 class="card-title">Quantidade de vagas livres</h5>
 					  </div>
 					  <div class="col-md-2">
-						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a quantidade de vagas disponíveis para cada tipo de veiculo." ><i class="fa fa-life-ring"></i> </button>
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a quantidade de vagas disponíveis para cada tipo de veiculo." >
+						  		<i class="fa fa-question"></i> 
+						  	</button>
 					  </div>
 					  </div>
 					    <hr />
-					     <div class="row">
+					    <div class="row">
 					    	<div class="col-md-12">
 					    		<ul class="list-group">
 								  <li class="list-group-item d-flex justify-content-between align-items-center " >
@@ -88,14 +55,132 @@
 					  </div>
 				</div>
 			</div>
-				
-				
-				
+			<div class="col-md-6" style="float: right">
+				<div class="card text-center" >
+					  <div class="card-body" style="min-height: 250px;">
+					  <div class="row">
+					  <div class="col-md-10">
+					    <h5 class="card-title">Veículos no estacionamento</h5>
+					  </div>
+					  <div class="col-md-2">
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a quantidade de vagas ocupadas por cada tipo de veiculo." >
+						  		<i class="fa fa-question"></i> 
+						  	</button>
+					  </div>
+					  </div>
+					    <hr />
+					     <div class="row">
+					    	<div class="col-md-12">
+					    		<ul class="list-group">
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+<<<<<<< HEAD
+								    <i class="fa fa-motorcycle" ></i> Moto
+								    <span class="badge badge-primary badge-pill" th:text="${countMoto}">0</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								    <i class="fa fa-car"></i> Carro
+								    <span class="badge badge-success badge-pill" th:text="${countCarro}">0</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center" >
+								     <i class="fab fa-accessible-icon" ></i> Deficiente
+								    <span class="badge badge-warning badge-pill" th:text="${countDeficiente}">0</span>
+=======
+								    <i class="fa fa-motorcycle" ></i> Motos
+								    <span class="badge badge-primary badge-pill" th:text="${countMotoOcup}">0</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								    <i class="fa fa-car"></i> Carros
+								    <span class="badge badge-success badge-pill" th:text="${countCarroOcup}">0</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center" >
+								     <i class="fab fa-accessible-icon" ></i> Deficiente
+								    <span class="badge badge-warning badge-pill" th:text="${countDeficienteOcup}">0</span>
+>>>>>>> Eduardo
+								  </li>
+								</ul>
+							</div>
+					    </div>
+					  </div>
+				</div>
+			</div>	
 			</div>
+				
+			
+			<div class="row justify-content-center" style="padding-top: 10px;">
+			
+			<div class="col-md-6" style="float: left">
+				<div class="card text-center" style="min-height: 250px;" >
+					  <div class="card-body">
+					  <div class="row">
+						  <div class="col-md-10" >
+						  	<h5 class="card-title">Tickets </h5> 
+						  </div>
+						  <div class="col-md-2">
+						  	<button type="button" class="btn btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="Neste módulo é gerado e valido os tickets do estacionamento." ><i class="fa fa-question"></i> </button>
+						  </div>
+					  </div>
+					    <hr />
+					    <div class="row">
+					    	<div class="col-md-12">
+					    	<form method="POST" th:action="@{/home/processar}" class="form-vertical"></form>
+						
+						<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${!#strings.isEmpty(erro)}" >
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+			
+									<i class="fa fa-exclamation-circle"></i>									
+									<span th:text="${erro}">Mensagem erro.</span>
+							</div>
+							
+							<div class="alert  alert-success alert-dismissible" role="alert" th:if="${!#strings.isEmpty(sucesso)}">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								
+								<i class="fa fa-check-circle"></i>
+			
+								<span th:text="${sucesso}">Mensagem sucesso!</span>
+							</div>
+						
+							<div class="form-group">
+								<label>Placa</label>		
+								<input id="placa" type="text" name="placa" class="form-control js-placa" placeholder="Digite a placa"/>
+								<small class="form-text text-muted">
+						      	Exemplo: AAA-9999
+								</small>
+							</div>
+							<div class="form-group">
+								<button class="btn  btn-primary"  type="submit" name="validar" value="Validar"><i class="fa fa-save"></i> Validar</button>
+								<button class="btn  btn-success"  type="submit" name="gerar" value="Gerar"><i class="fa fa-save"></i> Gerar</button>
+							</div>
+					    
+					    </div>
+<!-- 					    	<div class="col-md-6"> -->
+<!-- 					    		<img th:src="@{/images/ticket.png}" class="img-fluid" style="height: 150px;" />								 -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-6"> -->
+<!-- 							<p>Opções</p> -->
+<!-- 							<hr /> -->
+<!-- 								<div class="btn-group-vertical btn-block"> -->
+<!-- 									 <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#modalValidarTicket"> -->
+<!-- 									  <i class="fa fa-check" ></i> Validar Ticket -->
+<!-- 									</button> -->
+<!-- 									<button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#modalGerarTicket"> -->
+<!-- 								  		<i class="fa fa-cog" ></i> Gerar Ticket -->
+<!-- 									</button> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+								</div>
+							</div>
+					    </div>
+					    
+					  </div>
 			
 			
-			<div class="row" style="padding-top: 10px;">
-				<div class="col-md-6">
+			
+			
+				<div class="col-md-4" style="float: right">
 				<div class="card text-center" >
 					<div class="card-body" style="min-height: 250px;">
 					<div class="row">
@@ -103,7 +188,9 @@
 					    <h5 class="card-title">Tabela de preços</h5>
 					  </div>
 					  <div class="col-md-2">
-						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="A tabela abaixo mostra os valores dos preços do estacionamento." ><i class="fa fa-life-ring"></i> </button>
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="A tabela abaixo mostra os valores dos preços do estacionamento." >
+						  		<i class="fa fa-question"></i> 
+						  	</button>
 					  </div>
 					  </div>
 					    <hr />
@@ -140,7 +227,10 @@
 					</div>
 					</div>
 				</div>
-				<div class="col-md-6">
+				</div>
+				
+			<div class="row justify-content-center" style="padding-top: 5px;">
+				<div class="col-md-8">
 				<div class="card text-center" >
 					<div class="card-body" style="min-height: 250px;">
 					    <div class="row">
@@ -148,7 +238,9 @@
 					    <h5 class="card-title">Histórico de entrada e saída</h5>
 					  </div>
 					  <div class="col-md-2">
-						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a entrada e saida de veiculos no estacionamento." ><i class="fa fa-life-ring"></i> </button>
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a entrada e saida de veiculos no estacionamento." >
+						  		<i class="fa fa-question"></i> 
+						  	</button>
 					  </div>
 					  </div>
 					    <hr />
@@ -164,55 +256,57 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="text-center">293847529384392</td>
-
-								<td class="text-center">10/10/2018 17:30
+							<tr th:each="historico : ${historicos}">
+								<td class="text-center" th:text=${historico.codigo}>293847529384392
 								</td>
 
-								<td class="text-center">10/10/2018 19:30</td>
+								<td class="text-center"  th:text=${historico.horarioChegada}>10/10/2018 17:30
+								</td>
+								
+								<td class="text-center" th:text=${historico.horarioSaida}>10/10/2018 19:30
+								</td>
 
 
 								
 							</tr>
-							<tr>
-								<td class="text-center">29384928349</td>
+<!--							<tr> -->
+<!-- 								<td class="text-center">29384928349</td>	-->
 
-								<td class="text-center">10/10/2018 10:40
-								</td>
-
-								<td class="text-center">---</td>
+<!--								<td class="text-center">10/10/2018 10:40	-->
+<!--								</td>	-->
+<!--
+<!--								<td class="text-center">---</td>	-->
 
 
 								
-							</tr>
-							<tr>
-								<td class="text-center">29384529389289</td>
+<!--							</tr>	-->
+<!--							<tr>	-->
+<!--								<td class="text-center">29384529389289</td>	-->
 
-								<td class="text-center">10/10/2018 11:30
-								</td>
+<!--								<td class="text-center">10/10/2018 11:30	-->
+<!--								</td>	-->
 
-								<td class="text-center">10/10/2018 12:30</td>
+<!--								<td class="text-center">10/10/2018 12:30</td>	-->
 		
-							</tr>
-							<tr>
-								<td class="text-center">29384529389289</td>
+<!--							</tr>	-->
+<!--							<tr>	-->
+<!--								<td class="text-center">29384529389289</td>	-->
 
-								<td class="text-center">10/10/2018 11:30
-								</td>
+<!--								<td class="text-center">10/10/2018 11:30	-->
+<!--								</td>	-->
 
-								<td class="text-center">10/10/2018 12:30</td>
+<!--								<td class="text-center">10/10/2018 12:30</td>	-->
 		
-							</tr>
-							<tr>
-								<td class="text-center">29384529389289</td>
+<!--							</tr>	-->
+<!--							<tr>	-->
+<!--								<td class="text-center">29384529389289</td>	-->
 
-								<td class="text-center">10/10/2018 11:30
-								</td>
+<!--								<td class="text-center">10/10/2018 11:30	-->
+<!--								</td>	-->
 
-								<td class="text-center">10/10/2018 12:30</td>
+<!--								<td class="text-center">10/10/2018 12:30</td>	-->
 		
-							</tr>
+<!--							</tr>	-->
 
 						</tbody>
 					</table>
@@ -222,9 +316,9 @@
 					  </div>
 					  </div>
 				</div>
-			</div>	
+				</div>
+				
 			
-			</div>
 			
 			
 			
@@ -241,10 +335,10 @@
 					        <form method="POST" class="form-vertical">
 						
 						
-							<div class="form-group">
-								<label>Renavam</label>
-								<input type="text" class="form-control" placeholder="Digite a numero do renavam"/>
-							</div>
+<!--							<div class="form-group">	-->
+<!--								<label>Renavam</label>	-->
+<!--								<input type="text" class="form-control" placeholder="Digite a numero do renavam"/>	-->
+<!--  							</div>	-->
 							<div class="form-group">
 								<label>Placa</label>		
 								<input id="placa" type="text" class="form-control js-placa" placeholder="Digite a placa"/>
@@ -254,13 +348,13 @@
 							</div>
 						    
 						     
-						    <div class="form-group">
-								<label>Valor</label>		
-								<input id="valor" type="text" readonly="readonly" class="form-control"/>
-							</div>
+<!--						    <div class="form-group">	-->
+<!--								<label>Valor</label>	-->		
+<!--								<input id="valor" type="text" readonly="readonly" class="form-control"/>	-->
+<!--							</div>	-->
 		
 							<div class="form-group">
-								<button class="btn  btn-primary"  type="submit"><i class="fa fa-save"></i> Validar</button>
+								<button class="btn  btn-primary"  type="submit"><i class="fa fa-save"></i> Processar</button>
 							</div>
 						</form>
 			      </div>
@@ -275,7 +369,7 @@
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" >GerarTicket</h5>
+			        <h5 class="modal-title" >Gerar Ticket</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>

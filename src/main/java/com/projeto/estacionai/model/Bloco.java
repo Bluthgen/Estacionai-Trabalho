@@ -50,20 +50,20 @@ public class Bloco {
     private Boolean ativo;
         
 	public Bloco(){
-        }
+    }
 	
-        public Bloco(Integer maxVagas){
-		this.vagas = new ArrayList<Vaga>();
-                this.maxVagas = maxVagas;
+    public Bloco(Integer maxVagas){
+    	this.vagas = new ArrayList<Vaga>();
+        this.maxVagas = maxVagas;
 	}
         
-        public Bloco(List<Vaga> vagas, @NotNull Integer maxVagas,Integer numVagas) {
+    public Bloco(List<Vaga> vagas, @NotNull Integer maxVagas,Integer numVagas) {
 		super();
 		this.vagas = vagas;
 		this.maxVagas = maxVagas;
 		this.numVagas = numVagas;
 	}
-
+    
 	public Long getId() {
 		return id;
 	}
@@ -72,51 +72,47 @@ public class Bloco {
 		this.id = id;
 	}
         
-        public List<Vaga> getVagas() {
+    public List<Vaga> getVagas() {
 		return vagas;
 	}
         
-        public void setVagas(List<Vaga> vagas) {
-        	this.vagas = vagas;
-        }
+    public void setVagas(List<Vaga> vagas) {
+    	this.vagas = vagas;
+    }
         
-        public Integer getNumVagas(){
-            return numVagas;
-        }
-        
-        public void setNumVagas(Integer numVagas){
-            this.numVagas = numVagas;
-        }
-        
-        public Integer getMaxVagas(){
-            return maxVagas;
-        }
-        
-        public void setMaxVagas(Integer maxVagas){
-            this.maxVagas = maxVagas;
-        }
+	public Integer getNumVagas(){
+        return numVagas;
+    }
+    
+    public void setNumVagas(Integer numVagas){
+        this.numVagas = numVagas;
+    }
+
+    public Integer getMaxVagas(){
+        return maxVagas;
+    }
+    
+    public void setMaxVagas(Integer maxVagas){
+        this.maxVagas = maxVagas;
+    }
 
 	public boolean addVaga(Vaga vaga){
-            if(getNumVagas() < maxVagas){
-                vagas.add(vaga);
-                return true;
-            }
-            return false;
+        if(getNumVagas() < maxVagas){
+            vagas.add(vaga);
+            return true;
         }
+        return false;
+    }
 	
-	
-	
-        public String getNome() {
+    public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
 
-		public Boolean getAtivo() {
+	public Boolean getAtivo() {
 		return ativo;
 	}
 

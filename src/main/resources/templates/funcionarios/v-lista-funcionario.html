@@ -14,7 +14,7 @@
 		<section layout:fragment="content">
 		<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/home}">Início</a></li>
 			    <li class="breadcrumb-item active" aria-current="page">Funcionários</li>
 			  </ol>
 			</nav>
@@ -35,7 +35,7 @@
 						
 						<div th:if="${!funcionarios.empty}" style="margin-bottom: 10px;" >
 						<a class="btn btn-outline-success" th:href="@{/funcionarios/novo}" > 
-	 							 <span class="fa fa-plus"></span> Adicionar funcionario 
+	 							 <span class="fa fa-plus"></span> Adicionar funcionário 
 						</a>
 						</div>
 						
@@ -219,7 +219,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="funcionario : ${funcionarios}">
+							<tr th:each="funcionario : ${funcionarios}" th:if="${funcionario.login} != ${username}">
 								<td class="text-center" th:text=${funcionario.id}>1</td>
 
 								<td th:text=${funcionario.nome}>Nome

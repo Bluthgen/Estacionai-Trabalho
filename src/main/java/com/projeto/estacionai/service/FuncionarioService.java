@@ -43,4 +43,17 @@ public class FuncionarioService {
 	{
 		return this.repository.getOne(id);
 	}
+	
+	public Funcionario buscarUser(String nome)
+	{
+		List<Funcionario> todos = buscarTodos();
+		for(Funcionario user: todos) 
+		{
+			if(user.getLogin().equals(nome))
+			{
+				return user;
+			}
+		}
+		return null;
+	}
 }

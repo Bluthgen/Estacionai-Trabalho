@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+</head>
+
+
+<body>
+
+		<section layout:fragment="content">
+		
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/funcionarios/user}">Usuários</a></li>
+			    <li class="breadcrumb-item active" aria-current="page" th:text="${user.nome}">User</li>
+			  </ol>
+			</nav>
+			
+			<div class="container">
+				<div class="row">
+						<div class="col-md-12">
+							<h1>
+								Meu Perfil
+							</h1>
+						</div>
+					</div>
+			</div>
+		
+			<div class="col-md-6">
+				<div class="card text-center" >
+					  <div class="card-body" style="min-height: 250px;">
+					  <div class="row">
+					  <div class="col-md-10">
+					    <h5 class="card-title">Informações do usuário</h5>
+					  </div>
+					  <div class="col-md-2">
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="Informqções do usuário atual. Para a mudança de alguma desta informações, contate seu gerente" >
+						  		<i class="fa fa-question"></i> 
+						  	</button>
+					  </div>
+					  </div>
+					    <hr />
+					    <div class="row">
+					    	<div class="col-md-12">
+					    		<ul class="list-group">
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								   	<b>Nome</b>
+								    <span class="badge badge-primary badge-pill" th:text="${user.nome}">Nome</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								   	<b>Função</b>
+								    <span class="badge badge-primary badge-pill" th:text="${user.funcao}">Nome</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								   	<b>Telefone</b>
+								    <span class="badge badge-primary badge-pill" th:text="${user.telefone}">Nome</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								   	<b>CPF</b>
+								    <span class="badge badge-primary badge-pill" th:text="${user.cpf}">Nome</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								   	<b>PIS</b>
+								    <span class="badge badge-primary badge-pill" th:text="${user.pis}">Nome</span>
+								  </li>
+								</ul>
+							</div>
+					    </div>
+					  </div>
+				</div>
+			</div>
+			
+		</section>
+		
+
+</body>
+</html>
