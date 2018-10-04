@@ -56,7 +56,7 @@ public class LoginController {
 	
 	@PostMapping
 	public ModelAndView validar(Funcionario funcionario) {
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/home");
 	}
 	
 	@PostMapping("/logout")
