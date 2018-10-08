@@ -15,7 +15,7 @@
 		
 		<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
 			    <li class="breadcrumb-item"><a th:href="@{/clientes}">Clientes</a></li>
 			    <li class="breadcrumb-item" th:if="${cliente.id != null}"><a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" th:text="${cliente.nome}">Nome</a></li>
 			    <li class="breadcrumb-item active" aria-current="page">Veiculos</li>
@@ -39,13 +39,13 @@
 			<div class="row">
 			<div class="col-md-12">
 			
-				<div class="alert  alert-info" th:if="${veiculos.empty}">
-					<i class="fa fa-info"></i>
+<!-- 				<div class="alert  alert-info" th:if="${veiculos.empty}"> -->
+<!-- 					<i class="fa fa-info"></i> -->
 
-					<span>Não existem veiculos cadastrado para este cliente!</span>
-					<a th:href="@{/clientes/veiculos/{idCliente}/novo(idCliente=${cliente.id})}" >Clique aqui para adicionar um novo veiculo</a>
+<!-- 					<span>Não existem veiculos cadastrado para este cliente!</span> -->
+<!-- 					<a th:href="@{/clientes/veiculos/{idCliente}/novo(idCliente=${cliente.id})}" >Clique aqui para adicionar um novo veiculo</a> -->
 					
-				</div>
+<!-- 				</div> -->
 				
 				
 				
@@ -55,67 +55,75 @@
 					<span th:text="${mensagem}">Mensagem sucesso!</span>
 				</div>
 				
-<!-- 				<form  th:object="${filtro}" th:action="@{/veiculos}" method="POST" -->
-<!-- 							class="form-default form-horizontal" > -->
-<!-- 					<div class="form-group"> -->
-<!-- 						<label>Renavam</label> -->
-<!-- 						<input type="text" class="form-control" th:field="*{renavam}" placeholder="Digite a numero do renavam"/> -->
-<!-- 					</div> -->
-<!-- 					<div class="form-group"> -->
-<!-- 							<label >Placa</label> -->
-<!-- 					      <input type="text" class="form-control" th:field="*{placa}" placeholder="Digite a placa">		   -->
-<!-- 					 </div> -->
-<!-- 					 <div class="form-group"> -->
-<!-- 					 <label >Modelo</label> -->
-<!-- 					      <input type="text" class="form-control" th:field="*{modelo}" placeholder="Digite o modelo">		   -->
-<!-- 					 </div> -->
-<!-- 					 <div class="form-group"> -->
-<!-- 					 <label >Marca</label> -->
-<!-- 					      <input type="text" class="form-control" th:field="*{marca}" placeholder="Digite a marca">		   -->
-<!-- 					 </div> -->
-<!-- 					 <div class="form-group"> -->
-<!-- 					 	<label>Tipo:</label> -->
-<!-- 						 <select id="tipo" th:field="*{tipo}" class="form-control"> -->
-<!-- 					    	<option value="" selected="selected">Carro e Moto</option> -->
-<!-- 					    	<option value="CARRO" >Carro</option> -->
-<!-- 					    	<option value="MOTO" >Moto</option> -->
-<!-- 					    </select> -->
-<!-- 				    </div> -->
-<!-- 					 <div class="form-group"> -->
-<!-- 					 <label >Ano</label> -->
-<!-- 					      <input type="number" class="form-control" th:field="*{ano}" placeholder="Informe o ano">		   -->
-<!-- 					 </div> -->
-<!-- 					<div class="form-group"> -->
-<!-- 					      <button class="btn  btn-primary" type="submit"><i class="fa fa-search"></i> Pesquisar</button> -->
-<!-- 					      <a class="btn btn-primary" th:href="@{/veiculos}"> -->
-<!-- 							<span class="hidden-xs hidden-sm"><i class="fa fa-search"></i> Buscar todos</span> -->
-<!-- 						</a> -->
-<!-- 					</div>    -->
-<!-- 				</form> -->
 				
-<!-- 				<hr /> -->
-	
-<!-- 				<div class="input-group"> -->
-<!-- 				  <input type="text" class="form-control" placeholder="Digite a placa" > -->
-<!-- 				  <div class="input-group-append"> -->
-<!-- 				    <button class="btn btn-outline-secondary" type="button"><span class="fa fa-search"></span> Pesquisar</button> -->
-<!-- 				    <button class="btn btn-primary"><i class="fa fa-car"></i> Adicionar novo veiculo</button> -->
-<!-- 				  </div> -->
-<!-- 				</div> -->
 
-				<div th:if="${!veiculos.empty}" style="margin-bottom: 10px;" >
+				<div style="margin-bottom: 10px;" >
 						<a class="btn btn-outline-success" th:href="@{/clientes/veiculos/{idCliente}/novo(idCliente=${cliente.id})}" > 
 	 							 <span class="fa fa-plus"></span> Adicionar veiculo 
 						</a>
 				</div>
-
-				<div class="input-group mb-3">
-							  <input type="text" class="form-control" placeholder="Digite o nome do veiculo" >
+				
+				<form  th:object="${filtro}" th:action="@{/clientes/veiculos/{idCliente}(idCliente=${cliente.id})}" method="POST" 
+						class="form-default form-horizontal" >
+						
+						<div class="collapse" id="collapseNormalVeiculo" >
+							<div class="input-group mb-3">
+							  <input type="text" class="form-control js-placa" th:field="*{placa}" placeholder="Digite a placa do veiculo" >
 							  <div class="input-group-append">
-							    <button class="btn btn-outline-secondary" type="button"><span class="fa fa-search"></span> Pesquisar</button>
-<!-- 							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button> -->
+							    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
+							   	<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseAvancadaVeiculo" th:onclick="${'expandirVeiculo()'}" ><span class="fa fa-angle-double-down"></span> Avançada</button>
 							  </div>
-				</div>
+							</div>
+						</div>
+				</form>
+				
+				<form  th:object="${filtro}" th:action="@{/clientes/veiculos/{idCliente}(idCliente=${cliente.id})}" method="POST"
+							class="form-default form-horizontal" >
+							
+					<div class="collapse" id="collapseAvancadaVeiculo">
+					<div class="form-group">
+						<label>Renavam</label>
+						<input type="text" class="form-control" th:field="*{renavam}" placeholder="Digite a numero do renavam"/>
+					</div>
+					<div class="form-group">
+							<label >Placa</label>
+					      <input type="text" class="form-control js-placa" th:field="*{placa}" placeholder="Digite a placa">		  
+					 </div>
+					 <div class="form-group">
+					 <label >Modelo</label>
+					      <input type="text" class="form-control" th:field="*{modelo}" placeholder="Digite o modelo">		  
+					 </div>
+					 <div class="form-group">
+					 <label >Marca</label>
+					      <input type="text" class="form-control" th:field="*{marca}" placeholder="Digite a marca">		  
+					 </div>
+					 <div class="form-group">
+					 	<label>Tipo:</label>
+						 <select id="tipo" th:field="*{tipo}" class="form-control">
+					    	<option value="" selected="selected">Carro e Moto</option>
+					    	<option value="CARRO" >Carro</option>
+					    	<option value="MOTO" >Moto</option>
+					    </select>
+				    </div>
+					 <div class="form-group">
+					 <label >Ano</label>
+					      <input type="number" class="form-control" th:field="*{ano}" placeholder="Informe o ano">		  
+					 </div>
+					 
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 	<button class="btn btn-outline-secondary" type="submit" th:onclick="${'expandirVeiculo()'}"><span class="fa fa-search"></span> Pesquisar</button>
+							  
+					    </div>
+					    
+						 <div class="form-group col-md-6">
+						  	<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseAvancadaVeiculo" th:onclick="${'despandirVeiculo()'}"  ><span class="fa fa-angle-double-up"></span> Normal</button>
+							  
+						 </div>
+					 </div> 
+					   
+					</div>
+				</form>
 
 				<div class="table-responsive">
 					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
@@ -166,6 +174,25 @@
 				</div>
 			</div>
 			</div>
+			
+			<script type="text/javascript">
+			
+				function expandirVeiculo()
+				{
+					
+					$('#collapseNormalVeiculo').collapse('hide');
+									
+				}
+				
+				function despandirVeiculo()
+				{
+					
+					$('#collapseNormalVeiculo').collapse('show');
+									
+				}
+			
+			</script>
+			
 		</section>
 
 </body>

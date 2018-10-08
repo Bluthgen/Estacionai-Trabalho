@@ -52,6 +52,16 @@ public class ContaEquipamentoRepositorySearch {
 		if(conta.getNome() != null && !conta.getNome().isEmpty())
 			predicates.add(builder.like(builder.lower(root.get("nome")), 
 					"%"+  conta.getNome().toLowerCase()+ "%"));
+		if(conta.getEstado() != null && !conta.getEstado().isEmpty())
+			predicates.add(builder.like(builder.lower(root.get("estado")), 
+					"%"+  conta.getEstado().toLowerCase()+ "%"));
+		if(conta.getLugarReparo() != null && !conta.getLugarReparo().isEmpty())
+			predicates.add(builder.like(builder.lower(root.get("lugarReparo")), 
+					"%"+  conta.getLugarReparo().toLowerCase()+ "%"));
+		if(conta.getValor() != null && conta.getValor() != 0)
+			predicates.add(builder.equal(root.get("valor"), conta.getValor() ));
+		if(conta.getDataVencimento() != null)
+			predicates.add(builder.equal(root.get("dataVencimento"), conta.getDataVencimento() ));
 		if(conta.getAtivo() != null)	
 			predicates.add(builder.equal(root.get("ativo"), 
 					conta.getAtivo()));

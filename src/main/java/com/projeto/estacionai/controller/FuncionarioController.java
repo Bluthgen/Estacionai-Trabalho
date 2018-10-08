@@ -1,8 +1,13 @@
 package com.projeto.estacionai.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projeto.estacionai.model.Funcionario;
+import com.projeto.estacionai.model.Permissao;
 import com.projeto.estacionai.repository.FuncionarioRepositorySearch;
 import com.projeto.estacionai.service.FuncionarioService;
+import com.projeto.estacionai.service.ContaPagarService;
+import com.projeto.estacionai.service.PermissaoService;
 
 @Controller
 @RequestMapping("/funcionarios")
@@ -25,6 +33,8 @@ public class FuncionarioController {
 		private FuncionarioService service;
 		@Autowired
 		private FuncionarioRepositorySearch search;
+		@Autowired
+		private PermissaoService servicePermissao;
 		
 		@GetMapping
 		public ModelAndView listar(Funcionario filtro)
@@ -50,6 +60,7 @@ public class FuncionarioController {
 			filtro.setAtivo(true);
 			mv.addObject("funcionarios", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
+			mv.addObject("username", SecurityContextHolder.getContext().getAuthentication().getName());
 			return mv;
 		}
 		
@@ -59,7 +70,16 @@ public class FuncionarioController {
 			return listar(filtro);
 		}
 		
-		
+		@GetMapping("/user")
+		public ModelAndView meuPerfil()
+		{
+			String login = SecurityContextHolder.getContext().getAuthentication().getName();
+			Funcionario user = service.buscarUser(login);
+			ModelAndView mv = new ModelAndView("funcionarios/v-perfil-funcionario");
+			mv.addObject("username", login);
+			mv.addObject("user", user);
+			return mv;
+		}
 		
 		@GetMapping("/novo")
 		public ModelAndView novo(Funcionario funcionario)
@@ -92,6 +112,21 @@ public class FuncionarioController {
 			{
 				return novo(funcionario);
 			}
+			
+			Set<Permissao> permissoes = new HashSet<>();
+			
+			if(funcionario.getNivelPermissao() == 1)
+			{
+				permissoes.add(servicePermissao.buscar(1L));
+			}
+			else
+			{
+				permissoes.add(servicePermissao.buscar(2L));
+			}		
+			
+			
+			funcionario.setSenha(BCrypt.hashpw(funcionario.getSenha(), BCrypt.gensalt()));
+			funcionario.setPermissoes(permissoes);	
 			
 			
 				

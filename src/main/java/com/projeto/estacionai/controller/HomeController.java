@@ -5,8 +5,8 @@
  */
 package com.projeto.estacionai.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +34,9 @@ public class HomeController {
 		mv.addObject("countMoto", this.serviceVaga.buscarPorTipo(1));
 		mv.addObject("countCarro", this.serviceVaga.buscarPorTipo(2));
 		mv.addObject("countDeficiente", this.serviceVaga.buscarPorTipo(3));
+		mv.addObject("countMotoOcup", this.serviceVaga.buscarPorTipoOcupadas(1));
+		mv.addObject("countCarroOcup", this.serviceVaga.buscarPorTipoOcupadas(2));
+		mv.addObject("countDeficienteOcup", this.serviceVaga.buscarPorTipoOcupadas(3));
 		return mv;
 	}
 	

@@ -14,20 +14,15 @@
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
 			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
-			    <li class="breadcrumb-item"><a th:href="@{/clientes}">Clientes</a></li>
-			    <li class="breadcrumb-item active" aria-current="page" th:if="${cliente.id == null}">Cadastro</li>
-			    <li class="breadcrumb-item active" aria-current="page" th:if="${cliente.id != null}" th:text="${cliente.nome}">Editar</li>
+			    <li class="breadcrumb-item active" aria-current="page">Gerar Ticket</li>
 			  </ol>
 			</nav>
 			
 			<div class="container">
 				<div class="row">
 						<div class="col-md-12">
-						<h1 th:if="${cliente.id != null}">
-								Editar cliente
-							</h1>
-							<h1 th:if="${cliente.id == null}">
-								Cadastro cliente
+						<h1>
+							Gerar Ticket
 						</h1>
 						</div>
 					</div>
@@ -35,19 +30,9 @@
 			
 		
 				<div class="container border rounded p-3" style="border-color: graytext;">
-					<div class="row">
-						<div class="col-md-12">
-							
-							<p>
-							* Campos obrigatórios
-							</p>
-						</div>
-					</div>
-				
-
 			
 				<form method="POST" class="form-vertical"
-				th:object="${cliente}" th:action="@{/clientes/novo}">
+				th:object="${ticket}" th:action="@{/gerar}">
 				
 				<div class="alert  alert-danger  alert-dismissible" role="alert" 
                 th:if="${#fields.hasAnyErrors()}">
@@ -63,7 +48,7 @@
 				</div>
 				
 				
-				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+				<div class="alert  alert-success alert-dismissible" role="alert"  th:if="${!#strings.isEmpty(mensagem)}">
 					<i class="fa fa-check-circle"></i>
 
 					<span th:text="${mensagem}">Mensagem sucesso!</span>
@@ -98,39 +83,18 @@
 					 </div>
 					 <div class="form-row">
 						 <div class="form-group col-md-6">
-						 <label >*Email</label>
-						      <input type="email" class="form-control" th:field="*{email}" placeholder="Informe o e-mail">	
-						      <small class="form-text text-muted">
-						      	Exemplo: nome@endereço.com
-						      </small>	  
-						 </div>
-					    
-						 <div class="form-group col-md-6">
-						 <label >*Número de vagas</label>
-						      <input type="number" min="1" class="form-control" th:field="*{numeroVagas}" placeholder="Informe o numero de vagas">		  
-						 </div>
-					 </div>
-					 
-					 <div class="form-row">
-						 <div class="form-group col-md-6">
 						 	<label>*Tipo de pagamento:</label>
 							 <select id="tipo" th:field="*{tipoPagamento}" class="form-control">
-						    	<option value="2" selected="selected">Boleto</option>
-						    	<option value="1">Cartão de Crédito</option>
+						    	<option value="1" selected="selected">Cartao de crédito</option>
+						    	<option value="2">Boleto</option>
 						    </select>
 					    </div>
 					    
-					    <div class="form-group col-md-6">
-						 <label >Número do Cartão</label>
-						      <input type="text" class="form-control" th:field="*{numeroCartao}" placeholder="Informe o numero do Cartão">
-						      <small class="form-text text-muted">
-						      	Obrigatório somente para pagamentos com cartão
-						      </small>		  
+						 <div class="form-group col-md-6">
+						 <label >*Numero de vagas</label>
+						      <input type="number" class="form-control" th:field="*{numeroVagas}" placeholder="Informe o numero de vagas">		  
 						 </div>
-					    		 
 					 </div>
-					 
-					 
 					
 					<div th:if="${cliente.id != null}">
 					 	<div class="form-row">
@@ -139,6 +103,8 @@
 					 		</div>
 					 		<div class="form-group col-md-3">	<a class="btn btn-block  btn-primary" th:href="@{/clientes/veiculos/{id}(id=${cliente.id})}"><i class="fa fa-angle-double-right"></i> Veiculos registrados</a>
 							</div>
+<!-- 					 		<div class="form-group col-md-3">	<button class="btn btn-block  btn-primary" type="submit"><i class="fa fa-users"></i> Dependente</button> -->
+<!-- 							</div> -->
 							<div class="form-group col-md-9"></div>
 					 	</div>					 
 					 </div>

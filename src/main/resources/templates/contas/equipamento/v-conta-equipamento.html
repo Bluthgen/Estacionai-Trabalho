@@ -15,7 +15,7 @@
 		
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/h}">Inicio</a></li>
 			    <li class="breadcrumb-item active" aria-current="page">Documentação de equipamentos</li>
 			  </ol>
 			</nav>
@@ -24,16 +24,24 @@
 			
 			<div class="row" style="padding-top: 10px;">
 			
+				<div class="col-md-10">
+				</div>
+				<div class="col-md-2" style="text-align: center;">
+					<button type="button" class="bnt bnt-outline-danger" style="color: red," data-toggle="popover" title="Ajuda" data-content="Nesta tela é apresentada a documentação dos equipamentos, assim como seu estado atual e necessidade de reparos">
+						<i class="fa fa-question"></i>Ajuda
+					</button>
+				
+				</div>
 				<div class="col-md-12">
-					<div class="alert  alert-info" th:if="${contas.empty}">
-						<i class="fa fa-info"></i>
+<!-- 					<div class="alert  alert-info" th:if="${contas.empty}"> -->
+<!-- 						<i class="fa fa-info"></i> -->
 	
-						<span>Não existem contas cadastradas!</span>
-						<a th:href="@{/contas/equipamento/novo}" >Clique aqui para adicionar um novo documento</a>
+<!-- 						<span>Não existem contas cadastradas!</span> -->
+<!-- 						<a th:href="@{/contas/equipamento/novo}" >Clique aqui para adicionar um novo documento</a> -->
 						
-					</div>
+<!-- 					</div> -->
 					
-					<div th:if="${!contas.empty}" style="margin-bottom: 10px;" >
+					<div style="margin-bottom: 10px;" >
 						<a class="btn btn-outline-success" th:href="@{/contas/equipamento/novo}" > 
 	 							 <span class="fa fa-plus"></span> Adicionar conta 
 						</a>
@@ -41,26 +49,66 @@
 					
 					<form  th:object="${filtro}" th:action="@{/contas/equipamento}" method="POST" 
 						class="form-default form-horizontal" >
+						<div class="collapse" id="collapseNormalEquipamento" >
 					<div class="input-group mb-3">
 							  <input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do equipamento" >
 							  <div class="input-group-append">
 							    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
-<!-- 							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button> -->
+						   	 	<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseAvancadaEquipamento" th:onclick="${'expandirEquipamento()'}"><span class="fa fa-angle-double-down"></span> Avançada</button>							  
 							  </div>
 					</div>
+					</div>
 					</form>
-				</div>
-			
-<!-- 				<div class="col-md-6"> -->
-<!-- 					<a class="btn btn-success  btn-lg" th:href="@{/contas/equipamento/novo}" > -->
-<!-- 							  Adicionar documento -->
-<!-- 							</a> -->
-					
-<!-- 				</div> -->
-<!-- 				<div class="col-md-6"> -->
-<!-- 				</div> -->
+				
+
+			<form  th:object="${filtro}" th:action="@{/contas/equipamento}" method="POST" 
+						class="form-default form-horizontal" >
+							<div class="collapse" id="collapseAvancadaEquipamento">
+							 
+						<h5>Busca avançada</h5>
+						<hr />
+						
+						<div class="form-group">
+						<label>Nome</label>
+						<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do equipamento" />
+					</div>
+<!-- 					<div class="form-group"> -->
+<!-- 					 <label >Data de vencimento</label> -->
+<!-- 					      <input type="text" class="form-control js-data" th:field="*{dataVencimento}" placeholder="Digite a data de vencimento">		   -->
+<!-- 					 	<small class="form-text text-muted"> -->
+<!-- 						      	Exemplo: 10/10/2010 -->
+<!-- 							  </small>	 -->
+<!-- 					 </div> -->
+					 <div class="form-group">
+					 <label >Estado</label>
+					      <input type="text" class="form-control" th:field="*{estado}" placeholder="Digite a estado do equipamento">		  
+					 </div>
+					 <div class="form-group">
+					 <label >Lugar de reparo</label>
+					      <input type="text" class="form-control" th:field="*{lugarReparo}" placeholder="Digite o lugar de reparo">		  
+					 </div>
+<!-- 					 <div class="form-group"> -->
+<!-- 					 <label >Valor</label> -->
+<!-- 					      <input type="text" class="form-control" th:field="*{valor}" placeholder="Digite o valor">		   -->
+<!-- 					 </div> -->
+					 
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 	<button class="btn btn-outline-secondary" type="submit" th:onclick="${'expandirEquipamento()'}"><span class="fa fa-search"></span> Pesquisar</button>
+							  
+					    </div>
+					    
+						 <div class="form-group col-md-6">
+						  	<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseAvancadaEquipamento" th:onclick="${'despandirEquipamento()'}"  ><span class="fa fa-angle-double-up"></span> Normal</button>
+							  
+						 </div>
+					 </div>
+					 
+					 </div>
+					</form>
 			</div>
 			
+			</div>
 			
 			<div class="row" style="padding-top: 10px;">
 				<div class="col-md-12">
@@ -113,6 +161,24 @@
 			</div>	
 			
 			</div>	
+			
+			<script type="text/javascript">
+			
+				function expandirEquipamento()
+				{
+					
+					$('#collapseNormalEquipamento').collapse('hide');
+									
+				}
+				
+				function despandirEquipamento()
+				{
+					
+					$('#collapseNormalEquipamento').collapse('show');
+									
+				}
+			
+			</script>
 			
 		</section>
 		

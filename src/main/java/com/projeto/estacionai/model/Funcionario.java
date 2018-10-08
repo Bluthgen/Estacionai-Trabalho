@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 public class Funcionario {
 	
 	public Funcionario(@NotBlank String nome, @NotBlank String telefone, @NotBlank String funcao, @NotBlank String cpf,
-			@NotBlank String pis, @NotNull Integer nivelPermissao, @NotBlank String senha, @NotBlank String login,
+			@NotBlank String pis, @NotNull Integer nivelPermissao, @NotBlank String senha, @NotBlank String senhaConfirm, @NotBlank String login,
 			Boolean ativo, Set<com.projeto.estacionai.model.Permissao> permissoes) {
 		super();
 		this.nome = nome;
@@ -37,6 +37,7 @@ public class Funcionario {
 		this.pis = pis;
 		this.nivelPermissao = nivelPermissao;
 		this.senha = senha;
+		this.senhaConfirm = senhaConfirm;
 		this.login = login;
 		this.ativo = ativo;
 		this.permissoes = permissoes;
@@ -109,6 +110,9 @@ public class Funcionario {
 	
 	@NotBlank
 	private String senha;
+	
+	@NotBlank
+	private String senhaConfirm;
 	
 	@NotBlank
 	private String login;
@@ -187,6 +191,14 @@ public class Funcionario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public String getSenhaConfirm() {
+		return senhaConfirm;
+	}
+
+	public void setSenhaConfirm(String senhaConfirm) {
+		this.senhaConfirm = senhaConfirm;
 	}
 
 
