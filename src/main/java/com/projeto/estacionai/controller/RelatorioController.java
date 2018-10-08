@@ -8,13 +8,15 @@ package com.projeto.estacionai.controller;
 import com.projeto.estacionai.model.ContaEquipamento;
 import com.projeto.estacionai.model.ContaPagar;
 import com.projeto.estacionai.model.ContaReceber;
+import com.projeto.estacionai.model.MovimentoCliente;
 import com.projeto.estacionai.repository.RelatorioContaEquipamentoRepositorySearch;
 import com.projeto.estacionai.repository.RelatorioContaPagarRepositorySearch;
 import com.projeto.estacionai.repository.RelatorioContaReceberRepositorySearch;
+import com.projeto.estacionai.repository.RelatorioMovimentoClienteRepositorySearch;
 import com.projeto.estacionai.service.ContaEquipamentoService;
 import com.projeto.estacionai.service.ContaPagarService;
 import com.projeto.estacionai.service.ContaReceberService;
-
+import com.projeto.estacionai.service.MovimentoClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +45,10 @@ public class RelatorioController {
 	private RelatorioContaReceberRepositorySearch searchReceber;
 	@Autowired
 	private RelatorioContaEquipamentoRepositorySearch searchEquipamento;
+	@Autowired
+	private MovimentoClienteService serviceMovimento;
+	@Autowired
+	private RelatorioMovimentoClienteRepositorySearch searchMovimento;
 	
 	
 	@GetMapping("/pagar")
@@ -87,13 +93,20 @@ public class RelatorioController {
 	}
 	
 	@GetMapping("/movimento")
-	public ModelAndView indexMovimento()
+	public ModelAndView indexMovimento(MovimentoCliente filtro)
 	{		
 		
 		ModelAndView mv = new ModelAndView("relatorios/movimento/v-relatorio");
-		mv.addObject("contas", serviceReceber.buscarTodos());
-		mv.addObject("total", serviceReceber.total());
+		filtro.setAtivo(true);
+		mv.addObject("filtro", filtro);
+		mv.addObject("contas", searchMovimento.filtrar(filtro));
 		return mv;
+	}
+	
+	@PostMapping("/movimento")
+	public ModelAndView listarEspecificoMovimento(MovimentoCliente filtro)
+	{		
+		return indexMovimento(filtro);
 	}
 	
 	
