@@ -11,12 +11,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.projeto.estacionai.model.Ticket;
+import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.observer.EntradaSaidaObserver;
 import com.projeto.estacionai.observer.TicketSujeito;
+import com.projeto.estacionai.service.TicketService;
 import com.projeto.estacionai.service.VagaService;
+import com.projeto.estacionai.service.VeiculoService;
 
 /**
  *
@@ -28,6 +34,10 @@ public class HomeController {
 	
 	@Autowired
 	private VagaService serviceVaga;
+	@Autowired
+	private TicketService service;
+	@Autowired
+	private VeiculoService serviceVeiculo;
 	
 	private Authentication authentication;
 	private String regra;
@@ -71,6 +81,30 @@ public class HomeController {
 		{
 			return false;
 		}
+	}
+	
+	@RequestMapping(value="/processar", method=RequestMethod.POST, params={"validar=Validar"})
+	public ModelAndView validarTicket(@RequestParam("placa") String placa, RedirectAttributes attributes)
+	{
+		Veiculo veiculo = this.serviceVeiculo.buscarPorPlaca(placa);
+		
+		if(veiculo == null)
+		{
+			attributes.addFlashAttribute("erro", "Veiculo não encontrado. Tente novamente!");
+			return new ModelAndView("redirect:/home");
+		}
+		
+		Ticket ticket = this.service.buscarTicket(placa);
+		
+		if(ticket == null)
+		{
+			attributes.addFlashAttribute("erro", "Não existe ticket para este veiculo. Tente novamente!");
+			return new ModelAndView("redirect:/home");
+		}
+				
+		attributes.addFlashAttribute("sucesso", "Ticket validado com sucesso!");
+		ModelAndView mv = new ModelAndView("redirect:/home");
+		return mv;
 	}
 	
 

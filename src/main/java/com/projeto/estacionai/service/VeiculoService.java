@@ -42,6 +42,11 @@ public class VeiculoService {
 		return this.repository.findByAtivoTrue();
 	}
 	
+	public Veiculo buscarPorPlaca(String placa)
+	{
+		return this.repository.findByPlaca(placa);
+	}
+	
 	public Veiculo buscar(Long id)
 	{
 		return this.repository.getOne(id);
