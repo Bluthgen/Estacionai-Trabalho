@@ -156,9 +156,61 @@
 				</div>
 			</div>	
 			</div>
+			
+			
+			
+			<!-- Painel do usuario normal -->
+			<div class="row" style="padding-top: 10px;" th:if="${!isGerente}">
+				<div class="col-md-12">
+				<div class="card text-center" >
+					<div class="card-body" style="min-height: 250px;">
+					<div class="row">
+					  <div class="col-md-10">
+					    <h5 class="card-title">Tabela de preços</h5>
+					  </div>
+					  <div class="col-md-2">
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="A tabela abaixo mostra os valores dos preços do estacionamento." ><i class="fa fa-question"></i> </button>
+					  </div>
+					  </div>
+					    <hr />
+					<table class="table">
+					  <thead class="thead-dark">
+					    <tr>
+					      <th scope="col">Tempo</th>
+					      <th scope="col">Valor (R$)</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <td>1 hora</td>
+					      <td>7,00</td>
+					    </tr>
+					    <tr>
+					      <td>2 horas</td>
+					      <td>13,00</td>
+					    </tr>
+					    <tr>
+					      <td>A partir de 2h</td>
+					      <td>1,75 à cada 15 min</td>
+					    </tr>
+					    <tr>
+					      <td>Diária</td>
+					      <td>65,00</td>
+					    </tr>
+					    <tr>
+					      <td>Mensal</td>
+					      <td>À combinar</td>
+					    </tr>
+					  </tbody>
+					</table>
+					</div>
+					</div>
+				</div>
+				</div>
 				
 			
-			<div class="row" style="padding-top: 10px;">
+			<!--  Painel se for gerente  -->
+			<div class="row" style="padding-top: 10px;" th:if="${isGerente}">
 			
 			
 			<div class="col-md-4" >

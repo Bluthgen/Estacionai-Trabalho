@@ -6,6 +6,8 @@
 package com.projeto.estacionai.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,9 @@ public class HomeController {
 	@Autowired
 	private VagaService serviceVaga;
 	
+	private Authentication authentication;
+	private String regra;
+	
 	@GetMapping
 	public ModelAndView index()
 	{		
@@ -37,6 +42,7 @@ public class HomeController {
 		mv.addObject("countMotoOcup", this.serviceVaga.buscarPorTipoOcupadas(1));
 		mv.addObject("countCarroOcup", this.serviceVaga.buscarPorTipoOcupadas(2));
 		mv.addObject("countDeficienteOcup", this.serviceVaga.buscarPorTipoOcupadas(3));
+		mv.addObject("isGerente", this.verificarGerente());
 		return mv;
 	}
 	
@@ -50,6 +56,21 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("redirect:/");
 		return mv;
+	}
+	
+	public Boolean verificarGerente()
+	{
+		this.authentication = SecurityContextHolder.getContext().getAuthentication();
+		authentication.getAuthorities().forEach(a -> regra = a.toString());
+		
+		if(regra.equals("ROLE_GERENTE"))
+		{
+			return  true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 
