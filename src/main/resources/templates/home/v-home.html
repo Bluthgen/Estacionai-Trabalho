@@ -19,84 +19,12 @@
 			  </ol>
 			</nav>
 
+<div class="container">
 		<div class="row">
 			<div class="col-md-6" >
-				<div class="card text-center" >
-					  <div class="card-body" style="min-height: 250px;">
-					  <div class="row">
-					  <div class="col-md-10">
-					    <h5 class="card-title">Quantidade de vagas livres</h5>
-					  </div>
-					  <div class="col-md-2">
-						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a quantidade de vagas disponíveis para cada tipo de veiculo." >
-						  		<i class="fa fa-question"></i> 
-						  	</button>
-					  </div>
-					  </div>
-					    <hr />
-					    <div class="row">
-					    	<div class="col-md-12">
-					    		<ul class="list-group">
-								  <li class="list-group-item d-flex justify-content-between align-items-center " >
-								    <i class="fa fa-motorcycle" ></i> Moto
-								    <span class="badge badge-primary badge-pill" th:text="${countMoto}">0</span>
-								  </li>
-								  <li class="list-group-item d-flex justify-content-between align-items-center " >
-								    <i class="fa fa-car"></i> Carro
-								    <span class="badge badge-success badge-pill" th:text="${countCarro}">0</span>
-								  </li>
-								  <li class="list-group-item d-flex justify-content-between align-items-center" >
-								     <i class="fab fa-accessible-icon" ></i> Deficiente
-								    <span class="badge badge-warning badge-pill" th:text="${countDeficiente}">0</span>
-								  </li>
-								</ul>
-							</div>
-					    </div>
-					  </div>
-				</div>
-			</div>
-			<div class="col-md-6" style="float: right">
-				<div class="card text-center" >
-					  <div class="card-body" style="min-height: 250px;">
-					  <div class="row">
-					  <div class="col-md-10">
-					    <h5 class="card-title">Veículos no estacionamento</h5>
-					  </div>
-					  <div class="col-md-2">
-						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a quantidade de vagas ocupadas por cada tipo de veiculo." >
-						  		<i class="fa fa-question"></i> 
-						  	</button>
-					  </div>
-					  </div>
-					    <hr />
-					     <div class="row">
-					    	<div class="col-md-12">
-					    		<ul class="list-group">
-								  <li class="list-group-item d-flex justify-content-between align-items-center " >
-								    <i class="fa fa-motorcycle" ></i> Motos
-								    <span class="badge badge-primary badge-pill" th:text="${countMotoOcup}">0</span>
-								  </li>
-								  <li class="list-group-item d-flex justify-content-between align-items-center " >
-								    <i class="fa fa-car"></i> Carros
-								    <span class="badge badge-success badge-pill" th:text="${countCarroOcup}">0</span>
-								  </li>
-								  <li class="list-group-item d-flex justify-content-between align-items-center" >
-								     <i class="fab fa-accessible-icon" ></i> Deficiente
-								    <span class="badge badge-warning badge-pill" th:text="${countDeficienteOcup}">0</span>
-								  </li>
-								</ul>
-							</div>
-					    </div>
-					  </div>
-				</div>
-			</div>	
-			</div>
-				
 			
-			<div class="row justify-content-center" style="padding-top: 10px;">
 			
-			<div class="col-md-6" style="float: left">
-				<div class="card text-center" style="min-height: 250px;" >
+			<div class="card text-center" style="min-height: 300px;" >
 					  <div class="card-body">
 					  <div class="row">
 						  <div class="col-md-10" >
@@ -143,31 +71,97 @@
 							</div>
 					    
 					    </div>
-<!-- 					    	<div class="col-md-6"> -->
-<!-- 					    		<img th:src="@{/images/ticket.png}" class="img-fluid" style="height: 150px;" />								 -->
-<!-- 							</div> -->
-<!-- 							<div class="col-md-6"> -->
-<!-- 							<p>Opções</p> -->
-<!-- 							<hr /> -->
-<!-- 								<div class="btn-group-vertical btn-block"> -->
-<!-- 									 <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#modalValidarTicket"> -->
-<!-- 									  <i class="fa fa-check" ></i> Validar Ticket -->
-<!-- 									</button> -->
-<!-- 									<button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#modalGerarTicket"> -->
-<!-- 								  		<i class="fa fa-cog" ></i> Gerar Ticket -->
-<!-- 									</button> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
 								</div>
 							</div>
 					    </div>
-					    
+			
+			
+
+			</div>
+			<div class="col-md-6" >
+				<div class="card text-center" >
+					  <div class="card-body" style="min-height: 275px;">
+					  <div class="row">
+					  <div class="col-md-10">
+					    <h5 class="card-title">Situação das vagas</h5>
 					  </div>
+					  <div class="col-md-2">
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a quantidade de vagas ocupadas e livres por cada tipo de veiculo." >
+						  		<i class="fa fa-question"></i> 
+						  	</button>
+					  </div>
+					  </div>
+					    <hr />
+					    
+					    <!-- Tabs -->
+					    <ul class="nav nav-tabs" id="tabs" role="tablist">
+						  <li class="nav-item">
+						    <a class="nav-link active" id="vagasLivres" data-toggle="tab" href="#livre" role="tab" aria-controls="livre" aria-selected="true">Vagas Livres</a>
+						  </li>
+						  <li class="nav-item">
+						    <a class="nav-link" id="vagasOcupadas" data-toggle="tab" href="#usada" role="tab" aria-controls="usada" aria-selected="false">Vagas Usadas</a>
+						  </li>
+						</ul>
+						<div class="tab-content" id="tabsConteudo">
+						  <div class="tab-pane fade show active" id="livre" role="tabpanel" aria-labelledby="livre">
+						  
+						 <div class="row">
+					    	<div class="col-md-12">
+					    		<ul class="list-group">
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								    <i class="fa fa-motorcycle" ></i> Moto
+								    <span class="badge badge-primary badge-pill" th:text="${countMoto}">0</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								    <i class="fa fa-car"></i> Carro
+								    <span class="badge badge-success badge-pill" th:text="${countCarro}">0</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center" >
+								     <i class="fab fa-accessible-icon" ></i> Deficiente
+								    <span class="badge badge-warning badge-pill" th:text="${countDeficiente}">0</span>
+								  </li>
+								</ul>
+							</div>
+					    </div>
+						  
+						  </div>
+						  <div class="tab-pane fade" id="usada" role="tabpanel" aria-labelledby="usada">
+						  
+						  <div class="row">
+					    	<div class="col-md-12">
+					    		<ul class="list-group">
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								    <i class="fa fa-motorcycle" ></i> Motos
+								    <span class="badge badge-primary badge-pill" th:text="${countMotoOcup}">0</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								    <i class="fa fa-car"></i> Carros
+								    <span class="badge badge-success badge-pill" th:text="${countCarroOcup}">0</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center" >
+								     <i class="fab fa-accessible-icon" ></i> Deficiente
+								    <span class="badge badge-warning badge-pill" th:text="${countDeficienteOcup}">0</span>
+								  </li>
+								</ul>
+							</div>
+					    </div>
+						  
+						  </div>
+						</div>
+					    
+					    
+					    
+					     
+					  </div>
+				</div>
+			</div>	
+			</div>
+				
+			
+			<div class="row" style="padding-top: 10px;">
 			
 			
-			
-			
-				<div class="col-md-4" style="float: right">
+			<div class="col-md-4" >
 				<div class="card text-center" >
 					<div class="card-body" style="min-height: 250px;">
 					<div class="row">
@@ -214,9 +208,9 @@
 					</div>
 					</div>
 				</div>
-				</div>
 				
-			<div class="row justify-content-center" style="padding-top: 5px;">
+				
+				
 				<div class="col-md-8">
 				<div class="card text-center" >
 					<div class="card-body" style="min-height: 250px;">
@@ -256,44 +250,6 @@
 
 								
 							</tr>
-<!--							<tr> -->
-<!-- 								<td class="text-center">29384928349</td>	-->
-
-<!--								<td class="text-center">10/10/2018 10:40	-->
-<!--								</td>	-->
-<!--
-<!--								<td class="text-center">---</td>	-->
-
-
-								
-<!--							</tr>	-->
-<!--							<tr>	-->
-<!--								<td class="text-center">29384529389289</td>	-->
-
-<!--								<td class="text-center">10/10/2018 11:30	-->
-<!--								</td>	-->
-
-<!--								<td class="text-center">10/10/2018 12:30</td>	-->
-		
-<!--							</tr>	-->
-<!--							<tr>	-->
-<!--								<td class="text-center">29384529389289</td>	-->
-
-<!--								<td class="text-center">10/10/2018 11:30	-->
-<!--								</td>	-->
-
-<!--								<td class="text-center">10/10/2018 12:30</td>	-->
-		
-<!--							</tr>	-->
-<!--							<tr>	-->
-<!--								<td class="text-center">29384529389289</td>	-->
-
-<!--								<td class="text-center">10/10/2018 11:30	-->
-<!--								</td>	-->
-
-<!--								<td class="text-center">10/10/2018 12:30</td>	-->
-		
-<!--							</tr>	-->
 
 						</tbody>
 					</table>
@@ -303,92 +259,17 @@
 					  </div>
 					  </div>
 				</div>
-				</div>
 				
+				
+				
+				
+</div>
+
+</div>	
 			
 			
 			
-			
-			<div class="modal fade" id="modalValidarTicket" tabindex="-1" role="dialog" aria-labelledby="modalValidarTicket" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title">Validar Ticket</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-					        <form method="POST" class="form-vertical">
-						
-						
-<!--							<div class="form-group">	-->
-<!--								<label>Renavam</label>	-->
-<!--								<input type="text" class="form-control" placeholder="Digite a numero do renavam"/>	-->
-<!--  							</div>	-->
-							<div class="form-group">
-								<label>Placa</label>		
-								<input id="placa" type="text" class="form-control js-placa" placeholder="Digite a placa"/>
-								<small class="form-text text-muted">
-						      	Exemplo: AAA-9999
-								</small>
-							</div>
-						    
-						     
-<!--						    <div class="form-group">	-->
-<!--								<label>Valor</label>	-->		
-<!--								<input id="valor" type="text" readonly="readonly" class="form-control"/>	-->
-<!--							</div>	-->
-		
-							<div class="form-group">
-								<button class="btn  btn-primary"  type="submit"><i class="fa fa-save"></i> Processar</button>
-							</div>
-						</form>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-			
-			<div class="modal fade" id="modalGerarTicket" tabindex="-1" role="dialog" aria-labelledby="modalGerarTicket" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" >Gerar Ticket</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        <form method="POST" class="form-vertical">
-						
-						
-							<div class="form-group">
-								<label>Renavam</label>
-								<input type="text" class="form-control" placeholder="Digite a numero do renavam"/>
-							</div>
-							<div class="form-group">
-								<label>Placa</label>		
-								<input id="placa" type="text" class="form-control js-placa" placeholder="Digite a placa"/>
-								<small class="form-text text-muted">
-						      	Exemplo: AAA-9999
-								</small>
-							</div>
-						   
-						   
-							<div class="form-group">
-								<button class="btn  btn-primary"  type="submit"><i class="fa fa-save"></i> Gerar</button>
-							</div>
-						</form>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+
 			
 			<script type="text/javascript">
 			
