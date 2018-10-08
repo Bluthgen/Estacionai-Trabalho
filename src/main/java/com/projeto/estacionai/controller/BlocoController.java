@@ -117,6 +117,7 @@ public class BlocoController {
 	{
 		
 		Long idBloco = vagaService.buscar(id).getBloco().getId();
+		service.buscar(idBloco).setNumVagas(service.buscar(idBloco).getNumVagas() - 1);
 		
 		vagaService.deletar(id);
 		
@@ -129,13 +130,14 @@ public class BlocoController {
 	public ModelAndView salvarVaga(@PathVariable Integer tipo, @PathVariable Long bloco)
 	{
 		
-		//acionando nova vaga
+		//adicionando nova vaga
 		Vaga vaga = new Vaga();
 		vaga.setTipo(tipo);
 		vaga.setOcupada(false);
 		vaga.setBloco(service.buscar(bloco));
 		
-		vagaService.salvar(vaga);	
+		vagaService.salvar(vaga);
+		service.buscar(bloco).setNumVagas(service.buscar(bloco).getNumVagas() + 1);
 			
 		return new ModelAndView("redirect:/blocos/editar/" + bloco);
 		

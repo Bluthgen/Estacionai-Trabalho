@@ -14,20 +14,10 @@
 		<section layout:fragment="content">
 		<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
 			    <li class="breadcrumb-item active" aria-current="page">Clientes</li>
 			  </ol>
-			</nav>
-<!-- 				<div class="container"> -->
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-12"> -->
-<!-- 							<h1> -->
-<!-- 								Lista clientes -->
-<!-- 							</h1> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-				
+			</nav>				
 				<div class="container">
 					<div class="row">
 					
@@ -39,8 +29,8 @@
 						<div class="alert  alert-info" th:if="${clientes.empty}">
 							<i class="fa fa-info"></i>
 		
-							<span>Não existem veiculos cadastrado para este cliente!</span>
-							<a th:href="@{/clientes/novo}" >Clique aqui para adicionar um novo veiculo</a>
+							<span>Não existem clientes cadastrados!</span>
+							<a th:href="@{/clientes/novo}" >Clique aqui para adicionar um novo Cliente</a>
 							
 						</div>
 						
@@ -100,8 +90,8 @@
 						 <div class="form-group col-md-6">
 						 	<label>Tipo de pagamento:</label>
 							 <select id="tipo" th:field="*{tipoPagamento}" class="form-control">
-						    	<option value="1" selected="selected">Cartao de crédito</option>
-						    	<option value="2">Boleto</option>
+						    	<option value="2" selected="selected">Boleto</option>
+						    	<option value="1">Cartão de Crédito</option>
 						    </select>
 					    </div>
 					    
@@ -109,6 +99,14 @@
 						 <label >Numero de vagas</label>
 						      <input type="number" class="form-control" th:field="*{numeroVagas}" placeholder="Informe o numero de vagas">		  
 						 </div>
+					 </div>
+					 
+					 
+					 <div class="form-row">
+						<div class="form-group col-md-6">
+						 <label >Email</label>
+						      <input type="email" class="form-control" th:field="*{email}" placeholder="Informe o e-mail">		  
+						 </div>					 
 					 </div>
 					 
 					 <div class="form-row">
@@ -146,6 +144,7 @@
 								<th>Nome</th>
 								<th >Telefone</th>
 								<th >CPF</th>
+								<th > E-mail </th>
 								<th>Editar</th>
 								<th>Excluir</th>
 							</tr>
@@ -160,6 +159,8 @@
 								<td  th:text=${cliente.telefone}>Telefone</td>
 
 								<td  th:text=${cliente.cpf}>CPF</td>
+								
+								<td th:text=${cliente.email}>E-mail</td>
 
 								<td class="text-center">
 									<a class="btn btn-info btn-xs" th:href="@{/clientes/editar/{id}(id=${cliente.id})}" ><span class="fa fa-pencil-alt"></span></a>
