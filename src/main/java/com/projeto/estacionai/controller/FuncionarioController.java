@@ -36,6 +36,7 @@ public class FuncionarioController {
 		@Autowired
 		private PermissaoService servicePermissao;
 		
+		
 		@GetMapping
 		public ModelAndView listar(Funcionario filtro)
 		{
@@ -61,6 +62,8 @@ public class FuncionarioController {
 			mv.addObject("funcionarios", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
 			mv.addObject("username", SecurityContextHolder.getContext().getAuthentication().getName());
+			mv.addObject("user", service.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 		}
 		
@@ -85,7 +88,9 @@ public class FuncionarioController {
 		public ModelAndView novo(Funcionario funcionario)
 		{
 			ModelAndView mv = new ModelAndView("funcionarios/v-cadastro-funcionario");
-			mv.addObject(funcionario);			
+			mv.addObject(funcionario);	
+			mv.addObject("user", service.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 		}
 		

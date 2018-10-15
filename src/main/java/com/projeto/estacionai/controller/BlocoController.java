@@ -9,9 +9,11 @@ import com.projeto.estacionai.model.Bloco;
 import com.projeto.estacionai.model.Vaga;
 import com.projeto.estacionai.repository.BlocoRepositorySearch;
 import com.projeto.estacionai.service.BlocoService;
+import com.projeto.estacionai.service.FuncionarioService;
 import com.projeto.estacionai.service.VagaService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +38,8 @@ public class BlocoController {
 	private BlocoRepositorySearch search;
     @Autowired
     private VagaService vagaService;
-    
+    @Autowired
+	private FuncionarioService serviceFunc;
 	
 	@GetMapping
 	public ModelAndView listar(Bloco filtro)
@@ -66,6 +69,8 @@ public class BlocoController {
 			filtro.setAtivo(true);
 			mv.addObject("blocos", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 //		}
 //		
@@ -88,6 +93,8 @@ public class BlocoController {
 	{
 		ModelAndView mv = new ModelAndView("blocos/v-cadastro-bloco");
 		mv.addObject(bloco);
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 //		mv.addObject("vagas", vagaService.buscarTodosDesocupadas());
 		return mv;
 	}
@@ -96,8 +103,11 @@ public class BlocoController {
 	public ModelAndView editar(@PathVariable Long id)
 	{
 		ModelAndView mv = new ModelAndView("blocos/v-editar-bloco");
-		mv.addObject("bloco", service.buscar(id));
-		mv.addObject("vagas", vagaService.buscarTodosDesocupadas());
+		Bloco bloco = service.buscar(id);
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
+		mv.addObject("bloco", bloco);
+		mv.addObject("vagas", vagaService.buscarVagasPorBloco(bloco));
 		return mv;
 //		return novo(service.buscar(id));
 	}
@@ -118,6 +128,7 @@ public class BlocoController {
 		
 		Long idBloco = vagaService.buscar(id).getBloco().getId();
 		service.buscar(idBloco).setNumVagas(service.buscar(idBloco).getNumVagas() - 1);
+		service.salvar(service.buscar(idBloco));
 		
 		vagaService.deletar(id);
 		
@@ -129,18 +140,19 @@ public class BlocoController {
 	@GetMapping("/vaga/novo/{bloco}/{tipo}")
 	public ModelAndView salvarVaga(@PathVariable Integer tipo, @PathVariable Long bloco)
 	{
-		
-		//adicionando nova vaga
-		Vaga vaga = new Vaga();
-		vaga.setTipo(tipo);
-		vaga.setOcupada(false);
-		vaga.setBloco(service.buscar(bloco));
-		
-		vagaService.salvar(vaga);
-		service.buscar(bloco).setNumVagas(service.buscar(bloco).getNumVagas() + 1);
+		Bloco dono = service.buscar(bloco);
+		if(dono.getNumVagas() < dono.getMaxVagas()){
+			//adicionando nova vaga
+			Vaga vaga = new Vaga();
+			vaga.setTipo(tipo);
+			vaga.setOcupada(false);
+			vaga.setBloco(service.buscar(bloco));
 			
+			vagaService.salvar(vaga);
+			dono.setNumVagas(dono.getNumVagas() + 1);
+			service.salvar(dono);
+		}
 		return new ModelAndView("redirect:/blocos/editar/" + bloco);
-		
 	}
 	
 	@PostMapping("/salvar")

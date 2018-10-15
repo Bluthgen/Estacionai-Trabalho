@@ -6,6 +6,7 @@
 package com.projeto.estacionai.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.projeto.estacionai.observer.EntradaSaidaObserver;
 import com.projeto.estacionai.observer.TicketSujeito;
+import com.projeto.estacionai.service.FuncionarioService;
 import com.projeto.estacionai.service.VagaService;
 
 /**
@@ -27,10 +29,16 @@ public class HomeController {
 	@Autowired
 	private VagaService serviceVaga;
 	
+
+	@Autowired
+	private FuncionarioService serviceFunc;
+	
 	@GetMapping
 	public ModelAndView index()
 	{		
 		ModelAndView mv = new ModelAndView("home/v-home");
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		mv.addObject("countMoto", this.serviceVaga.buscarPorTipo(1));
 		mv.addObject("countCarro", this.serviceVaga.buscarPorTipo(2));
 		mv.addObject("countDeficiente", this.serviceVaga.buscarPorTipo(3));

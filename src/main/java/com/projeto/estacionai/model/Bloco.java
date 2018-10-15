@@ -55,6 +55,7 @@ public class Bloco {
     public Bloco(Integer maxVagas){
     	this.vagas = new ArrayList<Vaga>();
         this.maxVagas = maxVagas;
+        this.numVagas = 0;
 	}
         
     public Bloco(List<Vaga> vagas, @NotNull Integer maxVagas,Integer numVagas) {

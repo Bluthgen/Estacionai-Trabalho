@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -20,6 +21,7 @@ import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.repository.ClienteRepositorySearch;
 import com.projeto.estacionai.repository.VeiculoRepositorySearch;
 import com.projeto.estacionai.service.ClienteService;
+import com.projeto.estacionai.service.FuncionarioService;
 import com.projeto.estacionai.service.VeiculoService;
 
 @Controller
@@ -34,6 +36,8 @@ public class ClienteController {
 		private VeiculoService serviceVeiculo;
 		@Autowired
 		private VeiculoRepositorySearch searchVeiculo;
+		@Autowired
+		private FuncionarioService serviceFunc;
 		
 		@GetMapping
 		public ModelAndView listar(Cliente filtro)
@@ -43,6 +47,8 @@ public class ClienteController {
 			filtro.setAtivo(true);
 			mv.addObject("clientes", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 		}
 		
@@ -59,6 +65,8 @@ public class ClienteController {
 		{
 			ModelAndView mv = new ModelAndView("clientes/v-cadastro-cliente");
 			mv.addObject("cliente", cliente);			
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 		}
 		
@@ -80,6 +88,8 @@ public class ClienteController {
 			mv.addObject("filtro", filtro);
 			mv.addObject("veiculos", searchVeiculo.filtrar(filtro));
 			mv.addObject("cliente", cliente);
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 		}
 		
@@ -95,6 +105,8 @@ public class ClienteController {
 			mv.addObject("filtro", filtro);
 			mv.addObject("veiculos", searchVeiculo.filtrar(filtro));
 			mv.addObject("cliente", cliente);
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 		}
 
@@ -106,6 +118,8 @@ public class ClienteController {
 			ModelAndView mv = new ModelAndView("clientes/v-cadastro-veiculo");
 			mv.addObject("clienteAtual", service.buscar(idCliente));
 			mv.addObject("veiculo", veiculo);	
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 		}
 		
@@ -115,6 +129,8 @@ public class ClienteController {
 			ModelAndView mv = new ModelAndView("clientes/v-cadastro-veiculo");
 			mv.addObject("clienteAtual", service.buscar(idCliente));
 			mv.addObject("veiculo", serviceVeiculo.buscar(id));			
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 		}
 		
@@ -123,6 +139,8 @@ public class ClienteController {
 			ModelAndView mv = new ModelAndView("clientes/v-cadastro-veiculo");
 //			mv.addObject("clienteAtual", cliente);
 			mv.addObject("veiculo", new Veiculo());			
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 		}
 		
@@ -131,6 +149,8 @@ public class ClienteController {
 		{
 			ModelAndView mv = new ModelAndView("clientes/v-cadastro-veiculo");
 			mv.addObject(veiculo);			
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 			return mv;
 		}
 		

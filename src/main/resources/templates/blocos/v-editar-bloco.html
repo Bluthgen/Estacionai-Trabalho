@@ -65,15 +65,15 @@
 						</div>
 					
 							<div class="form-group">
-								<a th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=1)}" class="btn btn-block  btn-primary" style="color: white;" ><i class="fa fa-motorcycle"></i> Adicionar vaga para Moto</a>
+								<a id="cadastroM" th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=1)}" class="btn btn-block  btn-primary" style="color: white;" th:if="${bloco.numVagas < bloco.maxVagas}"><i class="fa fa-motorcycle"></i> Adicionar vaga para Moto</a>
 							</div>
 							
 							<div class="form-group">
-								<a th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=2)}" class="btn btn-block  btn-success" style="color: white;" ><i class="fa fa-car"></i> Adicionar vaga para Carro</a>
+								<a id="cadastroC" th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=2)}" class="btn btn-block  btn-success" style="color: white;" th:if="${bloco.numVagas < bloco.maxVagas}"><i class="fa fa-car"></i> Adicionar vaga para Carro</a>
 							</div>
 							
 							<div class="form-group">
-								<a th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=3)}" class="btn btn-block  btn-warning" style="color: white;" ><i class="fab fa-accessible-icon" ></i> Adicionar vaga para Deficiente Físico</a>
+								<a id="cadastroD" th:href="@{/blocos/vaga/novo/{bloco}/{tipo}(bloco=${bloco.id},tipo=3)}" class="btn btn-block  btn-warning" style="color: white;" th:if="${bloco.numVagas < bloco.maxVagas}"><i class="fab fa-accessible-icon" ></i> Adicionar vaga para Deficiente Físico</a>
 							</div>
 						
 							<input type="hidden" th:field="*{id}" value="${bloco.id}" />
@@ -84,12 +84,12 @@
 							 
 							 <div class="form-group">
 							 <label >*Numero máximo de vagas</label>
-							  <input type="text" class="form-control" th:field="*{maxVagas}"   placeholder="Informe o número máximo de vagas do bloco">		  
+							  <input id="maxV" type="text" class="form-control" th:field="*{maxVagas}"   placeholder="Informe o número máximo de vagas do bloco">		  
 							 </div>
 							 
 							 <div class="form-group">
 							 <label >Vagas adicionadas</label>
-							  <input type="text" readonly="readonly" class="form-control" th:field="*{numVagas}"  placeholder="Numero de vagas adicionadas até o momento">		  
+							  <input id="numV" type="text" readonly="readonly" class="form-control" th:field="*{numVagas}"  placeholder="Numero de vagas adicionadas até o momento">		  
 							 </div>
 							
 							<hr />
@@ -153,6 +153,27 @@
 					</div>
 				</div>
 			</div>
+			<script type="text/javascript">
+				
+				function blocoCheio(){
+					var maxVagas = document.getElementById("maxV");
+					var numVagas = document.getElementById("numV");
+					if(numVagas < maxVagas)
+					{
+						document.getElementById("cadastroM").disabled = false;
+						document.getElementById("cadastroC").disabled = false;
+						document.getElementById("cadastroD").disabled = false;
+					}
+					else
+					{
+						document.getElementById("cadastroM").disabled = true;
+						document.getElementById("cadastroC").disabled = true;
+						document.getElementById("cadastroD").disabled = true;
+					}
+				}
+				
+				
+			</script>
 		</section>
 		
 

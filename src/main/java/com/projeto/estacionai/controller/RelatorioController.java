@@ -14,9 +14,10 @@ import com.projeto.estacionai.repository.RelatorioContaReceberRepositorySearch;
 import com.projeto.estacionai.service.ContaEquipamentoService;
 import com.projeto.estacionai.service.ContaPagarService;
 import com.projeto.estacionai.service.ContaReceberService;
-
+import com.projeto.estacionai.service.FuncionarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +44,8 @@ public class RelatorioController {
 	private RelatorioContaReceberRepositorySearch searchReceber;
 	@Autowired
 	private RelatorioContaEquipamentoRepositorySearch searchEquipamento;
-	
+	@Autowired
+	private FuncionarioService serviceFunc;
 	
 	@GetMapping("/pagar")
 	public ModelAndView index(ContaPagar filtro)
@@ -57,6 +59,8 @@ public class RelatorioController {
 		mv.addObject("filtro", filtro);
 		mv.addObject("contas", searchPagar.filtrar(filtro));
 		mv.addObject("total", servicePagar.total());
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	
@@ -77,6 +81,8 @@ public class RelatorioController {
 		mv.addObject("filtro", filtro);
 		mv.addObject("contas", searchReceber.filtrar(filtro));
 		mv.addObject("total", serviceReceber.total());
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	
@@ -93,6 +99,8 @@ public class RelatorioController {
 		ModelAndView mv = new ModelAndView("relatorios/movimento/v-relatorio");
 		mv.addObject("contas", serviceReceber.buscarTodos());
 		mv.addObject("total", serviceReceber.total());
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	
@@ -107,6 +115,8 @@ public class RelatorioController {
 		mv.addObject("filtro", filtro);
 		mv.addObject("contas", searchEquipamento.filtrar(filtro));
 		mv.addObject("total", serviceEquipamento.total());
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	

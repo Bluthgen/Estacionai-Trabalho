@@ -10,6 +10,7 @@ package com.projeto.estacionai.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.projeto.estacionai.model.ContaPagar;
 import com.projeto.estacionai.repository.ContaPagarRepositorySearch;
 import com.projeto.estacionai.service.ContaPagarService;
+import com.projeto.estacionai.service.FuncionarioService;
 
 /**
  *
@@ -39,6 +41,9 @@ public class ContaPagarController {
 	@Autowired
 	private ContaPagarRepositorySearch search;
 	
+	@Autowired
+	private FuncionarioService serviceFunc;
+	
 	@GetMapping
 	public ModelAndView index(ContaPagar filtro)
 	{		
@@ -46,6 +51,8 @@ public class ContaPagarController {
 		filtro.setAtivo(true);
 		mv.addObject("contas", this.search.filtrar(filtro));
 		mv.addObject("filtro", filtro);
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	
@@ -61,6 +68,8 @@ public class ContaPagarController {
 	{
 		ModelAndView mv = new ModelAndView("contas/pagar/v-cadastro-conta");
 		mv.addObject("contaPagar", contaPagar);
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	

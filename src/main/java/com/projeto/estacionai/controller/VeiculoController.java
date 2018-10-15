@@ -3,6 +3,7 @@ package com.projeto.estacionai.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import com.projeto.estacionai.model.Cliente;
 import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.repository.VeiculoRepositorySearch;
 import com.projeto.estacionai.service.ClienteService;
+import com.projeto.estacionai.service.FuncionarioService;
 import com.projeto.estacionai.service.VeiculoService;
 
 /**
@@ -35,6 +37,8 @@ public class VeiculoController {
 	private VeiculoRepositorySearch search;
 	@Autowired
 	private ClienteService clienteService;
+	@Autowired
+	private FuncionarioService serviceFunc;
 	
 	@GetMapping
 	public ModelAndView listar(Veiculo filtro)
@@ -55,6 +59,8 @@ public class VeiculoController {
 			filtro.setAtivo(true);
 			mv.addObject("veiculos", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
 //		}
 		return mv;
 	}
@@ -76,6 +82,8 @@ public class VeiculoController {
 		ModelAndView mv = new ModelAndView("veiculos/v-lista-veiculo");
 		mv.addObject("veiculos", search.filtrar(filtro));
 		mv.addObject("cliente", cliente);
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	
@@ -84,6 +92,8 @@ public class VeiculoController {
 	{
 		ModelAndView mv = new ModelAndView("veiculos/v-cadastro-veiculo");
 		mv.addObject(veiculo);
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	
@@ -99,6 +109,8 @@ public class VeiculoController {
 		ModelAndView mv = new ModelAndView("veiculos/v-cadastro-veiculo");
 		mv.addObject("veiculo", service.buscar(id));
 		mv.addObject("cliente", clienteService.buscar(idCliente));
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	

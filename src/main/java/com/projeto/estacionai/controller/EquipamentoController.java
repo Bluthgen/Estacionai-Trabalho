@@ -3,6 +3,7 @@ package com.projeto.estacionai.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.projeto.estacionai.model.Equipamento;
 import com.projeto.estacionai.repository.EquipamentoRepositorySearch;
 import com.projeto.estacionai.service.EquipamentoService;
+import com.projeto.estacionai.service.FuncionarioService;
 
 @Controller
 @RequestMapping("/equipamentos")
@@ -27,6 +29,9 @@ public class EquipamentoController {
 	@Autowired
 	private EquipamentoRepositorySearch search;
 	
+	@Autowired
+	private FuncionarioService serviceFunc;
+	
 	@GetMapping
 	public ModelAndView listar(Equipamento filtro)
 	{
@@ -35,6 +40,8 @@ public class EquipamentoController {
 		filtro.setAtivo(true);
 		mv.addObject("equipamentos", search.filtrar(filtro));
 		mv.addObject("filtro", filtro);
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	
@@ -49,6 +56,8 @@ public class EquipamentoController {
 	{
 		ModelAndView mv = new ModelAndView("equipamentos/v-cadastro-equipamento");
 		mv.addObject(equipamento);			
+		mv.addObject("user", serviceFunc.buscarUser(
+				SecurityContextHolder.getContext().getAuthentication().getName()));
 		return mv;
 	}
 	

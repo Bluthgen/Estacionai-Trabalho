@@ -5,6 +5,7 @@
  */
 package com.projeto.estacionai.service;
 
+import com.projeto.estacionai.model.Bloco;
 import com.projeto.estacionai.model.Vaga;
 import com.projeto.estacionai.repository.VagaRepository;
 import java.util.List;
@@ -62,9 +63,9 @@ public class VagaService {
         return this.repository.getOne(id);
     }
     
-    public List<Vaga> buscarVagasBloco()
+    public List<Vaga> buscarVagasPorBloco(Bloco bloco)
     {
-    	return null;
+    	return this.repository.findByBlocoLike(bloco);
     }
 }
 
