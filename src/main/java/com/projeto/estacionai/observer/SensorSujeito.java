@@ -2,9 +2,11 @@ package com.projeto.estacionai.observer;
 
 import java.util.ArrayList;
 
-import com.projeto.estacionai.model.Sensor;
-import com.projeto.estacionai.model.Ticket;
+import org.springframework.stereotype.Component;
 
+import com.projeto.estacionai.model.Sensor;
+
+@Component
 public class SensorSujeito {
 	
 	private ArrayList<SensorObserver> observadores;
@@ -39,6 +41,10 @@ public class SensorSujeito {
 	 
 	public Sensor pegarEstado() {
 	    return sensor;
+	}
+	
+	public ArrayList<SensorObserver> getObservadores() {
+		return observadores;
 	}
 
 }
