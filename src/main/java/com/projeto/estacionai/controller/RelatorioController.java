@@ -13,10 +13,19 @@ import com.projeto.estacionai.repository.RelatorioContaEquipamentoRepositorySear
 import com.projeto.estacionai.repository.RelatorioContaPagarRepositorySearch;
 import com.projeto.estacionai.repository.RelatorioContaReceberRepositorySearch;
 import com.projeto.estacionai.repository.RelatorioMovimentoClienteRepositorySearch;
+import com.projeto.estacionai.security.Conexao;
 import com.projeto.estacionai.service.ContaEquipamentoService;
 import com.projeto.estacionai.service.ContaPagarService;
 import com.projeto.estacionai.service.ContaReceberService;
 import com.projeto.estacionai.service.MovimentoClienteService;
+import com.projeto.estacionai.util.GeradorRelatorio;
+
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+
+import java.io.File;
+import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -99,8 +108,36 @@ public class RelatorioController {
 		ModelAndView mv = new ModelAndView("relatorios/movimento/v-relatorio");
 		filtro.setAtivo(true);
 		mv.addObject("filtro", filtro);
+		mv.addObject("filtroPdf", new MovimentoCliente());
 		mv.addObject("contas", searchMovimento.filtrar(filtro));
 		return mv;
+	}
+	
+	@PostMapping("/movimento/gerarPdf")
+	public ModelAndView gerarPdf(MovimentoCliente filtro)
+	{		
+		try {
+			String nomeArquivo = "relatorio_movimento_cliente.jasper";
+			String caminho = new File("./").getAbsolutePath(); 
+			//System.err.println("CAMINHO GERADO:"+caminho);
+			caminho = caminho.substring(0, caminho.length() - 1);
+			
+			Map<String, Object> params = new HashMap<String, Object>();
+			
+			
+			params.put("DATA_INICIO", Date.valueOf(filtro.getDataInicio()));
+			params.put("DATA_FIM", Date.valueOf(filtro.getDataFim()));
+			GeradorRelatorio geradorRelatorio = new GeradorRelatorio(nomeArquivo, params, Conexao.getConnection());
+			geradorRelatorio.gerarPDFParaOutputStream(new SimpleOutputStreamExporterOutput(caminho+"movimento_cliente.pdf"));
+				
+			System.out.println("Foi gerado");
+			return new ModelAndView("redirect:/relatorios/movimento").addObject("gerado", true);
+		}catch (Exception e) {
+			
+		}
+		
+		return new ModelAndView("redirect:/relatorios/movimento").addObject("error", true);
+	
 	}
 	
 	@PostMapping("/movimento")
