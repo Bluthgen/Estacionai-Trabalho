@@ -48,6 +48,11 @@ public class HistoricoEntradaSaidaService {
 	    public HistoricoEntradaSaida buscar(Long id)
 	    {
 	        return this.repository.getOne(id);
-	    }	
+	    }
+	    
+	    public List<HistoricoEntradaSaida> buscarUltimos5()
+	    {
+	        return this.repository.findTop5ByAtivoTrueOrderByIdDesc();
+	    }
    
 }

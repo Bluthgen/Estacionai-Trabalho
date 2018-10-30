@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import com.projeto.estacionai.model.Ticket;
 import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.observer.EntradaSaidaObserver;
 import com.projeto.estacionai.observer.TicketSujeito;
+import com.projeto.estacionai.service.HistoricoEntradaSaidaService;
 import com.projeto.estacionai.service.TicketService;
 import com.projeto.estacionai.service.VagaService;
 import com.projeto.estacionai.service.VeiculoService;
@@ -38,6 +40,8 @@ public class HomeController {
 	private TicketService service;
 	@Autowired
 	private VeiculoService serviceVeiculo;
+	@Autowired
+	private HistoricoEntradaSaidaService serviceHistorico;
 	
 	private Authentication authentication;
 	private String regra;
@@ -54,6 +58,16 @@ public class HomeController {
 		mv.addObject("countDeficienteOcup", this.serviceVaga.buscarPorTipoOcupadas(3));
 		mv.addObject("isGerente", this.verificarGerente());
 		return mv;
+	}
+	
+	@GetMapping("/atualizar")
+	public String atualizarHistoricoEntradaESaida(Model model)
+	{		
+		//mv.addObject("historicos", this.serviceHistorico.buscarUltimos5());
+		model.addAttribute("historicos", this.serviceHistorico.buscarUltimos5());
+		System.out.print("Atualizou a lista");
+		return "home/resultadoEntradaESaida :: fragResultadoEntradaESaida";
+		
 	}
 	
 	
