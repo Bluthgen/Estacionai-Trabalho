@@ -36,15 +36,10 @@ public class Mensalidade {
 	@NotNull
 	private Long idCliente;
 	
-	private boolean ativo;
+	@NotNull
+	private String status;
 	
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
+	private boolean ativo;
 
 	public Long getId() {
 		return id;
@@ -77,5 +72,22 @@ public class Mensalidade {
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
 	
 }
