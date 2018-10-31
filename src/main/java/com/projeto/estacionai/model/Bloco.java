@@ -33,6 +33,7 @@ public class Bloco {
 		this.vagas = vagas;
 		this.maxVagas = maxVagas;
 		this.numVagas = numVagas;
+		this.addVagas = 1;
 		this.nome = nome;
 	}
 
@@ -43,6 +44,10 @@ public class Bloco {
     private Integer maxVagas;
         
     private Integer numVagas;
+    
+    @NotNull
+    private Integer addVagas;
+    
     
     @NotBlank
     private String nome;
@@ -56,13 +61,15 @@ public class Bloco {
     	this.vagas = new ArrayList<Vaga>();
         this.maxVagas = maxVagas;
         this.numVagas = 0;
-	}
+        this.addVagas = 1;
+    }
         
     public Bloco(List<Vaga> vagas, @NotNull Integer maxVagas,Integer numVagas) {
 		super();
 		this.vagas = vagas;
 		this.maxVagas = maxVagas;
 		this.numVagas = numVagas;
+		this.addVagas = 1;
 	}
     
 	public Long getId() {
@@ -97,6 +104,15 @@ public class Bloco {
         this.maxVagas = maxVagas;
     }
 
+    public Integer getAddVagas(){
+        return addVagas;
+    }
+    
+    public void setAddVagas(Integer addVagas){
+        this.addVagas = addVagas;
+    }
+
+    
 	public boolean addVaga(Vaga vaga){
         if(getNumVagas() < maxVagas){
             vagas.add(vaga);

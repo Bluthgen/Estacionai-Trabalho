@@ -108,6 +108,7 @@ public class BlocoController {
 				SecurityContextHolder.getContext().getAuthentication().getName()));
 		mv.addObject("bloco", bloco);
 		mv.addObject("vagas", vagaService.buscarVagasPorBloco(bloco));
+		mv.addObject("numAdd", Integer.valueOf(1));
 		return mv;
 //		return novo(service.buscar(id));
 	}
@@ -137,20 +138,22 @@ public class BlocoController {
 		return "redirect:/blocos/editar/" + idBloco;
 	}
 	
-	@GetMapping("/vaga/novo/{bloco}/{tipo}")
-	public ModelAndView salvarVaga(@PathVariable Integer tipo, @PathVariable Long bloco)
+	@GetMapping("/vaga/novo/{bloco}/{tipo}/{num}")
+	public ModelAndView salvarVaga(@PathVariable Integer tipo, @PathVariable Long bloco, @PathVariable Integer num)
 	{
 		Bloco dono = service.buscar(bloco);
-		if(dono.getNumVagas() < dono.getMaxVagas()){
-			//adicionando nova vaga
-			Vaga vaga = new Vaga();
-			vaga.setTipo(tipo);
-			vaga.setOcupada(false);
-			vaga.setBloco(service.buscar(bloco));
-			
-			vagaService.salvar(vaga);
-			dono.setNumVagas(dono.getNumVagas() + 1);
-			service.salvar(dono);
+		for(int i= 0; i < num; i++) {
+			if(dono.getNumVagas() < dono.getMaxVagas()){
+				//adicionando nova vaga
+				Vaga vaga = new Vaga();
+				vaga.setTipo(tipo);
+				vaga.setOcupada(false);
+				vaga.setBloco(service.buscar(bloco));
+				
+				vagaService.salvar(vaga);
+				dono.setNumVagas(dono.getNumVagas() + 1);
+				service.salvar(dono);
+			}
 		}
 		return new ModelAndView("redirect:/blocos/editar/" + bloco);
 	}

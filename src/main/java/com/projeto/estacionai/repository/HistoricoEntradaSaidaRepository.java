@@ -23,5 +23,7 @@ public interface HistoricoEntradaSaidaRepository extends JpaRepository<Historico
     public Ticket findLastByCodigoLike(String codigo);
     
     public List<HistoricoEntradaSaida> findByAtivoTrue();
+    
+    public List<HistoricoEntradaSaida> findTop5ByAtivoTrueOrderByIdDesc();
 
 }

@@ -110,8 +110,8 @@
 					  </div>
 					    <hr />
 					    <div class="row">
-					    	<div class="col-md-12">
-					    	<form method="POST" th:action="@{/home/processar}" class="form-vertical"></form>
+					    <div class="col-md-12">
+					    	<form method="POST" th:action="@{/home/processar}" class="form-vertical">
 						
 						<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${!#strings.isEmpty(erro)}" >
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -139,10 +139,13 @@
 						      	Exemplo: AAA-9999
 								</small>
 							</div>
+					
+		
 							<div class="form-group">
 								<button class="btn  btn-primary"  type="submit" name="validar" value="Validar"><i class="fa fa-save"></i> Validar</button>
 								<button class="btn  btn-success"  type="submit" name="gerar" value="Gerar"><i class="fa fa-save"></i> Gerar</button>
 							</div>
+						</form>
 					    
 					    </div>
 <!-- 					    	<div class="col-md-6"> -->
@@ -227,9 +230,7 @@
 					    <h5 class="card-title">Histórico de entrada e saída</h5>
 					  </div>
 					  <div class="col-md-2">
-						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a entrada e saida de veiculos no estacionamento." >
-						  		<i class="fa fa-question"></i> 
-						  	</button>
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a entrada e saida de veiculos no estacionamento." ><i class="fa fa-question"></i> </button>
 					  </div>
 					  </div>
 					    <hr />
@@ -246,14 +247,12 @@
 						</thead>
 						<tbody>
 							<tr th:each="historico : ${historicos}">
-								<td class="text-center" th:text=${historico.codigo}>293847529384392
-								</td>
+								<td class="text-center" th:text=${historico.codigo}>293847529384392</td>
 
 								<td class="text-center"  th:text=${historico.horarioChegada}>10/10/2018 17:30
 								</td>
-								
-								<td class="text-center" th:text=${historico.horarioSaida}>10/10/2018 19:30
-								</td>
+
+								<td class="text-center" th:text=${historico.horarioSaida}>10/10/2018 19:30</td>
 
 
 								
@@ -367,11 +366,11 @@
 			        <form method="POST" class="form-vertical">
 						
 						
-							<div class="form-group">
+		<!-- 					<div class="form-group">
 								<label>Renavam</label>
 								<input type="text" class="form-control" placeholder="Digite a numero do renavam"/>
 							</div>
-							<div class="form-group">
+			 -->				<div class="form-group">
 								<label>Placa</label>		
 								<input id="placa" type="text" class="form-control js-placa" placeholder="Digite a placa"/>
 								<small class="form-text text-muted">
@@ -381,8 +380,9 @@
 						   
 						   
 							<div class="form-group">
-								<button class="btn  btn-primary"  type="submit"><i class="fa fa-save"></i> Gerar</button>
-							</div>
+<!-- 								<a class="btn  btn-primary" th:href="@{tickets/gerar}"><i class="fa fa-save"></i> Gerar</a>
+	 -->					<button class="btn  btn-primary"  type="submit"><i class="fa fa-save"></i> Gerar</button>	
+							 </div>
 						</form>
 			      </div>
 			      <div class="modal-footer">

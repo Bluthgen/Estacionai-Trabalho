@@ -129,14 +129,14 @@
 					 <div class="form-row">
 							 <div class="form-group col-md-12">
 							 	<label>*Senha:</label>
-							 	<input id="senha" type="password" class="form-control" th:field="*{senha}"  onkeyup="isNotValid()" placeholder="Informe a senha">		  		 
+							 	<input id="senha" type="password" class="form-control" th:field="*{senha}"  onkeyup="isValid()" placeholder="Informe a senha">		  		 
 						    </div>
 					 </div>
 					 
 					 <div class="form-row">
 							 <div class="form-group col-md-12">
 							 	<label>*Confirmar Senha:</label>
-							 	<input id="senhaConfirm" type="password" class="form-control" th:field="*{senhaConfirm}" onkeyup="isNotValid()" placeholder="Confirme a senha">		  		 
+							 	<input id="senhaConfirm" type="password" class="form-control" th:field="*{senhaConfirm}" onkeyup="isValid()" placeholder="Confirme a senha">		  		 
 						    </div>
 					 </div>
 							
@@ -186,11 +186,9 @@
 				
 			}
 			
-			function isNotValid(){
+			function isValid(){
 				var senha = document.getElementById("senha").value;
-				console.log(senha);
 				var senhaConfirm = document.getElementById("senhaConfirm").value;
-				console.log(senhaConfirm);
 				if(senha != "" && senhaConfirm != "")
 				{
 					if(senha == senhaConfirm)

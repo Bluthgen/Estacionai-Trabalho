@@ -52,6 +52,12 @@ public class VeiculoService {
 		return this.repository.findByCliente(id);
 	}
 	
+	
+	public Veiculo buscarPorPlaca(String placa)
+	{
+		return this.repository.findByPlaca(placa);
+	}
+	
 	public List<Veiculo> buscarEspecifico(Veiculo veiculo)
 	{
 		

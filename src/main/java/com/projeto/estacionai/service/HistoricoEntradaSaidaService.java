@@ -39,6 +39,11 @@ public class HistoricoEntradaSaidaService {
 	    {
 	        this.repository.deleteById(id);
 	    }
+	    
+	    public List<HistoricoEntradaSaida> buscarUltimos5()
+	    {
+	        return this.repository.findTop5ByAtivoTrueOrderByIdDesc();
+	    }
 		
 	    public List<HistoricoEntradaSaida> buscarTodos()
 	    {
