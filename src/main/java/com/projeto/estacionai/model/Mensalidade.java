@@ -35,6 +35,16 @@ public class Mensalidade {
 	
 	@NotNull
 	private Long idCliente;
+	
+	private boolean ativo;
+	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 
 	public Long getId() {
 		return id;
