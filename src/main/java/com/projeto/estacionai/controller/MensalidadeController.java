@@ -29,7 +29,7 @@ public class MensalidadeController {
 	public ModelAndView listar(Mensalidade filtro)
 	{
 		
-		ModelAndView mv = new ModelAndView("mensalidade/v-lista-mensalidade");
+		ModelAndView mv = new ModelAndView("mensalidades/v-lista-mensalidade");
 		filtro.setAtivo(true);
 		mv.addObject("mensalidades", search.filtrar(filtro));
 		mv.addObject("filtro", filtro);
