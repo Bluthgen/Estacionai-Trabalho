@@ -94,10 +94,10 @@ public class BlocoController {
 	
 	@GetMapping("/editar/{id}")
 	public ModelAndView editar(@PathVariable Long id)
-	{
+	{	
 		ModelAndView mv = new ModelAndView("blocos/v-editar-bloco");
 		mv.addObject("bloco", service.buscar(id));
-		mv.addObject("vagas", vagaService.buscarTodosDesocupadas());
+//		mv.addObject("vagas", vagaService.buscarTodosDesocupadas());
 		return mv;
 //		return novo(service.buscar(id));
 	}
