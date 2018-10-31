@@ -23,7 +23,7 @@
 			<div class="row" style="padding-top: 10px;">
 			
 				<div class="col-md-12">
-					<div class="alert  alert-info" th:if="${equipamentos.empty}">
+					<div class="alert  alert-info" th:if="${mensalidades.empty}">
 						<i class="fa fa-info"></i>
 	
 						<span>Não existem clientes cadastrados!</span>
@@ -31,19 +31,18 @@
 						
 					</div>
 					
-					<div th:if="${!equipamentos.empty}" style="margin-bottom: 10px;" >
-						<a class="btn btn-outline-success" th:href="@{/equipamentos/novo}" > 
-	 							 <span class="fa fa-plus"></span> Adicionar equipamento 
+					<div th:if="${!mensalidades.empty}" style="margin-bottom: 10px;" >
+						<a class="btn btn-outline-success" th:href="@{/clientes}" > 
+	 							 <span class="fa fa-plus"></span> Listar Clientes
 						</a>
 					</div>
 					
-					<form  th:object="${filtro}" th:action="@{/equipamentos}" method="POST" 
+					<form  th:object="${filtro}" th:action="@{/mensalidades}" method="POST" 
 						class="form-default form-horizontal" >
 					<div class="input-group mb-3">
-							  <input type="text" class="form-control" th:field="*{tipo}" placeholder="Digite o tipo do equipamento" >
+							  <input type="text" class="form-control" th:field="*{status}" placeholder="Digite o status da mensalidade" >
 							  <div class="input-group-append">
 							    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
-<!-- 							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button> -->
 							  </div>
 					</div>
 					</form>
@@ -65,34 +64,20 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="equipamento : ${equipamentos}">
+							<tr th:each="mensalidade : ${mensalidades}">
 								<td class="text-center" th:text=${equipamento.id}>1</td>
 
-								<td th:text=${equipamento.tipo}>Tipo
-								</td>
+								<td th:text=$mensalidade.valor}>Valor </td>
 
-								<td  th:text=${equipamento.descricao}>Descricao</td>
+								<td  th:text=${mensaliadde.idCliente}>ID Cliente</td>
 								
-								<td  th:text=${equipamento.status}>Status</td>
+								<td  th:text=${mensalidade.status}>Status</td>
+	
 								
-								<td class="text-center">
-									<a class="btn btn-info btn-xs" th:href="@{/equipamentos/editar/{id}(id=${equipamento.id})}" ><span class="fa fa-pencil-alt"></span></a>
-								</td>
-								
-								<td class="text-center">
-									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${equipamento.descricao} + '?\');'"
-									th:action="@{/equipamentos/{id}(id=${equipamento.id})}">
-										<input type="hidden" name="_method" value="DELETE" />
-									
-										<button type="submit" class="btn btn-danger btn-xs">
-											<span class="fa fa-trash"></span>
-										</button>
-									</form>
-								</td>
 							</tr>
 
-							<tr th:if="${equipamentos.empty}">
-								<td colspan="6">Nenhum equipamento cadastrado</td>
+							<tr th:if="${mensalidades.empty}">
+								<td colspan="6">Nenhum cliente cadastrado</td>
 							</tr>
 						</tbody>
 					</table>

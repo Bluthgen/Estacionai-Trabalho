@@ -7,11 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.projeto.estacionai.util.AdapterLocalDate;
 
+@Entity
 public class Mensalidade {
 	public Mensalidade(Long id, @NotNull LocalDate dataVencimento, @NotNull Double valor, @NotNull Long idCliente) {
 		super();
