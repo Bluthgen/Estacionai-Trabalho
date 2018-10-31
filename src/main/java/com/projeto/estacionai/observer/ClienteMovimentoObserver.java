@@ -1,20 +1,20 @@
 package com.projeto.estacionai.observer;
 
 
-import java.time.LocalDate;
 
-import com.projeto.estacionai.model.HistoricoEntradaSaida;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.projeto.estacionai.model.MovimentoCliente;
-import com.projeto.estacionai.service.HistoricoEntradaSaidaService;
-import com.projeto.estacionai.service.MovimentoClienteService;
+import com.projeto.estacionai.service.MovimentoClienteServiceObserver;
 
 public class ClienteMovimentoObserver extends TicketObserver {
 	
-	private MovimentoClienteService service;
+	@Autowired
+	private MovimentoClienteServiceObserver service;
 
 	public ClienteMovimentoObserver(TicketSujeito ess) {
 		super(ess);
-		this.service = new MovimentoClienteService();
+		this.service = new MovimentoClienteServiceObserver();
 	}
 
 	@Override

@@ -2,11 +2,14 @@ package com.projeto.estacionai.observer;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
 import com.projeto.estacionai.model.Ticket;
 
+@Component
 public class TicketSujeito {
 	
-	private ArrayList<TicketObserver> observadores;
+	private ArrayList<TicketObserver> observadores;	
 	private Ticket ticket;
 	
 	
@@ -39,5 +42,11 @@ public class TicketSujeito {
 	public Ticket pegarEstado() {
 	    return ticket;
 	}
+
+	public ArrayList<TicketObserver> getObservadores() {
+		return observadores;
+	}
+	
+	
 
 }

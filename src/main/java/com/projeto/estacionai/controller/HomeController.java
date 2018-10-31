@@ -5,6 +5,8 @@
  */
 package com.projeto.estacionai.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projeto.estacionai.model.Ticket;
 import com.projeto.estacionai.model.Veiculo;
+import com.projeto.estacionai.observer.ClienteMovimentoObserver;
 import com.projeto.estacionai.observer.EntradaSaidaObserver;
 import com.projeto.estacionai.observer.TicketSujeito;
 import com.projeto.estacionai.service.HistoricoEntradaSaidaService;
@@ -42,6 +45,8 @@ public class HomeController {
 	private VeiculoService serviceVeiculo;
 	@Autowired
 	private HistoricoEntradaSaidaService serviceHistorico;
+	@Autowired
+	private TicketSujeito sujeito;
 	
 	private Authentication authentication;
 	private String regra;
@@ -115,6 +120,22 @@ public class HomeController {
 			attributes.addFlashAttribute("erro", "Não existe ticket para este veiculo. Tente novamente!");
 			return new ModelAndView("redirect:/home");
 		}
+		
+		
+		ticket.setHorarioSaida(LocalDateTime.now());
+		ticket.setTotal(this.service.calcularTotal(ticket));
+		this.service.validarTicket(ticket);
+		
+		if(this.sujeito == null)
+			this.sujeito = new TicketSujeito();
+		
+		//desanexando os que já tem
+		this.sujeito.getObservadores().clear();
+		//anexando e alertando os observadores
+		this.sujeito.anexar(new EntradaSaidaObserver(this.sujeito));
+		this.sujeito.anexar(new ClienteMovimentoObserver(this.sujeito));
+		this.sujeito.setarEstado(this.service.buscarUltimo());
+		
 				
 		attributes.addFlashAttribute("sucesso", "Ticket validado com sucesso!");
 		ModelAndView mv = new ModelAndView("redirect:/home");
