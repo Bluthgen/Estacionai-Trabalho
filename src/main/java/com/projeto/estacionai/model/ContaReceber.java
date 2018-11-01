@@ -91,6 +91,9 @@ public class ContaReceber {
 	@Convert(converter = AdapterLocalDate.class)
 	private LocalDate dataFim;
 	
+	@Transient
+	private Boolean atrasada;
+	
 	public Double getValor() {
 		return valor;
 	}
@@ -185,6 +188,16 @@ public class ContaReceber {
 	}
 
 
+	public Boolean getAtrasada() {
+		return atrasada;
+	}
+
+
+	public void setAtrasada(Boolean atrasada) {
+		this.atrasada = atrasada;
+	}
+
+	
 	
 	
 	

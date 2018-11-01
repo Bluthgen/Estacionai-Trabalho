@@ -72,6 +72,9 @@ public class ContaPagar {
 	@Convert(converter = AdapterLocalDate.class)
 	private LocalDate dataFim;
 	
+	@Transient
+	private Boolean atrasada;
+	
 
 	public Integer getTipoConta() {
 		return tipoConta;
@@ -135,6 +138,14 @@ public class ContaPagar {
 
 	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
+	}
+
+	public Boolean getAtrasada() {
+		return atrasada;
+	}
+
+	public void setAtrasada(Boolean atrasada) {
+		this.atrasada = atrasada;
 	}
 	
 	

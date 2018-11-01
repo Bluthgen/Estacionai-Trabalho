@@ -7,6 +7,9 @@ package com.projeto.estacionai.controller;
 
 
 
+import java.time.LocalDate;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +44,25 @@ public class ContaPagarController {
 	
 	@GetMapping
 	public ModelAndView index(ContaPagar filtro)
-	{		
+	{	
+		//verifica e seta a conta como atrasada
+		LocalDate dataAtual = LocalDate.now();
+		List<ContaPagar> contas = this.search.filtrar(filtro);
+		int i =0;
+		for (ContaPagar contaPagar : contas) {
+			if(contaPagar.getDataVencimento().isBefore(dataAtual))
+			{
+				contas.get(i).setAtrasada(true);
+			}
+			i++;
+		}
+		
 		ModelAndView mv = new ModelAndView("contas/pagar/v-conta-pagar");
 		filtro.setAtivo(true);
-		mv.addObject("contas", this.search.filtrar(filtro));
+		mv.addObject("contas", contas);
 		mv.addObject("filtro", filtro);
+		
+		System.out.println("Data atual: " + dataAtual);
 		return mv;
 	}
 	

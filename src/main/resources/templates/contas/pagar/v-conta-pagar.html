@@ -26,7 +26,7 @@
 			
 			<div class="col-md-10"> </div>
 				<div class="col-md-2" style="text-align: center;">
-					<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="Nesta tela é apresentada as contas que devem ser pagas, assim como sua data de vencimento e o valor." >
+					<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="Nesta tela é apresentada as contas que devem ser pagas, assim como sua data de vencimento e o valor. As contas em vermelhos são as que já venceram!" >
 						<i class="fa fa-question"></i> Ajuda
 					</button>
 				</div>
@@ -97,14 +97,19 @@
 						</thead>
 						<tbody>
 							<tr th:each="conta : ${contas}">
-								<td class="text-center" th:text=${conta.id}>1</td>
+								<td  th:if="${conta.atrasada}" class="text-center text-danger" th:text=${conta.id}>1</td>
+								<td th:unless="${conta.atrasada}" class="text-center" th:text=${conta.id}>1</td>
 
-								<td th:text=${conta.nome}>Nome
+								<td class="text-danger" th:if="${conta.atrasada}"  th:text=${conta.nome}>Nome
+								</td>
+								<td th:unless="${conta.atrasada}"  th:text=${conta.nome}>Nome
 								</td>
 
-								<td  th:text=${conta.dataVencimento}>Data de vencimento</td>
+								<td class="text-danger" th:if="${conta.atrasada}"  th:text=${conta.dataVencimento}>Data de vencimento</td>
+								<td th:unless="${conta.atrasada}" th:text=${conta.dataVencimento}>Data de vencimento</td>
 								
-								<td  th:text=${conta.valor}>Valor</td>
+								<td class="text-danger" th:if="${conta.atrasada}"  th:text=${conta.valor}>Valor</td>
+								<td th:unless="${conta.atrasada}" th:text=${conta.valor}>Valor</td>
 								
 								<td class="text-center">
 									<a class="btn btn-info btn-xs" th:href="@{/contas/pagar/editar/{id}(id=${conta.id})}" ><span class="fa fa-pencil-alt"></span></a>
