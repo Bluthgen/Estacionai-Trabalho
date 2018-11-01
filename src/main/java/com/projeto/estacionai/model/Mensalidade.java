@@ -15,12 +15,16 @@ import com.projeto.estacionai.util.AdapterLocalDate;
 
 @Entity
 public class Mensalidade {
-	public Mensalidade(Long id, @NotNull LocalDate dataVencimento, @NotNull Double valor, @NotNull Long idCliente) {
+
+	public Mensalidade(Long id, @NotNull LocalDate dataVencimento, @NotNull Double valor, @NotNull Long idCliente,
+			@NotNull String status, boolean ativo) {
 		super();
 		this.id = id;
 		this.dataVencimento = dataVencimento;
 		this.valor = valor;
 		this.idCliente = idCliente;
+		this.status = status;
+		this.ativo = ativo;
 	}
 
 	@Id
@@ -42,6 +46,7 @@ public class Mensalidade {
 	private String status;
 	
 	private boolean ativo;
+	
 
 	public Long getId() {
 		return id;
