@@ -1,10 +1,18 @@
 package com.projeto.estacionai.service;
 
+import java.math.BigInteger;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.persistence.Tuple;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.projeto.estacionai.model.MovimentoCliente;
+import com.projeto.estacionai.relatorio.RelatorioMovimentoTipo1;
 import com.projeto.estacionai.repository.MovimentoClienteRepository;
 
 /**
@@ -42,5 +50,22 @@ public class MovimentoClienteService {
 	public MovimentoCliente buscar(Long id)
 	{
 		return this.repository.getOne(id);
+	}
+	
+	
+	public List<RelatorioMovimentoTipo1> buscarMaisUtilizaramEstacionamento()
+	{
+		List<Tuple> resultado = this.repository.buscarMaisUtilizaramEstacionamento();
+		List<RelatorioMovimentoTipo1> lista = new ArrayList<>();
+		
+		System.out.println("Resultado: " + resultado);
+		
+		for(Tuple result : resultado)
+		{
+			lista.add(new RelatorioMovimentoTipo1(Integer.valueOf(result.get(0).toString()), Integer.valueOf(result.get(1).toString())));
+		}
+		
+		
+		return lista;
 	}
 }

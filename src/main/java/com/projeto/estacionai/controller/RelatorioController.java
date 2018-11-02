@@ -9,6 +9,7 @@ import com.projeto.estacionai.model.ContaEquipamento;
 import com.projeto.estacionai.model.ContaPagar;
 import com.projeto.estacionai.model.ContaReceber;
 import com.projeto.estacionai.model.MovimentoCliente;
+import com.projeto.estacionai.relatorio.RelatorioMovimentoTipo1;
 import com.projeto.estacionai.repository.RelatorioContaEquipamentoRepositorySearch;
 import com.projeto.estacionai.repository.RelatorioContaPagarRepositorySearch;
 import com.projeto.estacionai.repository.RelatorioContaReceberRepositorySearch;
@@ -24,7 +25,9 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
 import java.io.File;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -97,19 +101,45 @@ public class RelatorioController {
 	
 	@PostMapping("/receber")
 	public ModelAndView listarEspecificoReceber(ContaReceber filtro)
-	{		
+	{	
+		
 		return indexReceber(filtro);
 	}
 	
 	@GetMapping("/movimento")
-	public ModelAndView indexMovimento(MovimentoCliente filtro)
+	public ModelAndView indexMovimento(MovimentoCliente filtro, Integer tipoRelatorio)
 	{		
+		
+		if(tipoRelatorio == null)
+		{
+			tipoRelatorio = 4;
+		}
 		
 		ModelAndView mv = new ModelAndView("relatorios/movimento/v-relatorio");
 		filtro.setAtivo(true);
 		mv.addObject("filtro", filtro);
 		mv.addObject("filtroPdf", new MovimentoCliente());
-		mv.addObject("contas", searchMovimento.filtrar(filtro));
+		mv.addObject("tipoPesquisa", tipoRelatorio);
+		
+		if(tipoRelatorio == 1)
+		{
+			List<RelatorioMovimentoTipo1> lista= this.serviceMovimento.buscarMaisUtilizaramEstacionamento();
+			mv.addObject("relatorio1", lista);
+			
+		}
+		else if(tipoRelatorio == 2)
+		{
+			
+		}
+		else if(tipoRelatorio == 3)
+		{
+			
+		}
+		else if(tipoRelatorio == 4)
+		{
+			mv.addObject("contas", searchMovimento.filtrar(filtro));
+		}
+		
 		return mv;
 	}
 	
@@ -141,9 +171,9 @@ public class RelatorioController {
 	}
 	
 	@PostMapping("/movimento")
-	public ModelAndView listarEspecificoMovimento(MovimentoCliente filtro)
-	{		
-		return indexMovimento(filtro);
+	public ModelAndView listarEspecificoMovimento(MovimentoCliente filtro, @RequestParam("tipoRelatorio") Integer tipoRelatorio)
+	{	
+		return indexMovimento(filtro, tipoRelatorio);
 	}
 	
 	

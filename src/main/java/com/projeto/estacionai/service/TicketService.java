@@ -46,6 +46,11 @@ public class TicketService {
 		this.repository.save(ticket);
 	}
 	
+	public void gerarTicket(Ticket ticket)
+	{
+		this.repository.save(ticket);	
+	}
+	
 	public Double calcularTotal(Ticket ticket)
 	{
 				

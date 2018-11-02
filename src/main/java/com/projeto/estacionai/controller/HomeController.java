@@ -5,7 +5,12 @@
  */
 package com.projeto.estacionai.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -138,6 +143,53 @@ public class HomeController {
 		
 				
 		attributes.addFlashAttribute("sucesso", "Ticket validado com sucesso!");
+		ModelAndView mv = new ModelAndView("redirect:/home");
+		return mv;
+	}
+	
+	
+	@RequestMapping(value="/processar", method=RequestMethod.POST, params={"gerar=Gerar"})
+	public ModelAndView gerarTicket(@RequestParam("placa") String placa, RedirectAttributes attributes)
+	{
+		
+		//salvamento do ticket novo
+		Veiculo veiculo = this.serviceVeiculo.buscarPorPlaca(placa);
+		
+		if(veiculo == null)
+		{
+			attributes.addFlashAttribute("erro", "Veiculo não encontrado. Tente novamente!");
+			return new ModelAndView("redirect:/home");
+		}
+		
+		String codigo = "";
+		try {
+			codigo = DatatypeConverter.printHexBinary(MessageDigest.getInstance("MD5").digest(placa.getBytes("utf-8")));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Ticket ticket = new Ticket();
+		ticket.setPlaca(placa);
+		ticket.setCodigo(codigo);
+		ticket.setAtivo(true);
+		ticket.setHorarioChegada(LocalDateTime.now());
+		ticket.setHorarioSaida(LocalDateTime.now());
+		ticket.setTotal(this.service.calcularTotal(ticket));
+		ticket.setCliente(veiculo.getCliente());
+		this.service.gerarTicket(ticket);
+		
+		//desanexando os que já tem
+		this.sujeito.getObservadores().clear();
+		//alertando os observadores 
+		this.sujeito.anexar(new EntradaSaidaObserver(sujeito));
+		this.sujeito.anexar(new ClienteMovimentoObserver(sujeito));
+		this.sujeito.setarEstado(this.service.buscarUltimo());
+		
+		attributes.addFlashAttribute("sucesso", "Ticket gerado com sucesso! Clique aqui para ver.");
 		ModelAndView mv = new ModelAndView("redirect:/home");
 		return mv;
 	}

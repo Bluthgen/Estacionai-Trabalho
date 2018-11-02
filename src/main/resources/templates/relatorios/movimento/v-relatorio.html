@@ -24,7 +24,30 @@
 			<form  th:object="${filtro}" th:action="@{/relatorios/movimento}" method="POST" 
 						class="form-default" >
 				<div class="form-row">
-					<div class="col"><h5>Pesquisar por periodo:</h5></div>
+					
+					<div class="col"><h5>Informe o tipo de relatório:</h5></div>
+					<div class="w-100"></div>
+				    <div class="col">
+				    	<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio1" value="1">
+						  <label class="form-check-label" for="inlineRadio1">Veiculos que mais utilizaram o estacionamento</label>
+						</div>
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio2" value="2">
+						  <label class="form-check-label" for="inlineRadio2">Por cliente (individual)</label>
+						</div>
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio3" value="3" >
+						  <label class="form-check-label" for="inlineRadio3">Clientes que mais utilizaram o estacionamento</label>
+						</div>
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio4" value="4">
+						  <label class="form-check-label" for="inlineRadio4" >Normal</label>
+						</div>
+				    </div>
+					<div class="w-100"></div>
+					<br />
+					<div class="col"><h5>Informe o periodo:</h5></div>
 					<div class="w-100"></div>
 				    <div class="col">
 				      <input type="text" class="form-control js-data" th:field="*{dataInicio}" placeholder="Informe a data de inicio">
@@ -43,9 +66,9 @@
 						      <button type="submit" class="btn btn-block btn-outline-secondary" >
 						      <span class="fa fa-search"></span> Pesquisar
 							</button>
-							<a  class="btn btn-block btn-outline-success" th:onclick="${'mostrarModal()'}" >
-						      <span class="fa fa-file-pdf"></span> Gerar pdf
-							</a>
+<!-- 							<a  class="btn btn-block btn-outline-success" th:onclick="${'mostrarModal()'}" > -->
+<!-- 						      <span class="fa fa-file-pdf"></span> Gerar pdf -->
+<!-- 							</a> -->
 						</div>
 				    </div>
 				    
@@ -73,7 +96,39 @@
 			
 			<div class="row" style="padding-top: 10px;">
 				<div class="col-md-12">
-					<div class="table-responsive">
+				
+				<!-- Tipo de pesquisa == Veiculos -->
+				<div class="table-responsive" th:if="${tipoPesquisa} == 1">
+					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+						<thead>
+							<tr>
+								<th>Tipo do veiculo</th>
+								<th>Quantidade de entrada</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="conta : ${relatorio1}">
+								
+								<td th:if="${conta.tipoVeiculo} == 1">MOTO</td>
+								<td th:if="${conta.tipoVeiculo} == 2">CARRO</td>
+								<td th:if="${conta.tipoVeiculo} == 3">DEFICIENTE</td>
+								
+								<td th:text="${conta.qtdMovimento}">2</td>
+								
+								
+							</tr>
+							
+
+							<tr th:if="${relatorio1.empty}">
+								<td colspan="5">Nenhum relatorio com esse periodo</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				
+				<!-- Tipo de pesquisa == Nenhum -->
+				<div class="table-responsive" th:if="${tipoPesquisa} == 4">
 					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
 						<thead>
 							<tr>
