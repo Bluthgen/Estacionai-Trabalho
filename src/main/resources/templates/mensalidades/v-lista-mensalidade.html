@@ -58,20 +58,20 @@
 						<thead>
 							<tr>
 								<th>Código</th>
-								<th>Tipo</th>
-								<th>Descricao</th>
+								<th>ID Cliente</th>
+								<th>Valor</th>
 								<th>Status</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="mensalidade : ${mensalidades}">
-								<td class="text-center" th:text=${equipamento.id}>1</td>
+								<td class="text-center" th:text=${mensalidade.id}></td>
 
-								<td th:text=$mensalidade.valor}>Valor </td>
+								<td  th:text=${mensalidade.idCliente}></td>
 
-								<td  th:text=${mensaliadde.idCliente}>ID Cliente</td>
+								<td th:text=${mensalidade.valor}></td>
 								
-								<td  th:text=${mensalidade.status}>Status</td>
+								<td  th:text=${mensalidade.status}></td>
 	
 								
 							</tr>
