@@ -39,7 +39,24 @@ public class MensalidadeRepositorySearch {
 	private Predicate[] restricoes(Mensalidade mensalidade, CriteriaBuilder builder, Root<Mensalidade> root) {
 		List<Predicate> predicates	= new ArrayList<>();
 		
-	
+			if(mensalidade.getId() != null)
+				predicates.add(builder.equal(root.get("id"), 
+						mensalidade.getId()));
+			if(mensalidade.getAtivo() != null)	
+				predicates.add(builder.equal(root.get("ativo"), 
+						mensalidade.getAtivo()));
+			if(mensalidade.getIdCliente() != null)
+				predicates.add(builder.equal(root.get("idCliente"),
+						mensalidade.getIdCliente()));
+			if(mensalidade.getStatus() != null && !mensalidade.getStatus().isEmpty())
+				predicates.add(builder.like(builder.lower(root.get("status")), 
+						"%"+  mensalidade.getStatus().toLowerCase()+ "%"));
+			if(mensalidade.getValor() != null)
+				predicates.add(builder.equal(root.get("valor"), 
+						mensalidade.getValor()));
+			if(mensalidade.getDataVencimento() != null)
+				predicates.add(builder.equal(root.get("dataVencimento"), 
+						mensalidade.getDataVencimento()));
 		
 		
 		
