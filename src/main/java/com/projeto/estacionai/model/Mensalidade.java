@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,7 +18,7 @@ import com.projeto.estacionai.util.AdapterLocalDate;
 public class Mensalidade {
 
 	public Mensalidade(Long id, @NotNull LocalDate dataVencimento, @NotNull Double valor, @NotNull Long idCliente,
-			@NotNull String status, boolean ativo) {
+			@NotBlank String status, Boolean ativo) {
 		super();
 		this.id = id;
 		this.dataVencimento = dataVencimento;
@@ -42,7 +43,7 @@ public class Mensalidade {
 	@NotNull
 	private Long idCliente;
 	
-	@NotNull
+	@NotBlank
 	private String status;
 	
 	private Boolean ativo;
