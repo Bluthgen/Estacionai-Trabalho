@@ -1,10 +1,6 @@
 package com.projeto.estacionai.service;
 
-import java.math.BigInteger;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.Tuple;
@@ -57,8 +53,6 @@ public class MovimentoClienteService {
 	{
 		List<Tuple> resultado = this.repository.buscarMaisUtilizaramEstacionamento();
 		List<RelatorioMovimentoTipo1> lista = new ArrayList<>();
-		
-		System.out.println("Resultado: " + resultado);
 		
 		for(Tuple result : resultado)
 		{

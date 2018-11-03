@@ -87,6 +87,8 @@ public class Ticket {
 	
 	private Boolean ativo;
         
+	@Transient
+	private Integer tipoVeiculo;
 	
 	public Ticket(){}    
 
@@ -168,6 +170,16 @@ public class Ticket {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+		public Integer getTipoVeiculo() {
+		return tipoVeiculo;
+	}
+
+
+
+	public void setTipoVeiculo(Integer tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo;
 	}
 
 

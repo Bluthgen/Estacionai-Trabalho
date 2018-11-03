@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.projeto.estacionai.model.MovimentoCliente;
 import com.projeto.estacionai.service.MovimentoClienteServiceObserver;
-
 public class ClienteMovimentoObserver extends TicketObserver {
 	
 	@Autowired
@@ -20,7 +19,8 @@ public class ClienteMovimentoObserver extends TicketObserver {
 	@Override
 	public void atualizar() {
 		
-		MovimentoCliente mv = new MovimentoCliente(ess.pegarEstado().getCodigo(), 2, ess.pegarEstado().getHorarioSaida().toLocalDate());
+		System.out.println("Ic cliente observer: " + ess.pegarEstado().getCliente().getId());
+		MovimentoCliente mv = new MovimentoCliente(ess.pegarEstado().getCodigo(), ess.pegarEstado().getCliente(), ess.pegarEstado().getTipoVeiculo(), ess.pegarEstado().getHorarioSaida().toLocalDate());
 		this.service.salvar(mv);
 		
 	}

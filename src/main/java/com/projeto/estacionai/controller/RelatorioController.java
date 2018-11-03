@@ -5,6 +5,7 @@
  */
 package com.projeto.estacionai.controller;
 
+import com.projeto.estacionai.model.Cliente;
 import com.projeto.estacionai.model.ContaEquipamento;
 import com.projeto.estacionai.model.ContaPagar;
 import com.projeto.estacionai.model.ContaReceber;
@@ -15,6 +16,7 @@ import com.projeto.estacionai.repository.RelatorioContaPagarRepositorySearch;
 import com.projeto.estacionai.repository.RelatorioContaReceberRepositorySearch;
 import com.projeto.estacionai.repository.RelatorioMovimentoClienteRepositorySearch;
 import com.projeto.estacionai.security.Conexao;
+import com.projeto.estacionai.service.ClienteService;
 import com.projeto.estacionai.service.ContaEquipamentoService;
 import com.projeto.estacionai.service.ContaPagarService;
 import com.projeto.estacionai.service.ContaReceberService;
@@ -62,6 +64,8 @@ public class RelatorioController {
 	private MovimentoClienteService serviceMovimento;
 	@Autowired
 	private RelatorioMovimentoClienteRepositorySearch searchMovimento;
+	@Autowired
+	private ClienteService serviceCliente;
 	
 	
 	@GetMapping("/pagar")
@@ -129,6 +133,11 @@ public class RelatorioController {
 		}
 		else if(tipoRelatorio == 2)
 		{
+			
+			Cliente cliente = this.serviceCliente.buscarPorCpf(filtro.getCliente().getCpf());
+			System.out.println("Id cliente: " + cliente.getId());
+			filtro.setCliente(cliente);
+			mv.addObject("relatorio2", searchMovimento.filtrar(filtro));
 			
 		}
 		else if(tipoRelatorio == 3)

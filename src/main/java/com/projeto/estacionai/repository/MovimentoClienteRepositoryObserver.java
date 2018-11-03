@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 public class MovimentoClienteRepositoryObserver {
     
     
-	private final String INSERT_SQL = "INSERT INTO movimento_cliente(nome, data_movimento, ativo, tipo_veiculo) values(?,?,?,?)";
+	private final String INSERT_SQL = "INSERT INTO movimento_cliente(nome, data_movimento, ativo, tipo_veiculo, cliente_id) values(?,?,?,?,?)";
 
 	private Connection conn;
 	
@@ -39,6 +39,7 @@ public class MovimentoClienteRepositoryObserver {
 			ps.setString(2, mc.getDataMovimento().toString());
 			ps.setBoolean(3, mc.getAtivo());
 			ps.setInt(4, mc.getTipoVeiculo());
+			ps.setLong(5, mc.getCliente().getId());
 			
 			ps.executeUpdate();			
 			

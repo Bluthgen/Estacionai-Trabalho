@@ -54,6 +54,9 @@ public class RelatorioMovimentoClienteRepositorySearch {
 		if(movimento.getAtivo() != null)	
 			predicates.add(builder.equal(root.get("ativo"), 
 					movimento.getAtivo()));
+		if(movimento.getCliente() != null && movimento.getCliente().getId() != 0)	
+			predicates.add(builder.equal(root.get("cliente"), 
+					movimento.getCliente().getId()));
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

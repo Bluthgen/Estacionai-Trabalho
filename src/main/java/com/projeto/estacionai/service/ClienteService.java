@@ -43,4 +43,9 @@ public class ClienteService {
 	{
 		return this.repository.getOne(id);
 	}
+	
+	public Cliente buscarPorCpf(String cpf)
+	{
+		return this.repository.findFirstByCpf(cpf);
+	}
 }

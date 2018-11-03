@@ -136,10 +136,25 @@ public class HomeController {
 		
 		//desanexando os que já tem
 		this.sujeito.getObservadores().clear();
+		
+		Ticket ultimo  = this.service.buscarUltimo();
+		if(veiculo.getTipo().equals("CARRO"))
+		{
+			ultimo.setTipoVeiculo(2);
+		}
+		else if(veiculo.getTipo().equals("MOTO"))
+		{
+			ultimo.setTipoVeiculo(1);
+		}
+		else
+		{
+			ultimo.setTipoVeiculo(3);
+		}
 		//anexando e alertando os observadores
 		this.sujeito.anexar(new EntradaSaidaObserver(this.sujeito));
 		this.sujeito.anexar(new ClienteMovimentoObserver(this.sujeito));
-		this.sujeito.setarEstado(this.service.buscarUltimo());
+		this.sujeito.setarEstado(ultimo);
+		
 		
 				
 		attributes.addFlashAttribute("sucesso", "Ticket validado com sucesso!");
@@ -172,6 +187,9 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		
+		if(this.sujeito == null)
+			this.sujeito = new TicketSujeito();
+		
 		Ticket ticket = new Ticket();
 		ticket.setPlaca(placa);
 		ticket.setCodigo(codigo);
@@ -182,12 +200,27 @@ public class HomeController {
 		ticket.setCliente(veiculo.getCliente());
 		this.service.gerarTicket(ticket);
 		
+		
 		//desanexando os que já tem
 		this.sujeito.getObservadores().clear();
 		//alertando os observadores 
+		Ticket ultimo  = this.service.buscarUltimo();
+		if(veiculo.getTipo().equals("CARRO"))
+		{
+			ultimo.setTipoVeiculo(2);
+		}
+		else if(veiculo.getTipo().equals("MOTO"))
+		{
+			ultimo.setTipoVeiculo(1);
+		}
+		else
+		{
+			ultimo.setTipoVeiculo(3);
+		}
+		
 		this.sujeito.anexar(new EntradaSaidaObserver(sujeito));
 		this.sujeito.anexar(new ClienteMovimentoObserver(sujeito));
-		this.sujeito.setarEstado(this.service.buscarUltimo());
+		this.sujeito.setarEstado(ultimo);
 		
 		attributes.addFlashAttribute("sucesso", "Ticket gerado com sucesso! Clique aqui para ver.");
 		ModelAndView mv = new ModelAndView("redirect:/home");

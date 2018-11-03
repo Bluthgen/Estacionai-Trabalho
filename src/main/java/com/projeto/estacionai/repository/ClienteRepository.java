@@ -15,5 +15,7 @@ import com.projeto.estacionai.model.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	
 	public List<Cliente> findByAtivoTrue();
+	
+	public Cliente findFirstByCpf(String cpf);
 
 }

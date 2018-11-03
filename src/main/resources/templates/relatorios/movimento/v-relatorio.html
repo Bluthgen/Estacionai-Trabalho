@@ -47,6 +47,13 @@
 				    </div>
 					<div class="w-100"></div>
 					<br />
+						<div class="col">
+						  <label>CPF do cliente:</label>
+					      <input type="text" class="form-control js-cpf" th:field="*{cliente.cpf}" placeholder="Informe o cpf do cliente">
+					  
+					    </div>
+				    <div class="w-100"></div>
+					<br />
 					<div class="col"><h5>Informe o periodo:</h5></div>
 					<div class="w-100"></div>
 				    <div class="col">
@@ -126,13 +133,44 @@
 					</table>
 				</div>
 				
+				<!-- Tipo de pesquisa == Nenhum -->
+				<div class="table-responsive" th:if="${tipoPesquisa} == 2">
+					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+						<thead>
+							<tr>
+								<th>Código do ticket</th>
+								<th>Data de movimento</th>
+								<th>Tipo de veiculo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="conta : ${relatorio2}">
+
+								<td th:text="${conta.nome}">Nome</td>
+								
+								<td th:text="${conta.dataMovimento}">Data</td>
+								
+								<td th:if="${conta.tipoVeiculo} == 1">MOTO</td>
+								<td th:if="${conta.tipoVeiculo} == 2">CARRO</td>
+								
+								
+							</tr>
+							
+
+							<tr th:if="${relatorio2.empty}">
+								<td colspan="5">Nenhum relatorio com esse periodo</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
 				
 				<!-- Tipo de pesquisa == Nenhum -->
 				<div class="table-responsive" th:if="${tipoPesquisa} == 4">
 					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
 						<thead>
 							<tr>
-								<th>Nome</th>
+								<th>Código do ticket</th>
 								<th>Data de movimento</th>
 								<th>Tipo de veiculo</th>
 							</tr>
