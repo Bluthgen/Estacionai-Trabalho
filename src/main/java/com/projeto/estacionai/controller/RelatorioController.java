@@ -11,6 +11,7 @@ import com.projeto.estacionai.model.ContaPagar;
 import com.projeto.estacionai.model.ContaReceber;
 import com.projeto.estacionai.model.MovimentoCliente;
 import com.projeto.estacionai.relatorio.RelatorioMovimentoTipo1;
+import com.projeto.estacionai.relatorio.RelatorioMovimentoTipo3;
 import com.projeto.estacionai.repository.RelatorioContaEquipamentoRepositorySearch;
 import com.projeto.estacionai.repository.RelatorioContaPagarRepositorySearch;
 import com.projeto.estacionai.repository.RelatorioContaReceberRepositorySearch;
@@ -142,7 +143,8 @@ public class RelatorioController {
 		}
 		else if(tipoRelatorio == 3)
 		{
-			
+			List<RelatorioMovimentoTipo3> lista= this.serviceMovimento.buscarClientesMaisUtilizaramEstacionamento();
+			mv.addObject("relatorio3", lista);
 		}
 		else if(tipoRelatorio == 4)
 		{
