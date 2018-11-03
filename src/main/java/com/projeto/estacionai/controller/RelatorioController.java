@@ -128,6 +128,7 @@ public class RelatorioController {
 		
 		if(tipoRelatorio == 1)
 		{
+			filtro.setCliente(null);
 			List<RelatorioMovimentoTipo1> lista= this.serviceMovimento.buscarMaisUtilizaramEstacionamento();
 			mv.addObject("relatorio1", lista);
 			
@@ -149,11 +150,13 @@ public class RelatorioController {
 		}
 		else if(tipoRelatorio == 3)
 		{
+			filtro.setCliente(null);
 			List<RelatorioMovimentoTipo3> lista= this.serviceMovimento.buscarClientesMaisUtilizaramEstacionamento();
 			mv.addObject("relatorio3", lista);
 		}
 		else if(tipoRelatorio == 4)
 		{
+			filtro.setCliente(null);
 			mv.addObject("contas", searchMovimento.filtrar(filtro));
 		}
 		
