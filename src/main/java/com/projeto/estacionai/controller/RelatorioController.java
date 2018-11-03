@@ -129,8 +129,16 @@ public class RelatorioController {
 		if(tipoRelatorio == 1)
 		{
 			filtro.setCliente(null);
-			List<RelatorioMovimentoTipo1> lista= this.serviceMovimento.buscarMaisUtilizaramEstacionamento();
-			mv.addObject("relatorio1", lista);
+			if(filtro.getDataFim() != null && filtro.getDataInicio() != null)
+			{
+				List<RelatorioMovimentoTipo1> lista= this.serviceMovimento.buscarMaisUtilizaramEstacionamentoComData(filtro.getDataInicio(), filtro.getDataFim());
+				mv.addObject("relatorio1", lista);
+			}
+			else
+			{
+				List<RelatorioMovimentoTipo1> lista= this.serviceMovimento.buscarMaisUtilizaramEstacionamento();
+				mv.addObject("relatorio1", lista);
+			}
 			
 		}
 		else if(tipoRelatorio == 2)
@@ -151,8 +159,16 @@ public class RelatorioController {
 		else if(tipoRelatorio == 3)
 		{
 			filtro.setCliente(null);
+			if(filtro.getDataFim() != null && filtro.getDataInicio() != null)
+			{
+				List<RelatorioMovimentoTipo3> lista= this.serviceMovimento.buscarClientesMaisUtilizaramEstacionamentoComData(filtro.getDataInicio(), filtro.getDataFim());
+				mv.addObject("relatorio3", lista);
+			}
+			else
+			{
 			List<RelatorioMovimentoTipo3> lista= this.serviceMovimento.buscarClientesMaisUtilizaramEstacionamento();
 			mv.addObject("relatorio3", lista);
+			}
 		}
 		else if(tipoRelatorio == 4)
 		{

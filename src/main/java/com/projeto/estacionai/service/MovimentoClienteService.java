@@ -1,5 +1,6 @@
 package com.projeto.estacionai.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,34 @@ public class MovimentoClienteService {
 		for(Tuple result : resultado)
 		{
 			lista.add(new RelatorioMovimentoTipo1(Integer.valueOf(result.get(0).toString()), Integer.valueOf(result.get(1).toString())));
+		}
+		
+		
+		return lista;
+	}
+	
+	public List<RelatorioMovimentoTipo1> buscarMaisUtilizaramEstacionamentoComData(LocalDate inicio, LocalDate fim)
+	{
+		List<Tuple> resultado = this.repository.buscarMaisUtilizaramEstacionamentoComData(inicio, fim);
+		List<RelatorioMovimentoTipo1> lista = new ArrayList<>();
+		
+		for(Tuple result : resultado)
+		{
+			lista.add(new RelatorioMovimentoTipo1(Integer.valueOf(result.get(0).toString()), Integer.valueOf(result.get(1).toString())));
+		}
+		
+		
+		return lista;
+	}
+	
+	public List<RelatorioMovimentoTipo3> buscarClientesMaisUtilizaramEstacionamentoComData(LocalDate inicio, LocalDate fim)
+	{
+		List<Tuple> resultado = this.repository.buscarClientesMaisUtilizaramEstacionamentoComData(inicio, fim);
+		List<RelatorioMovimentoTipo3> lista = new ArrayList<>();
+		
+		for(Tuple result : resultado)
+		{
+			lista.add(new RelatorioMovimentoTipo3(result.get(0).toString(), Integer.valueOf(result.get(1).toString())));
 		}
 		
 		
