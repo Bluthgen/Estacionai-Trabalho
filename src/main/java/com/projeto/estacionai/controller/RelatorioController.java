@@ -135,10 +135,16 @@ public class RelatorioController {
 		else if(tipoRelatorio == 2)
 		{
 			
-			Cliente cliente = this.serviceCliente.buscarPorCpf(filtro.getCliente().getCpf());
-			System.out.println("Id cliente: " + cliente.getId());
-			filtro.setCliente(cliente);
-			mv.addObject("relatorio2", searchMovimento.filtrar(filtro));
+			if(filtro.getCliente() != null && !filtro.getCliente().getCpf().equals(""))
+			{
+				Cliente cliente = this.serviceCliente.buscarPorCpf(filtro.getCliente().getCpf());
+				filtro.setCliente(cliente);
+				mv.addObject("relatorio2", searchMovimento.filtrar(filtro));
+			}
+			else
+			{
+				mv.addObject("relatorio2", new ArrayList<MovimentoCliente>());
+			}
 			
 		}
 		else if(tipoRelatorio == 3)

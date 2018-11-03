@@ -29,19 +29,23 @@
 					<div class="w-100"></div>
 				    <div class="col">
 				    	<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio1" value="1">
+						  <input th:if="${tipoPesquisa} == 1"  class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio1" value="1" checked="checked">
+						  <input th:unless="${tipoPesquisa} == 1" class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio1" value="1">
 						  <label class="form-check-label" for="inlineRadio1">Veiculos que mais utilizaram o estacionamento</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio2" value="2">
+						  <input th:if="${tipoPesquisa} == 2" class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio2" value="2" checked="checked">
+						  <input th:unless="${tipoPesquisa} == 2" class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio2" value="2">
 						  <label class="form-check-label" for="inlineRadio2">Por cliente (individual)</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio3" value="3" >
+						  <input th:if="${tipoPesquisa} == 3" class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio3" value="3" checked="checked" >
+						  <input th:unless="${tipoPesquisa} == 3" class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio3" value="3" >
 						  <label class="form-check-label" for="inlineRadio3">Clientes que mais utilizaram o estacionamento</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio4" value="4">
+						  <input th:if="${tipoPesquisa} == 4" class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio4" value="4" checked="checked" >
+						  <input th:unless="${tipoPesquisa} == 4" class="form-check-input" type="radio" name="tipoRelatorio" id="inlineRadio4" value="4">
 						  <label class="form-check-label" for="inlineRadio4" >Normal</label>
 						</div>
 				    </div>
