@@ -74,7 +74,7 @@
 				    </div>
 				    <div class="col">
 					    <div class="form-group">
-						      <button type="submit" class="btn btn-block btn-outline-secondary" >
+						      <button type="submit" class="btn btn-block btn-outline-secondary" th:onclick="${'construirGrafico()'}" >
 						      <span class="fa fa-search"></span> Pesquisar
 							</button>
 <!-- 							<a  class="btn btn-block btn-outline-success" th:onclick="${'mostrarModal()'}" > -->
@@ -107,6 +107,14 @@
 			
 			<div class="row" style="padding-top: 10px;">
 				<div class="col-md-12">
+				
+				
+				<div id="verGrafico">
+							<a  class="btn btn-block btn-outline-secondary" th:onclick="${'mostrarGrafico()'}" >
+						      Ver gráfico
+							</a>
+							<br />
+				</div>
 				
 				<!-- Tipo de pesquisa == Veiculos -->
 				<div class="table-responsive" th:if="${tipoPesquisa} == 1">
@@ -227,11 +235,37 @@
 						</tbody>
 					</table>
 				</div>
+				
+				
+				
+				
+				
 				</div>
 			</div>	
 			
 			</div>	
 			
+			
+			
+		<!--  MODAL GRAFICO -->
+		<div class="modal fade"  id="graficoModal" tabindex="-1"
+			role="dialog" aria-labelledby="graficoModal"
+			aria-hidden="true" >
+			<div class="modal-dialog " role="document"  >
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="confirmacaoModalLabel">Gráfico</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					
+					<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+					
+				</div>
+			</div>
+		</div>
 			
 			<!--  MODAL -->
 		<div class="modal fade" id="relatorioModal" tabindex="-1"
@@ -277,13 +311,97 @@
 		</div>
 		
 		
+		
+		<!-- Funções para construção dos graficos -->
+			<script th:inline="javascript">
+			window.onload = function(){
+			var dps = [];
+			
+			var yValue;
+			var name;
+			var i = 0;
+			
+			
+			if(document.getElementById('inlineRadio1').checked)
+			{
+				document.getElementById('verGrafico').style.display = "block";
+				
+				/*<![CDATA[*/
+				
+				/*[# th:each="dado : ${relatorio1}"]*/
+						console.log("valor " + /*[[${dado.qtdMovimento}]]*/ );
+						var obj = {};
+						obj['label'] = /*[[${dado.tipoVeiculo} == 1 ? 'MOTO' : 'CARRO']]*/ 'tipo';
+						obj['y'] = parseFloat(/*[[${dado.qtdMovimento}]]*/ 0);
+						dps.push(obj);
+				    	i++;
+				    
+				/*[/]*/
+				
+				/*]]>*/
+			}
+			else if(document.getElementById('inlineRadio2').checked)
+			{
+				document.getElementById('verGrafico').style.display = "none";
+			}
+			else if(document.getElementById('inlineRadio3').checked)
+			{
+				
+				document.getElementById('verGrafico').style.display = "block";
+				
+			/*<![CDATA[*/
+				
+				/*[# th:each="dado : ${relatorio3}"]*/
+						console.log("valor " + /*[[${dado.qtdMovimento}]]*/ );
+						var obj = {};
+						obj['label'] = /*[[${dado.nomeCliente}]]*/ 'nome';
+						obj['y'] = parseFloat(/*[[${dado.qtdMovimento}]]*/ 0);
+						dps.push(obj);
+				    	i++;
+				    
+				/*[/]*/
+				
+				/*]]>*/
+			}
+			else if(document.getElementById('inlineRadio4').checked)
+			{
+				document.getElementById('verGrafico').style.display = "none";
+			}
+			
+			
+			var chart = new CanvasJS.Chart("chartContainer", {
+				animationEnabled: true,
+				exportEnabled: true,	
+				title:{
+					text: "Tipo de veiculos que mais utilizaram o estacionamento"
+				},
+				data: [{
+					type: "column", 
+					dataPoints: dps
+				}]
+			});
+			
+			 
+			chart.render();
+			 
+			}
+			</script>
+		
+		
+		
+		
+		
+		
 		<script type="text/javascript">
 		
 				var radio = document.getElementById('inlineRadio2');
+// 				document.getElementById('chartContainer').style.display = "none";
 				
 				if(radio.checked)
 				{
+					
 					document.getElementById('collapseCliente').style.display= "block";
+					
 					console.log("Esta clicado!");					
 				}
 				else
@@ -304,6 +422,20 @@
 				{
 					document.getElementById('collapseCliente').style.display= "none";
 					//$('#collapseCliente').collapse('hide');
+									
+				}
+				
+				function mostrarGrafico()
+				{
+					
+					$('#graficoModal').modal('show');
+									
+				}
+				
+				function esconderGrafico()
+				{
+					
+					$('#graficoModal').modal('hide');
 									
 				}
 			
