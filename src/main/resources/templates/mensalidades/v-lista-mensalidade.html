@@ -67,7 +67,7 @@
 							<tr th:each="mensalidade : ${mensalidades}">
 								<td class="text-center" th:text=${mensalidade.id}></td>
 
-								<td  th:text=${mensalidade.idCliente}></td>
+								<td  th:text=${mensalidade.cliente.id}></td>
 
 								<td th:text=${mensalidade.valor}></td>
 								

@@ -1,7 +1,10 @@
 package com.projeto.estacionai.controller;
 
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -15,12 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.projeto.estacionai.model.Cliente;
+import com.projeto.estacionai.model.Mensalidade;
 import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.repository.ClienteRepositorySearch;
 import com.projeto.estacionai.repository.VeiculoRepositorySearch;
 import com.projeto.estacionai.service.ClienteService;
+import com.projeto.estacionai.service.MensalidadeService;
 import com.projeto.estacionai.service.VeiculoService;
+
+import antlr.collections.List;
 
 @Controller
 @RequestMapping("/clientes")
@@ -34,6 +42,8 @@ public class ClienteController {
 		private VeiculoService serviceVeiculo;
 		@Autowired
 		private VeiculoRepositorySearch searchVeiculo;
+		@Autowired
+		private MensalidadeService serviceMensalidade;
 		
 		@GetMapping
 		public ModelAndView listar(Cliente filtro)
@@ -203,6 +213,16 @@ public class ClienteController {
 				
 				service.salvar(cliente);
 				
+				Cliente cadastrado = null;
+				java.util.List<Cliente> clientes = search.filtrar(cliente);
+				
+				if(clientes.size() > 0)
+				{
+					cadastrado = clientes.get(0);
+				}
+				
+				vincularMensalidades(cadastrado);
+				
 				attributes.addFlashAttribute("mensagem", "Cliente cadastrado com sucesso!");
 				
 				return new ModelAndView("redirect:/clientes/novo");
@@ -214,8 +234,47 @@ public class ClienteController {
 				
 				attributes.addFlashAttribute("mensagem", "Cliente atualizado com sucesso!");
 				
+				
+				
 				return new ModelAndView("redirect:/clientes/editar/" + cliente.getId());
 			}
+		}
+		
+		
+		
+		public void vincularMensalidades(Cliente cliente)
+		{
+			
+			
+			Integer valorPorVaga = 30;
+			Integer qtdVagas = cliente.getNumeroVagas();
+			
+			Integer valorPorMensalidade = (valorPorVaga * qtdVagas);
+			
+			LocalDate dataPagamento = LocalDate.now();
+			dataPagamento = dataPagamento.withDayOfMonth(5);
+			
+			
+			
+			for(int i = 1; i <= 12; i++)
+			{
+				Mensalidade mensalidade = new Mensalidade();
+				mensalidade.setDataVencimento(dataPagamento);
+				mensalidade.setAtivo(true);
+				mensalidade.setCliente(cliente);
+				mensalidade.setStatus("PENDENTE");
+				mensalidade.setValor(valorPorMensalidade.doubleValue());
+				
+				serviceMensalidade.salvar(mensalidade);
+				dataPagamento = dataPagamento.plusMonths(1);
+			}
+			
+			
+			
+			
+			
+			
+			
 		}
 
 
