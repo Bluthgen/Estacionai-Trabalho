@@ -45,9 +45,9 @@ public class MensalidadeRepositorySearch {
 			if(mensalidade.getAtivo() != null)	
 				predicates.add(builder.equal(root.get("ativo"), 
 						mensalidade.getAtivo()));
-			if(mensalidade.getIdCliente() != null)
-				predicates.add(builder.equal(root.get("idCliente"),
-						mensalidade.getIdCliente()));
+			if(mensalidade.getCliente() != null && mensalidade.getCliente().getId() != 0)
+				predicates.add(builder.equal(root.get("cliente"),
+						mensalidade.getCliente().getId()));
 			if(mensalidade.getStatus() != null && !mensalidade.getStatus().isEmpty())
 				predicates.add(builder.like(builder.lower(root.get("status")), 
 						"%"+  mensalidade.getStatus().toLowerCase()+ "%"));

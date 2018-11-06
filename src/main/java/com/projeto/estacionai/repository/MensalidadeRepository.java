@@ -15,8 +15,6 @@ import com.projeto.estacionai.model.Mensalidade;
 
 @Repository
 public interface MensalidadeRepository extends JpaRepository<Mensalidade, Long>{
-
-	public List<Mensalidade> findByidCliente(Long id);
 	
 	public List<Mensalidade> findByAtivoTrue();
 	

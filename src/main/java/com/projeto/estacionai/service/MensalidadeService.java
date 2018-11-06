@@ -41,10 +41,5 @@ public class MensalidadeService {
 		return this.repository.getOne(id);
 	}
 	
-	public List<Mensalidade> buscarPorCliente(Long id)
-	{
-		return this.repository.findByidCliente(id);
-	}
-	
 	
 }
