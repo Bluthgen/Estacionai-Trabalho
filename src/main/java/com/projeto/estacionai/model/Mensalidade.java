@@ -6,6 +6,8 @@ import javax.persistence.Convert;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
@@ -18,16 +20,18 @@ import com.projeto.estacionai.util.AdapterLocalDate;
 public class Mensalidade {
 
 
-	public Mensalidade(Long id, @NotNull LocalDate dataVencimento, @NotNull Double valor, @NotNull Long idCliente,
+	
+	public Mensalidade(Long id, @NotNull LocalDate dataVencimento, @NotNull Double valor, Cliente cliente,
 			@NotBlank String status, Boolean ativo) {
+		super();
 		this.id = id;
 		this.dataVencimento = dataVencimento;
 		this.valor = valor;
-		this.idCliente = idCliente;
+		this.cliente = cliente;
 		this.status = status;
 		this.ativo = ativo;
 	}
-	
+
 	public Mensalidade() {
 		
 	}
@@ -44,8 +48,9 @@ public class Mensalidade {
 	@NotNull
 	private Double valor;
 	
-	@NotNull
-	private Long idCliente;
+	@ManyToOne
+	@JoinColumn(name="cliente_id", nullable=false)
+	private Cliente cliente;
 	
 	@NotBlank
 	private String status;
@@ -76,13 +81,6 @@ public class Mensalidade {
 		this.valor = valor;
 	}
 
-	public Long getIdCliente() {
-		return idCliente;
-	}
-
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
-	}
 
 	public String getStatus() {
 		return status;
@@ -98,6 +96,14 @@ public class Mensalidade {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	
