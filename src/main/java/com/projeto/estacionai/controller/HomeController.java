@@ -8,6 +8,7 @@ package com.projeto.estacionai.controller;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javax.xml.bind.DatatypeConverter;
@@ -128,7 +129,16 @@ public class HomeController {
 		
 		
 		ticket.setHorarioSaida(LocalDateTime.now());
-		ticket.setTotal(this.service.calcularTotal(ticket));
+		Double tempoGasto = Double.parseDouble(String.valueOf(Duration.between(ticket.getHorarioChegada(), ticket.getHorarioSaida()).toMinutes()));	
+		Double total = this.service.calcularTotal(tempoGasto);
+		
+		if(total == (-1.0))
+		{
+			attributes.addFlashAttribute("erro", "Tempo Gasto inválido!");
+			return new ModelAndView("redirect:/home");
+		}
+		
+		ticket.setTotal(total);
 		this.service.validarTicket(ticket);
 		
 		if(this.sujeito == null)
@@ -196,7 +206,7 @@ public class HomeController {
 		ticket.setAtivo(true);
 		ticket.setHorarioChegada(LocalDateTime.now());
 		ticket.setHorarioSaida(LocalDateTime.now());
-		ticket.setTotal(this.service.calcularTotal(ticket));
+		ticket.setTotal(0.0);
 		ticket.setCliente(veiculo.getCliente());
 		this.service.gerarTicket(ticket);
 		

@@ -19,7 +19,6 @@ public class ClienteMovimentoObserver extends TicketObserver {
 	@Override
 	public void atualizar() {
 		
-		System.out.println("Ic cliente observer: " + ess.pegarEstado().getCliente().getId());
 		MovimentoCliente mv = new MovimentoCliente(ess.pegarEstado().getCodigo(), ess.pegarEstado().getCliente(), ess.pegarEstado().getTipoVeiculo(), ess.pegarEstado().getHorarioSaida().toLocalDate());
 		this.service.salvar(mv);
 		

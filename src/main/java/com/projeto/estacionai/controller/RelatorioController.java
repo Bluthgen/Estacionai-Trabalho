@@ -124,8 +124,13 @@ public class RelatorioController {
 		filtro.setAtivo(true);
 		mv.addObject("filtro", filtro);
 		mv.addObject("filtroPdf", new MovimentoCliente());
-		mv.addObject("tipoPesquisa", tipoRelatorio);
+		mv.addObject("tipoPesquisa", tipoRelatorio);		
 		
+		return gerarRelatorioMovimento(filtro, tipoRelatorio, mv);
+	}
+	
+	public  ModelAndView gerarRelatorioMovimento(MovimentoCliente filtro, Integer tipoRelatorio, ModelAndView mv)
+	{
 		if(tipoRelatorio == 1)
 		{
 			filtro.setCliente(null);

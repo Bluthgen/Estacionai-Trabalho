@@ -51,26 +51,29 @@ public class TicketService {
 		this.repository.save(ticket);	
 	}
 	
-	public Double calcularTotal(Ticket ticket)
-	{
-				
+	public Double calcularTotal(Double tempoGasto)
+	{			
+		Double total = 0.0;
 		
-		Double tempoGasto = Double.parseDouble(String.valueOf(Duration.between(ticket.getHorarioChegada(), ticket.getHorarioSaida()).toMinutes()));
-				
 		//calcula o total a pagar
-		if(tempoGasto <= 60)
+		if(tempoGasto != null && tempoGasto >= 0 && tempoGasto <= 60)
 		{
-			return 7.0;
+			total = 7.0;
 		}
-		else if(tempoGasto <= 120)
+		else if(tempoGasto != null && tempoGasto >= 0 && tempoGasto <= 120)
 		{
-			return 13.0;
+			total =  13.0;
+		}
+		else if(tempoGasto != null && tempoGasto >= 0 )
+		{		
+			total = (13.0 + (1.75 * ( (tempoGasto - 120) / 15.0)));
 		}
 		else
-		{		
-			return (13.0 + (1.75 * ( (tempoGasto - 120) / 15.0)));
+		{
+			total = -1.0;
 		}
 		
+		return total;
 		
 	}
    
