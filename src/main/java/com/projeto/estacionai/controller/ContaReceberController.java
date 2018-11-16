@@ -105,6 +105,16 @@ public class ContaReceberController {
 			return novo(contaReceber);
 		}
 		
+		//verifica se a data de vencimento e menor que a atual
+				LocalDate dataAtual = LocalDate.now();
+				if(contaReceber.getDataVencimento().isBefore(dataAtual))
+				{
+					ModelAndView mv = new ModelAndView("contas/receber/v-cadastro-conta");
+					mv.addObject("erro", "A data de vencimento não pode ser menor que a atual!");
+					mv.addObject("contaReceber", contaReceber);
+					return mv;
+				}
+		
 		
 		if(contaReceber.getId() == null)
 		{

@@ -102,12 +102,24 @@ public class ContaPagarController {
 	@PostMapping("/novo")
 	public ModelAndView salvar(@Valid ContaPagar contaPagar, BindingResult result, RedirectAttributes redirectAttributes)
 	{
-				
+			
+		
 		
 		if(result.hasErrors())
 		{
 			return novo(contaPagar);
 		}
+		
+		//verifica se a data de vencimento e menor que a atual
+		LocalDate dataAtual = LocalDate.now();
+		if(contaPagar.getDataVencimento().isBefore(dataAtual))
+		{
+			ModelAndView mv = new ModelAndView("contas/pagar/v-cadastro-conta");
+			mv.addObject("erro", "A data de vencimento não pode ser menor que a atual!");
+			mv.addObject("contaPagar", contaPagar);
+			return mv;
+		}
+		
 		
 		
 		if(contaPagar.getId() == null)
