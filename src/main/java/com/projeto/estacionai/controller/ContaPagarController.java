@@ -111,8 +111,7 @@ public class ContaPagarController {
 		}
 		
 		//verifica se a data de vencimento e menor que a atual
-		LocalDate dataAtual = LocalDate.now();
-		if(contaPagar.getDataVencimento().isBefore(dataAtual))
+		if(!verificarDataVencimento(contaPagar.getDataVencimento()).equals("Data valida"))
 		{
 			ModelAndView mv = new ModelAndView("contas/pagar/v-cadastro-conta");
 			mv.addObject("erro", "A data de vencimento não pode ser menor que a atual!");
@@ -138,5 +137,20 @@ public class ContaPagarController {
 		
 	}
 	
+	public String verificarDataVencimento(LocalDate dataVencimento)
+	{
+		String mensagem = "";
+		LocalDate dataAtual = LocalDate.now();
+		if(dataVencimento.isBefore(dataAtual))
+		{
+			mensagem = "A data de vencimento não pode ser menor que a atual!";
+		}
+		else
+		{
+			mensagem = "Data valida";
+		}
+		
+		return mensagem;
+	}
 
 }
