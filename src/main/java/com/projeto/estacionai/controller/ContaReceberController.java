@@ -138,7 +138,7 @@ public class ContaReceberController {
 		LocalDate dataAtual = LocalDate.now();
 		if(dataVencimento.isBefore(dataAtual))
 		{
-			mensagem = "A data de vencimento não pode ser menor que a atual!";
+			mensagem = "Data invalida";
 		}
 		else
 		{
