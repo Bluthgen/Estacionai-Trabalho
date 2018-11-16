@@ -136,7 +136,7 @@ public class ContaReceberController {
 	{
 		String mensagem = "";
 		LocalDate dataAtual = LocalDate.now();
-		if(dataVencimento.isBefore(dataAtual))
+		if(dataVencimento == null || dataVencimento.isBefore(dataAtual))
 		{
 			mensagem = "Data invalida";
 		}
