@@ -42,4 +42,12 @@ public class MensalidadeController {
 		return listar(filtro);
 	}
 	
+	@GetMapping("/editar/{id}")
+	public ModelAndView editar(@PathVariable Long id)
+	{
+		ModelAndView mv = new ModelAndView("mensalidades/v-editar-mensalidade");
+		mv.addObject(service.buscar(id));			
+		return mv;
+	}
+	
 }
