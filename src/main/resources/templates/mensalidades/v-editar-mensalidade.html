@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
 </head>
+
 <body>
 
+<section layout:fragment="content" >
+	
+		<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/mensalidades}">Mensalidades</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">Editar</li>
+			  </ol>
+		</nav>
+		
+		
+		<div class="row">
+					<div class="col-md-12">
+						<form method="POST" class="form-vertical" th:object="${mensalidade}">
+						
+						<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+							<i class="fa fa-check-circle"></i>
+		
+							<span th:text="${mensagem}">Mensagem sucesso!</span>
+						</div>
+						
+					<input id="id" type="hidden" th:field="*{id}" value="${mensdalidade.id}" />
+					
+					<div class="form-group">
+						<label>Descricao</label>
+						
+						<input type="text" class="form-control" th:field="*{status}" placeholder=th:text=${mensalidade.cliente.nome} />
+					</div>
+		
+					<div class="btn-group">
+								<button class="btn  btn-success" th:if="${mensalidade.status != 'PAGO'}" type="submit"><i class="fa fa-credit-card"></i> Confirmar Pagamento</button>
+								<button class="btn  btn-warning" th:if="${mensalidade.status != 'PAGO'}" type="submit"><i class="fa fa-envelope"></i> Enviar Cobrança</button>							
+								<a class="btn  btn-danger " role="group" th:href="@{/mensalidades}"><i class="fa fa-times"></i> Cancelar</a>
+					</div>
+
+
+						</form>
+					</div>
+				</div>
+		
+		
+		
+		
+</section>
+
 </body>
+
 </html>
