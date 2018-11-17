@@ -19,23 +19,54 @@
 			  </ol>
 		</nav>
 		
+		<div class="container">
+			<div class="row">
+						<div class="col-md-12">
+							<h1 >
+								Mensalidade
+							</h1>
+							
+						</div>
+					</div>
+		</div>
+		
+		<div class="container border rounded p-3" style="border-color: graytext;">
 		
 		<div class="row">
 					<div class="col-md-12">
 						<form method="POST" class="form-vertical" th:object="${mensalidade}">
 						
-						<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
-							<i class="fa fa-check-circle"></i>
-		
-							<span th:text="${mensagem}">Mensagem sucesso!</span>
-						</div>
 						
-					<input id="id" type="hidden" th:field="*{id}" value="${mensdalidade.id}" />
+					<input id="id" type="hidden" th:field="*{id}" value="${mensalidade.id}" />
 					
 					<div class="form-group">
-						<label>Descricao</label>
+						<label>Cliente</label>
 						
-						<input type="text" class="form-control" th:field="*{status}" placeholder=th:text=${mensalidade.cliente.nome} />
+						<input type="text" class="form-control" th:field="*{cliente.nome}" />
+					</div>
+					
+					<div class="form-group">
+						<label>CPF</label>
+						
+						<input type="text" class="form-control" th:field="*{cliente.cpf}" />
+					</div>
+					
+					<div class="form-group">
+						<label>Data de Vencimento</label>
+						
+						<input type="text" class="form-control" th:field="*{dataVencimento}" />
+					</div>
+					
+					<div class="form-group">
+						<label>Valor(R$)</label>
+						
+						<input type="text" class="form-control" th:field="*{valor}" />
+					</div>
+					
+					<div class="form-group">
+						<label>Status</label>
+						
+						<input type="text" class="form-control" th:field="*{status}" />
 					</div>
 		
 					<div class="btn-group">
@@ -50,7 +81,7 @@
 				</div>
 		
 		
-		
+		</div>
 		
 </section>
 

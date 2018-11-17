@@ -60,7 +60,7 @@
 							<tr>
 								<th>Data Vencimento</th>
 								<th>Cliente</th>
-								<th>Valor</th>
+								<th>Valor(R$)</th>
 								<th>Status</th>
 								<th>Editar</th>
 							</tr>
@@ -77,7 +77,7 @@
 								
 								
 								<td class="text-center">
-									<a class="btn btn-info btn-xs" ><span class="fa fa-pencil-alt"></span></a>
+									<a class="btn btn-info btn-xs" th:href="@{/mensalidades/editar/{id}(id=${mensalidade.id})}"><span class="fa fa-pencil-alt"></span></a>
 								</td>
 	
 								
