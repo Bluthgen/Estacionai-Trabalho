@@ -106,6 +106,14 @@ public class Mensalidade {
 		this.cliente = cliente;
 	}
 	
+	public void setStatusPago() {
+		this.status = "PAGO";
+	}
+	
+	public  void setStatusAtraso() {
+		this.status = "ATRASO";
+	}
+	
 	
 	
 }
