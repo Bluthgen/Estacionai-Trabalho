@@ -57,17 +57,17 @@
 					<table  class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
 						<thead>
 							<tr>
-								<th>Código</th>
-								<th>ID Cliente</th>
+								<th>Data Vencimento</th>
+								<th>Cliente</th>
 								<th>Valor</th>
 								<th>Status</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="mensalidade : ${mensalidades}">
-								<td class="text-center" th:text=${mensalidade.id}></td>
+								<td class="text-center" th:text=${mensalidade.dataVencimento}></td>
 
-								<td  th:text=${mensalidade.cliente.id}></td>
+								<td  th:text=${mensalidade.cliente.nome}></td>
 
 								<td th:text=${mensalidade.valor}></td>
 								
