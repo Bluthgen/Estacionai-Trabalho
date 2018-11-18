@@ -39,17 +39,29 @@
 					
 					<form  th:object="${filtro}" th:action="@{/mensalidades}" method="POST" 
 						class="form-default form-horizontal" >
-					<div class="input-group mb-3">
-							  <input type="text" class="form-control" th:field="*{status}" placeholder="Digite o status da mensalidade" >
-							  <div class="input-group-append">
-							    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
-							  </div>
-					</div>
-					</form>
-					
+						<div class="input-group mb-3">
+								  <input type="text" class="form-control" th:field="*{cliente}" placeholder="Digite o nome do cliente" >
+								  <div class="input-group-append">
+								    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
+								  </div> 
+						</div>
+						
+						 <div class="form-group col-md-3">
+									 	<label>Filtrar por Status</label>
+										 <select id="tipo" th:field="*{status}" class="form-control">
+										 	<option value="" selected="selected">Todas</option>
+									    	<option value="PAGO">Pago</option>
+									    	<option value="PENDENTE">Pendente</option>
+									    	<option value="ATRASO">Atraso</option>
+									    </select>
+
+					   	</div>
+					   	
+					 </form>
+					 	
+					 </div>
 				</div>
 			
-			</div>
 			
 			
 			<div class="row" style="padding-top: 10px;">
