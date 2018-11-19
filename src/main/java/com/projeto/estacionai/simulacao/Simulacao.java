@@ -34,6 +34,11 @@ public class Simulacao implements Runnable {
 
 	@Override
 	public void run() {
+		
+		int max = 0;
+		while(true)
+		{
+			try {
 				
 				Sensor sorteado = getRandomList(sensores);
 				System.out.println("Sensor sorteado: " + sorteado.getId());
@@ -44,6 +49,24 @@ public class Simulacao implements Runnable {
 				this.sujeito.setarEstado(sorteado);
 				
 				System.out.println("Simulando vagas...");
+				
+				
+				Thread.sleep(3000);
+				max++;
+				
+				if(max == 10)
+				{
+					break;
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+			
+		}
+				
+				
 		
 	}
 
