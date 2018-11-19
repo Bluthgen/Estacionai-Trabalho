@@ -18,10 +18,14 @@ import com.projeto.estacionai.model.Funcionario;
 import com.projeto.estacionai.model.Mensalidade;
 import com.projeto.estacionai.repository.MensalidadeRepositorySearch;
 import com.projeto.estacionai.service.MensalidadeService;
+import com.projeto.estacionai.util.Email;
 
 @Controller
 @RequestMapping("/mensalidades")
 public class MensalidadeController {
+	
+	@Autowired
+	private Email email;
 	
 	@Autowired
 	private MensalidadeService service;
@@ -58,6 +62,8 @@ public class MensalidadeController {
 	{
 		
 		System.out.println("Enviou o email!");
+		
+		this.email.enviarMensagem("alissonlopes3@gmail.com", "teste", "testinho");
 		
 		attributes.addFlashAttribute("mensagem", "Email enviado com sucesso!");
 		

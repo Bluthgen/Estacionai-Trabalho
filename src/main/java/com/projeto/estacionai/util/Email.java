@@ -11,13 +11,21 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Email {
+	
+	String email = "estacionaiuem@gmail.com";
+	String senha = "estacionai123";
+	Session secao;
 	
 	public Email() {
 		// TODO Auto-generated constructor stub
+		inicializar(this.email, this.senha);
 	}
 	
-	public Session inicializar(String email, String senha)
+	public void inicializar(String email, String senha)
 	{
 		Properties props = new Properties();
         /** Parâmetros de conexão com servidor Gmail */
@@ -27,7 +35,7 @@ public class Email {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
 
-        Session session = Session.getDefaultInstance(props,
+        this.secao = Session.getDefaultInstance(props,
                     new javax.mail.Authenticator() {
                          protected PasswordAuthentication getPasswordAuthentication() 
                          {
@@ -35,22 +43,21 @@ public class Email {
                          }
                     });
         
-        return session;
 	}
 	
-	public void enviarMensagem(Session secao, String destinatario, String assunto, String mensagem)
+	public void enviarMensagem(String destinatario, String assunto, String mensagem)
 	{
 		try {
 			 
-            Message message = new MimeMessage(secao);
-            message.setFrom(new InternetAddress("seuemail@gmail.com")); //Remetente
+            Message message = new MimeMessage(this.secao);
+            message.setFrom(new InternetAddress(this.email)); //Remetente
 
             Address[] toUser = InternetAddress //Destinatário(s)
                        .parse(destinatario);  
 
             message.setRecipients(Message.RecipientType.TO, toUser);
-            message.setSubject("Enviando email com JavaMail");//Assunto
-            message.setText("Enviei este email utilizando JavaMail com minha conta GMail!");
+            message.setSubject(assunto);//Assunto
+            message.setText(mensagem);
             /**Método para enviar a mensagem criada*/
             Transport.send(message);
 
