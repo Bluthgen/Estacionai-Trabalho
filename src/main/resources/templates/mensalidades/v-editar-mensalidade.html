@@ -34,10 +34,32 @@
 		
 		<div class="row">
 					<div class="col-md-12">
-						<form method="POST" class="form-vertical" th:object="${mensalidade}">
+				<form method="POST" class="form-vertical" th:action="@{/mensalidades/processar}" th:object="${mensalidade}">
+						
+					<div class="alert  alert-danger  alert-dismissible" role="alert" 
+                th:if="${#fields.hasAnyErrors()}">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+					<div th:each="erro: ${#fields.detailedErrors()}">
+						<i class="fa fa-exclamation-circle"></i>
+						
+						<span th:text="${erro.message}">Mensagem erro.</span>
+					</div>
+				</div>
+				
+				
+				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+					<i class="fa fa-check-circle"></i>
+
+					<span th:text="${mensagem}">Mensagem sucesso!</span>
+				</div>	
+						
 						
 						
 					<input id="id" type="hidden" th:field="*{id}" value="${mensalidade.id}" />
+					<input id="idCliente" type="hidden" th:field="*{cliente.id}" value="${cliente.id}" />
 					
 					<div class="form-group">
 						<label>Cliente</label>
@@ -70,8 +92,8 @@
 					</div>
 		
 					<div class="btn-group">
-								<button class="btn  btn-success" th:if="${mensalidade.status != 'PAGO'}" type="submit"><i class="fa fa-credit-card"></i> Confirmar Pagamento</button>
-								<button class="btn  btn-warning" th:if="${mensalidade.status != 'PAGO'}" type="submit"><i class="fa fa-envelope"></i> Enviar Cobrança</button>							
+								<button id="pagamento" name="pagamento" value="Pagamento" class="btn  btn-success" th:if="${mensalidade.status != 'PAGO'}" type="submit"><i class="fa fa-credit-card"></i> Confirmar Pagamento</button>
+								<button id="enviar" name="enviar" value="Email" class="btn  btn-warning" th:if="${mensalidade.status != 'PAGO'}" type="submit"><i class="fa fa-envelope"></i> Enviar Cobrança</button>							
 								<a class="btn  btn-danger " role="group" th:href="@{/mensalidades}"><i class="fa fa-times"></i> Cancelar</a>
 					</div>
 
