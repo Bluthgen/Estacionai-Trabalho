@@ -1,5 +1,7 @@
 package com.projeto.estacionai.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.projeto.estacionai.model.Cliente;
 import com.projeto.estacionai.model.Funcionario;
 import com.projeto.estacionai.model.Mensalidade;
+import com.projeto.estacionai.repository.ClienteRepositorySearch;
 import com.projeto.estacionai.repository.MensalidadeRepositorySearch;
 import com.projeto.estacionai.service.MensalidadeService;
 import com.projeto.estacionai.util.Email;
@@ -32,6 +36,9 @@ public class MensalidadeController {
 	
 	@Autowired
 	private MensalidadeRepositorySearch search;
+	
+	@Autowired
+	private ClienteRepositorySearch searchCliente;
 	
 	@GetMapping
 	public ModelAndView listar(Mensalidade filtro)
@@ -80,6 +87,19 @@ public class MensalidadeController {
 	@PostMapping
 	public ModelAndView listarEspecifico(Mensalidade filtro)
 	{
+		Cliente cli = new Cliente();
+		if(filtro.getCliente() != null && !filtro.getCliente().getNome().equals(""))
+		{
+			List<Cliente> clientes = searchCliente.filtrar(filtro.getCliente());
+			
+			if(clientes.size() > 0)
+			{
+				cli = clientes.get(0);
+			}
+		}
+		
+		filtro.setCliente(cli);
+		
 		return listar(filtro);
 	}
 	

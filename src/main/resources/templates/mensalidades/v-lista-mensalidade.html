@@ -40,7 +40,7 @@
 					<form  th:object="${filtro}" th:action="@{/mensalidades}" method="POST" 
 						class="form-default form-horizontal" >
 						<div class="input-group mb-3">
-								  <input type="text" class="form-control" th:field="*{cliente}" placeholder="Digite o nome do cliente" >
+								  <input type="text" class="form-control" th:field="*{cliente.nome}" placeholder="Digite o nome do cliente" >
 								  <div class="input-group-append">
 								    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
 								  </div> 
