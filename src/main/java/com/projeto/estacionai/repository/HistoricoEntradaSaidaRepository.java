@@ -25,5 +25,7 @@ public interface HistoricoEntradaSaidaRepository extends JpaRepository<Historico
     public List<HistoricoEntradaSaida> findByAtivoTrue();
     
     public List<HistoricoEntradaSaida> findTop5ByAtivoTrueOrderByIdDesc();
+    
+    public HistoricoEntradaSaida findFirstByOrderByIdDesc();
 
 }

@@ -8,6 +8,8 @@ import javax.persistence.Tuple;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.projeto.estacionai.model.HistoricoEntradaSaida;
 import com.projeto.estacionai.model.MovimentoCliente;
 import com.projeto.estacionai.relatorio.RelatorioMovimentoTipo1;
 import com.projeto.estacionai.relatorio.RelatorioMovimentoTipo3;
@@ -49,6 +51,11 @@ public class MovimentoClienteService {
 	{
 		return this.repository.getOne(id);
 	}
+	
+	public MovimentoCliente buscarUltimo()
+    {
+        return this.repository.findFirstByOrderByIdDesc();
+    }
 	
 	
 	public List<RelatorioMovimentoTipo1> buscarMaisUtilizaramEstacionamento()

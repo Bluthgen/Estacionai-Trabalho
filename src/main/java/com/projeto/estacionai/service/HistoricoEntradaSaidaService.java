@@ -54,5 +54,10 @@ public class HistoricoEntradaSaidaService {
 	    {
 	        return this.repository.findTop5ByAtivoTrueOrderByIdDesc();
 	    }
+	    
+	    public HistoricoEntradaSaida buscarUltimo()
+	    {
+	        return this.repository.findFirstByOrderByIdDesc();
+	    }
    
 }

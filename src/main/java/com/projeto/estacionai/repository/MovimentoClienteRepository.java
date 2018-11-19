@@ -20,6 +20,8 @@ public interface MovimentoClienteRepository extends JpaRepository<MovimentoClien
 	
 	public List<MovimentoCliente> findByAtivoTrue();
 	
+	public MovimentoCliente findFirstByOrderByIdDesc();
+	
 	@Query(value="SELECT tipo_veiculo, COUNT(tipo_veiculo) FROM movimento_cliente GROUP BY tipo_veiculo;", nativeQuery= true)
 	public List<Tuple> buscarMaisUtilizaramEstacionamento();
 	
