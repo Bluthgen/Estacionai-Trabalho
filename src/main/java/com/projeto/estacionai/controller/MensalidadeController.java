@@ -61,9 +61,14 @@ public class MensalidadeController {
 	public ModelAndView enviarEmail(@Valid Mensalidade mensalidade, BindingResult result, RedirectAttributes attributes)
 	{
 		
-		System.out.println("Enviou o email!");
+		if(this.email == null)
+			this.email = new Email();
 		
-		this.email.enviarMensagem("alissonlopes3@gmail.com", "teste", "testinho");
+		
+		Double valor = mensalidade.getValor();
+		
+		String email = mensalidade.getCliente().getEmail();
+		this.email.enviarMensagem(email, "Cobrança Estacionaí", "Boleto no valor de:R$ " + valor);
 		
 		attributes.addFlashAttribute("mensagem", "Email enviado com sucesso!");
 		

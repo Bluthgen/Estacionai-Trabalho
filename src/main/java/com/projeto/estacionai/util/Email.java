@@ -34,8 +34,8 @@ public class Email {
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
-
-        this.secao = Session.getDefaultInstance(props,
+        
+        this.secao = Session.getInstance(props,
                     new javax.mail.Authenticator() {
                          protected PasswordAuthentication getPasswordAuthentication() 
                          {
@@ -47,6 +47,7 @@ public class Email {
 	
 	public void enviarMensagem(String destinatario, String assunto, String mensagem)
 	{
+		
 		try {
 			 
             Message message = new MimeMessage(this.secao);
