@@ -79,9 +79,11 @@ public class ObserverTeste extends EstacionaiApplicationTests {
 	@Test
 	public void anexar()
 	{
+		
 		if(this.ticket == null)
 		{
-			this.ticket = this.service.buscarUltimo();
+			String placa = "asd-2342";
+			this.ticket = this.service.buscarTicket(placa);
 		}
 		
 		if(sujeito == null)
@@ -92,9 +94,21 @@ public class ObserverTeste extends EstacionaiApplicationTests {
 		this.sujeito.anexar(new EntradaSaidaObserver(this.sujeito));
 		this.sujeito.anexar(new ClienteMovimentoObserver(this.sujeito));
 		
-		
+		//verifica se foi anexado os objetos
 		Assertions.assertThat(this.sujeito.getObservadores().get(0).getClass().getName()).isEqualTo("com.projeto.estacionai.observer.EntradaSaidaObserver");
 		Assertions.assertThat(this.sujeito.getObservadores().get(1).getClass().getName()).isEqualTo("com.projeto.estacionai.observer.ClienteMovimentoObserver");		
+		
+		this.ticket.setTipoVeiculo(2);
+		this.sujeito.setarEstado(this.ticket);
+		
+		String codigo = this.ticket.getCodigo();
+		MovimentoCliente mc = this.movimentoService.buscarUltimo();
+		HistoricoEntradaSaida hes = this.entradaService.buscarUltimo();
+		
+		//verifica se de fato o observer notificou os ouvintes
+		Assertions.assertThat(mc.getNome()).isEqualTo(codigo);
+		Assertions.assertThat(hes.getCodigo()).isEqualTo(codigo);		
+		
 		
 	}
 	
