@@ -35,7 +35,10 @@
 						<a class="btn btn-outline-success" th:href="@{/clientes}" > 
 	 							 <span class="fa fa-plus"></span> Listar Clientes
 						</a>
+						
 					</div>
+					
+					
 					
 					<form  th:object="${filtro}" th:action="@{/mensalidades}" method="POST" 
 						class="form-default form-horizontal" >
@@ -43,7 +46,12 @@
 								  <input type="text" class="form-control" th:field="*{cliente.nome}" placeholder="Digite o nome do cliente" >
 								  <div class="input-group-append">
 								    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
-								  </div> 
+								  </div>
+								  
+								  <div class="col-md-2">
+						  			<button type="button" class="btn btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="A pesquisa pode ser feita pelo nome do cliente e filtrada pelo status da mensalidade." ><i class="fa fa-question"></i> </button>
+								</div>
+								
 						</div>
 						
 						 <div class="form-group col-md-3">
@@ -60,6 +68,7 @@
 					 </form>
 					 	
 					 </div>
+					 			 
 				</div>
 			
 			
