@@ -320,6 +320,7 @@
 			var yValue;
 			var name;
 			var i = 0;
+			var texto = "";
 			
 			
 			if(document.getElementById('inlineRadio1').checked)
@@ -339,6 +340,8 @@
 				/*[/]*/
 				
 				/*]]>*/
+				
+				texto = "Veiculos que mais utilizaram o estacionamento";
 			}
 			else if(document.getElementById('inlineRadio2').checked)
 			{
@@ -362,6 +365,8 @@
 				/*[/]*/
 				
 				/*]]>*/
+				
+				texto = "Clientes que mais utilizaram o estacionamento";
 			}
 			else if(document.getElementById('inlineRadio4').checked)
 			{
@@ -373,7 +378,7 @@
 				animationEnabled: true,
 				exportEnabled: true,	
 				title:{
-					text: "Tipo de veiculos que mais utilizaram o estacionamento"
+					text: texto
 				},
 				data: [{
 					type: "column", 
