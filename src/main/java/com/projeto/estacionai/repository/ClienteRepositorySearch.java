@@ -58,6 +58,12 @@ public class ClienteRepositorySearch {
 		if(cliente.getNumeroVagas() != null)
 			predicates.add(builder.equal(root.get("numeroVagas"), 
 					cliente.getNumeroVagas()));
+		if(cliente.getNumeroVagasCarro() != null)
+			predicates.add(builder.equal(root.get("numeroVagasCarro"), 
+					cliente.getNumeroVagasCarro()));
+		if(cliente.getDiaPagamento() != null)
+			predicates.add(builder.equal(root.get("diaPagamento"), 
+					cliente.getDiaPagamento()));
 		if(cliente.getTipoPagamento() != null)
 			predicates.add(builder.equal(root.get("tipoPagamento"), 
 					cliente.getTipoPagamento()));

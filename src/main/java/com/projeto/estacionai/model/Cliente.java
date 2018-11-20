@@ -20,6 +20,45 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Cliente {
 	
+	public Cliente(Long id, @NotBlank String nome, @NotBlank String telefone, @NotBlank String endereco,
+			@NotBlank String cpf, @NotNull Integer tipoPagamento, @NotNull Integer numeroVagas,
+			@NotNull Integer numeroVagasCarro, @NotNull Integer diaPagamento, List<Veiculo> veiculos, Boolean ativo,
+			Integer numeroCartao, @NotBlank String email) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.telefone = telefone;
+		this.endereco = endereco;
+		this.cpf = cpf;
+		this.tipoPagamento = tipoPagamento;
+		this.numeroVagas = numeroVagas;
+		this.numeroVagasCarro = numeroVagasCarro;
+		this.diaPagamento = diaPagamento;
+		this.veiculos = veiculos;
+		this.ativo = ativo;
+		this.numeroCartao = numeroCartao;
+		this.email = email;
+	}
+
+	public Cliente(Long id, @NotBlank String nome, @NotBlank String telefone, @NotBlank String endereco,
+			@NotBlank String cpf, @NotNull Integer tipoPagamento, @NotNull Integer numeroVagas,
+			@NotNull Integer numeroVagasCarro, List<Veiculo> veiculos, Boolean ativo, Integer numeroCartao,
+			@NotBlank String email) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.telefone = telefone;
+		this.endereco = endereco;
+		this.cpf = cpf;
+		this.tipoPagamento = tipoPagamento;
+		this.numeroVagas = numeroVagas;
+		this.numeroVagasCarro = numeroVagasCarro;
+		this.veiculos = veiculos;
+		this.ativo = ativo;
+		this.numeroCartao = numeroCartao;
+		this.email = email;
+	}
+
 	// Atributos
 	
 	@Id
@@ -43,6 +82,12 @@ public class Cliente {
 	
 	@NotNull
 	private Integer numeroVagas;
+	
+	@NotNull
+	private Integer numeroVagasCarro;
+	
+	@NotNull
+	private Integer diaPagamento;
 	
 	@OneToMany(mappedBy="cliente")
 	private List<Veiculo> veiculos;
@@ -202,6 +247,30 @@ public class Cliente {
 	
 	public void setnumeroCartao(Integer numeroCartao) {
 		this.numeroCartao = numeroCartao;
+	}
+
+	public Integer getNumeroVagasCarro() {
+		return numeroVagasCarro;
+	}
+
+	public void setNumeroVagasCarro(Integer numeroVagasCarro) {
+		this.numeroVagasCarro = numeroVagasCarro;
+	}
+
+	public Integer getNumeroCartao() {
+		return numeroCartao;
+	}
+
+	public void setNumeroCartao(Integer numeroCartao) {
+		this.numeroCartao = numeroCartao;
+	}
+
+	public Integer getDiaPagamento() {
+		return diaPagamento;
+	}
+
+	public void setDiaPagamento(Integer diaPagamento) {
+		this.diaPagamento = diaPagamento;
 	}
 	
 	

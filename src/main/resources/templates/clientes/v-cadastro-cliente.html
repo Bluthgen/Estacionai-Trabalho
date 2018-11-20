@@ -96,6 +96,8 @@
 							  </small>	
 						 </div>
 					 </div>
+					 
+					 
 					 <div class="form-row">
 						 <div class="form-group col-md-6">
 						 <label >*Email</label>
@@ -106,10 +108,23 @@
 						 </div>
 					    
 						 <div class="form-group col-md-6">
-						 <label >*Número de vagas</label>
-						      <input type="number" min="1" class="form-control" th:field="*{numeroVagas}" placeholder="Informe o numero de vagas">		  
+						 <label >*Dia do Pagamento</label>
+						      <input type="number" min="1" max="10" class="form-control" th:field="*{diaPagamento}" placeholder="Informe o dia do Pagamento">		  
 						 </div>
 					 </div>
+					 
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 <label >*Número de vagas totais</label>
+						      <input type="number" min="1" class="form-control" th:field="*{numeroVagas}" placeholder="Informe o numero de vagas totais">		  
+						 </div>
+					    
+						 <div class="form-group col-md-6">
+						 <label >*Número de vagas para carro</label>
+						      <input type="number" min="0" class="form-control" th:field="*{numeroVagasCarro}" placeholder="Informe o numero de vagas para carros">		  
+						 </div>
+					 </div>
+					 
 					 
 					 <div class="form-row">
 						 <div class="form-group col-md-6">

@@ -246,15 +246,17 @@ public class ClienteController {
 		{
 			
 			
-			Integer valorPorVaga = 30;
-			Integer qtdVagas = cliente.getNumeroVagas();
-			
-			Integer valorPorMensalidade = (valorPorVaga * qtdVagas);
+			Integer valorVagaCarro = 45;
+			Integer valorVagaMoto = 30;
+			Integer qtdVagasCarro = cliente.getNumeroVagasCarro();
+			Integer qtdVagasMoto = cliente.getNumeroVagas() - qtdVagasCarro;
+	
+			Integer valorPorMensalidade = (valorVagaCarro * qtdVagasCarro + valorVagaMoto * qtdVagasMoto);
 			
 			LocalDate dataPagamento = LocalDate.now();
-			dataPagamento = dataPagamento.withDayOfMonth(5);
-			
-			
+			Integer diaPagamento = cliente.getDiaPagamento();
+			dataPagamento = dataPagamento.withDayOfMonth(diaPagamento);
+	
 			
 			for(int i = 1; i <= 12; i++)
 			{
@@ -262,9 +264,12 @@ public class ClienteController {
 				mensalidade.setDataVencimento(dataPagamento);
 				mensalidade.setAtivo(true);
 				mensalidade.setCliente(cliente);
-				mensalidade.setStatus("PENDENTE");
+				if(i == 1 && LocalDate.now().getDayOfMonth() > diaPagamento) {
+					mensalidade.setStatus("ATRASO");
+				}else {
+					mensalidade.setStatus("PENDENTE");
+				}
 				mensalidade.setValor(valorPorMensalidade.doubleValue());
-				
 				serviceMensalidade.salvar(mensalidade);
 				dataPagamento = dataPagamento.plusMonths(1);
 			}
