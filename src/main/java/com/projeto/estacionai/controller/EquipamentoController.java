@@ -61,7 +61,7 @@ public class EquipamentoController {
 	@DeleteMapping("/{id}")
 	public String deletar(@PathVariable Long id, RedirectAttributes attributes)
 	{
-		service.deletar(id);
+		service.deletar(service.buscar(id));
 		
 		attributes.addFlashAttribute("mensagem", "Equipamento removido com sucesso!");
 		

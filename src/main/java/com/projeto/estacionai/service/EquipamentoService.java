@@ -25,10 +25,6 @@ public class EquipamentoService {
         this.repository.save(equipamento);
     }
 	
-    public void deletar(Long id)
-    {
-        this.repository.deleteById(id);
-    }
 	
     public List<Equipamento> buscarTodos()
     {
