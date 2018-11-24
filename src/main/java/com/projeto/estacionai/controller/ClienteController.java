@@ -206,20 +206,21 @@ public class ClienteController {
 				return novo(cliente);
 			}
 			
-			
-				
 			if(cliente.getId() == null)
 			{
+				// Caso as vagas passadas para carro sejam maiores que as vagas totais, as vagas do carro serão as totais
+				if(cliente.getNumeroVagasCarro() > cliente.getNumeroVagas()) {
+					cliente.setNumeroVagasCarro(cliente.getNumeroVagas());
+				}
 				
 				service.salvar(cliente);
 				
 				Cliente cadastrado = null;
 				java.util.List<Cliente> clientes = search.filtrar(cliente);
 				
-				if(clientes.size() > 0)
-				{
-					cadastrado = clientes.get(0);
-				}
+				
+				cadastrado = clientes.get(0);
+				
 				
 				vincularMensalidades(cadastrado);
 				
@@ -273,12 +274,6 @@ public class ClienteController {
 				serviceMensalidade.salvar(mensalidade);
 				dataPagamento = dataPagamento.plusMonths(1);
 			}
-			
-			
-			
-			
-			
-			
 			
 		}
 
