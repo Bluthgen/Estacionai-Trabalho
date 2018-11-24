@@ -41,8 +41,8 @@ public class TesteEquipamento extends EstacionaiApplicationTests {
 	@Transactional
 	public void atualizarEquipamento() {
 		Equipamento original = service.buscar(4L);
-		original.setAtivo(true);		// Recupera o de id 3 que tinha sido deletado e trás como ativo novamente
-		original.setDescricao("Atualizado");			// Altera 3 parametros do original
+		original.setAtivo(true);		// Recupera o de id 4 que tinha sido deletado e trás como ativo novamente
+		original.setDescricao("Atualizado");			// Altera 4 parametros do original
 		original.setTipo("TipoAtualizado");
 		original.setStatus("StatusAtualizado");
 		service.salvar(original);
