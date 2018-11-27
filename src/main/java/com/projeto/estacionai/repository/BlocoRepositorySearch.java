@@ -49,9 +49,9 @@ public class BlocoRepositorySearch {
 		if(bloco.getId() != null)
 			predicates.add(builder.equal(root.get("id"), 
 					bloco.getId()));
-        if(bloco.getNumVagas() != null)
-			predicates.add(builder.equal(root.get("numVagas"), 
-					bloco.getMaxVagas()));
+        //if(bloco.getNumVagas() != null)
+		//	predicates.add(builder.equal(root.get("numVagas"), 
+		//			bloco.getNumVagas()));
 		if(bloco.getMaxVagas() != null)
 			predicates.add(builder.equal(root.get("maxVagas"), 
 					bloco.getMaxVagas()));

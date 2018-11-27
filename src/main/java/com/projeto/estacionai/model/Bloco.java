@@ -43,10 +43,9 @@ public class Bloco {
     @NotNull
     private Integer maxVagas;
         
-    private Integer numVagas;
+    private Integer numVagas= 0;
     
-    @NotNull
-    private Integer addVagas;
+    private Integer addVagas= 1;
     
     
     @NotBlank

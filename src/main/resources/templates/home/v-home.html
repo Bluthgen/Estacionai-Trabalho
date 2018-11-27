@@ -235,7 +235,7 @@
 					  </div>
 					    <hr />
 					    <div class="row">
-					    	<div class="col-md-12">
+					    	<div class="col-md-12" id="historicoEntradaSaida">
 					    		<div class="table-responsive">
 					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
 						<thead class="aw-table-header-solid">
@@ -394,7 +394,19 @@
 			
 			<script type="text/javascript">
 			
-			
+			window.onload = function(){
+				
+                setInterval(function() {
+                	
+                	console.log("Executou metodo!");
+                	
+                    var url = '/home/atualizar';
+                    
+                    $('#historicoEntradaSaida').load(url);
+                    
+                    
+                }, 5000);
+            }
 			
 // 			jQuery(function($){
 // 				  console.log('Ready disparado');

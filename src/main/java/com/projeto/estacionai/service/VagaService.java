@@ -35,7 +35,8 @@ public class VagaService {
 	
     public void deletar(Long id)
     {
-        this.repository.deleteById(id);
+    	Vaga vaga= buscar(id);
+    	deletar(vaga);
     }
 	
     public List<Vaga> buscarTodos()

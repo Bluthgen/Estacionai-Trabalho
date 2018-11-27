@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -27,13 +30,25 @@ public class MovimentoCliente {
 	
 	
 
-	public MovimentoCliente(@NotBlank String nome, @NotNull Integer tipoVeiculo, @NotNull LocalDate dataMovimento) {
+	public MovimentoCliente(@NotBlank String nome, @NotNull Cliente cliente, @NotNull Integer tipoVeiculo, @NotNull LocalDate dataMovimento) {
 		super();
 		this.nome = nome;
+		this.cliente = cliente;
 		this.tipoVeiculo = tipoVeiculo;
 		this.dataMovimento = dataMovimento;
 	}
 
+	public MovimentoCliente(@NotBlank String nome, @NotNull Integer tipoVeiculo, Boolean ativo,
+			@NotNull LocalDate dataMovimento, LocalDate dataInicio, LocalDate dataFim) {
+		super();
+		this.nome = nome;
+		this.tipoVeiculo = tipoVeiculo;
+		this.ativo = ativo;
+		this.dataMovimento = dataMovimento;
+		this.dataInicio = dataInicio;
+		this.dataFim = dataFim;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -51,6 +66,20 @@ public class MovimentoCliente {
 	@Convert(converter = AdapterLocalDate.class)
 	private LocalDate dataMovimento;
 	
+	@Transient
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Convert(converter = AdapterLocalDate.class)
+	private LocalDate dataInicio;
+	
+	@Transient
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Convert(converter = AdapterLocalDate.class)
+	private LocalDate dataFim;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
+	private Cliente cliente;
 
 	public MovimentoCliente() {}
 
@@ -95,8 +124,28 @@ public class MovimentoCliente {
 	}
 
 
+	public LocalDate getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(LocalDate dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public LocalDate getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(LocalDate dataFim) {
+		this.dataFim = dataFim;
+	}
 	
-	
-	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 	
 }

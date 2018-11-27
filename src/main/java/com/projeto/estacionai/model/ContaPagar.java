@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.projeto.estacionai.model;
 
 import java.time.LocalDate;
@@ -72,6 +67,9 @@ public class ContaPagar {
 	@Convert(converter = AdapterLocalDate.class)
 	private LocalDate dataFim;
 	
+	@Transient
+	private Boolean atrasada;
+	
 
 	public Integer getTipoConta() {
 		return tipoConta;
@@ -136,10 +134,12 @@ public class ContaPagar {
 	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
 	}
-	
-	
-    
-    
-	
-	
+
+	public Boolean getAtrasada() {
+		return atrasada;
+	}
+
+	public void setAtrasada(Boolean atrasada) {
+		this.atrasada = atrasada;
+	}
 }

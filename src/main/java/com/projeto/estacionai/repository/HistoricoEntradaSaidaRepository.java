@@ -19,11 +19,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface HistoricoEntradaSaidaRepository extends JpaRepository<HistoricoEntradaSaida, Long> {
-    
-    public Ticket findLastByCodigoLike(String codigo);
+	
+	public Ticket findLastByCodigoLike(String codigo);
     
     public List<HistoricoEntradaSaida> findByAtivoTrue();
     
     public List<HistoricoEntradaSaida> findTop5ByAtivoTrueOrderByIdDesc();
 
+    public HistoricoEntradaSaida findFirstByOrderByIdDesc();
 }

@@ -42,6 +42,9 @@
 				      <button type="submit" class="btn btn-block btn-outline-secondary" >
 				      <span class="fa fa-search"></span> Pesquisar
 					</button>
+					<a  class="btn btn-block btn-outline-success" th:onclick="${'mostrarModal()'}" >
+						<span class="fa fa-file-pdf"></span> Gerar PDF
+					</a>
 				    </div>
 				    
 				  </div>
@@ -105,6 +108,67 @@
 			</div>	
 			
 			</div>	
+			
+			<div class="modal fade" id="relatorioModal" tabindex="-1"
+			role="dialog" aria-labelledby="relatorioModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="confirmacaoModalLabel">Geração do relatório em PDF</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form th:object="${filtroPdf}" th:action="@{/relatorios/receber/gerarPdf}"
+						method="POST" class="form-default form-horizontal">
+						<div class="modal-body">
+							<div class="form-group row justify-content-left">
+									<label for="dataInicioModal"
+										class="col-sm-4 col-form-label   text-right">Data de início</label>
+									<div class="controls col-sm-4">
+										<input type="text" th:field="*{dataInicio}"
+											class="form-control js-data" placeholder="dd/mm/yyyy"/>
+									</div>
+							</div>
+							<div class="form-group row justify-content-left">
+									<label for="dataFimModal"
+										class="col-sm-4 col-form-label   text-right">Data término</label>
+									<div class="controls col-sm-4 col-sm-4">
+										<input type="text"
+											class="form-control js-data" th:field="*{dataFim}" placeholder="dd/mm/yyyy"/>
+									</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-primary">Confirmar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript">
+			
+				function mostrarModal()
+				{
+					
+					$('#relatorioModal').modal('show');
+									
+				}
+				
+				function esconderModal()
+				{
+					
+					$('#relatorioModal').modal('hide');
+									
+				}
+			
+			</script>
 			
 		</section>
 		

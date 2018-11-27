@@ -23,11 +23,10 @@ public class HistoricoEntradaSaidaService {
 	@Autowired
 	private HistoricoEntradaSaidaRepository repository;
 	
-	 public void salvar(HistoricoEntradaSaida historico)
-	    {
-		 	historico.setAtivo(true);
-	        this.repository.save(historico);
-	    }
+	 public void salvar(HistoricoEntradaSaida historico){
+		 historico.setAtivo(true);
+	     this.repository.save(historico);
+	 }
 	 
 	 public void deletar(HistoricoEntradaSaida historico)
 	    {
@@ -54,5 +53,10 @@ public class HistoricoEntradaSaidaService {
 	    {
 	        return this.repository.getOne(id);
 	    }	
+	    
+	    public HistoricoEntradaSaida buscarUltimo()
+	    {
+	        return this.repository.findFirstByOrderByIdDesc();
+	    }
    
 }

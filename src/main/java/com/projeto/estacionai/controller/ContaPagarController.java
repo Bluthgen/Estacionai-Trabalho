@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.projeto.estacionai.controller;
 
 
+
+import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -28,7 +26,7 @@ import com.projeto.estacionai.service.FuncionarioService;
 
 /**
  *
- * @author Alisson
+ * @author Alisson, Eduardo
  */
 @Controller
 @RequestMapping("/contas/pagar")
@@ -46,13 +44,26 @@ public class ContaPagarController {
 	
 	@GetMapping
 	public ModelAndView index(ContaPagar filtro)
-	{		
+	{	
+		//verifica e seta a conta como atrasada
+		LocalDate dataAtual = LocalDate.now();
+		List<ContaPagar> contas = this.search.filtrar(filtro);
+		int i =0;
+		for (ContaPagar contaPagar : contas) {
+			if(contaPagar.getDataVencimento().isBefore(dataAtual))
+			{
+				contas.get(i).setAtrasada(true);
+			}
+			i++;
+		}
+		
 		ModelAndView mv = new ModelAndView("contas/pagar/v-conta-pagar");
 		filtro.setAtivo(true);
-		mv.addObject("contas", this.search.filtrar(filtro));
+		mv.addObject("contas", contas);
 		mv.addObject("filtro", filtro);
 		mv.addObject("user", serviceFunc.buscarUser(
 				SecurityContextHolder.getContext().getAuthentication().getName()));
+		System.out.println("Data atual: " + dataAtual);
 		return mv;
 	}
 	
@@ -94,12 +105,25 @@ public class ContaPagarController {
 	@PostMapping("/novo")
 	public ModelAndView salvar(@Valid ContaPagar contaPagar, BindingResult result, RedirectAttributes redirectAttributes)
 	{
-				
+			
+		
 		
 		if(result.hasErrors())
 		{
 			return novo(contaPagar);
 		}
+		
+		//verifica se a data de vencimento e menor que a atual
+		if(!verificarDataVencimento(contaPagar.getDataVencimento()).equals("Data valida"))
+		{
+			ModelAndView mv = new ModelAndView("contas/pagar/v-cadastro-conta");
+			mv.addObject("erro", "A data de vencimento não pode ser menor que a atual!");
+			mv.addObject("contaPagar", contaPagar);
+			mv.addObject("user", serviceFunc.buscarUser(
+					SecurityContextHolder.getContext().getAuthentication().getName()));
+			return mv;
+		}
+		
 		
 		
 		if(contaPagar.getId() == null)
@@ -118,5 +142,20 @@ public class ContaPagarController {
 		
 	}
 	
+	public String verificarDataVencimento(LocalDate dataVencimento)
+	{
+		String mensagem = "";
+		LocalDate dataAtual = LocalDate.now();
+		if(dataVencimento == null || dataVencimento.isBefore(dataAtual))
+		{
+			mensagem = "Data invalida";
+		}
+		else
+		{
+			mensagem = "Data valida";
+		}
+		
+		return mensagem;
+	}
 
 }

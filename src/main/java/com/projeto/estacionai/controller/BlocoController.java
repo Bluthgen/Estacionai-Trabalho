@@ -108,7 +108,12 @@ public class BlocoController {
 				SecurityContextHolder.getContext().getAuthentication().getName()));
 		mv.addObject("bloco", bloco);
 		mv.addObject("vagas", vagaService.buscarVagasPorBloco(bloco));
-		mv.addObject("numAdd", Integer.valueOf(1));
+		if(bloco.getAddVagas() == null) {
+			bloco.setAddVagas(1);
+		}
+		if(bloco.getNumVagas() == null) {
+			bloco.setNumVagas(0);
+		}
 		return mv;
 //		return novo(service.buscar(id));
 	}
@@ -153,7 +158,8 @@ public class BlocoController {
 				vagaService.salvar(vaga);
 				dono.setNumVagas(dono.getNumVagas() + 1);
 				service.salvar(dono);
-			}
+			}else
+				break;
 		}
 		return new ModelAndView("redirect:/blocos/editar/" + bloco);
 	}
@@ -188,7 +194,15 @@ public class BlocoController {
 			
 		if(bloco.getId() == null)
 		{
-			
+			if(bloco.getAddVagas() == null) {
+				bloco.setAddVagas(1);
+			}
+			if(bloco.getNumVagas() == null) {
+				bloco.setNumVagas(0);
+			}
+			if(bloco.getMaxVagas() < 0) {
+				bloco.setMaxVagas(0);
+			}
 			service.salvar(bloco);
 //			Bloco ultimo = service.buscarUltimo();
 //			for (Vaga vaga : bloco.getVagas()) {

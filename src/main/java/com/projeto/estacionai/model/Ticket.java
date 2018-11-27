@@ -86,6 +86,9 @@ public class Ticket {
 	private Double total;
 	
 	private Boolean ativo;
+	
+	@Transient
+	private Integer tipoVeiculo;
         
 	
 	public Ticket(){}    
@@ -160,12 +163,17 @@ public class Ticket {
 		return cliente;
 	}
 
-
-
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
+	public Integer getTipoVeiculo() {
+		return tipoVeiculo;
+	}
+
+	public void setTipoVeiculo(Integer tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo;
+	}
 
 
 	@Override
