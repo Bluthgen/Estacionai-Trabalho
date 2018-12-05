@@ -69,13 +69,13 @@
 							 
 							 <div class="form-group">
 							 <label >*Numero máximo de vagas</label>
-							  <input type="number" class="form-control" th:field="*{maxVagas}"  placeholder="Numero máximo de vagas">		  
+							  <input id="mVagas" type="number" class="form-control" onkeyup="isValid()" th:field="*{maxVagas}"  placeholder="Numero máximo de vagas">		  
 							 </div>
 							 
 							 <hr />
 						
 							<div class="btn-group">
-							<button class="btn  btn-success" type="submit"><i class="fa fa-save"></i> Cadastrar</button>			
+							<button id="btn_cadastrar" disabled=disabled class="btn  btn-success" type="submit"><i class="fa fa-save"></i> Cadastrar</button>			
 							<a class="btn  btn-danger " role="group" th:href="@{/blocos}"><i class="fa fa-times"></i> Cancelar</a>
 							</div>
 						</form>
@@ -83,6 +83,18 @@
 				</div>
 			
 		</div>
+		
+		<script type="text/javascript">
+			function isValid(){
+				var maxVagas= document.getElementById("mVagas").value;
+				if(maxVagas == "" || maxVagas < 0 || maxVagas > 5000){
+					document.getElementById("btn_cadastrar").disabled = true;
+				}else{
+					document.getElementById("btn_cadastrar").disabled = false;
+				}
+			}
+		</script>
+		
 		</section>
 
 </body>

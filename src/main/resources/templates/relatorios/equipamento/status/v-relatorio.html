@@ -16,26 +16,20 @@
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
 			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
-			    <li class="breadcrumb-item active" aria-current="page">Relatórios de Movimentos de Clientes</li>
+			    <li class="breadcrumb-item active" aria-current="page">Relatórios de Equipamentos</li>
 			  </ol>
 			</nav>
 			
 			<div class="container">
-<!-- 			<form  th:object="${filtro}" th:action="@{/relatorios/equipamento}" method="POST"  -->
-<!-- 						class="form-default" > -->
+			<form  th:object="${filtro}" th:action="@{/relatorios/equipamento/status}" method="POST" 
+						class="form-default" >
 				<div class="form-row">
-					<div class="col"><h5>Pesquisar por periodo:</h5></div>
+					<div class="col"><h5>Pesquisar por tipo:</h5></div>
 					<div class="w-100"></div>
 				    <div class="col">
-				      <input type="text" class="form-control js-data"  placeholder="Informe a data de inicio">
+				      <input type="text" class="form-control" th:field="*{tipo}" placeholder="Informe o tipo do equipamento">
 				      <small class="form-text text-muted">
-						      	Exemplo: 10/10/2010
-						</small>
-				    </div>
-				    <div class="col">
-				      <input type="text" class="form-control js-data"  placeholder="Informe a data de fim">
-				      <small class="form-text text-muted">
-						      	Exemplo: 10/11/2010
+						      	Exemplo: Sensor
 						</small>
 				    </div>
 				    <div class="col">
@@ -48,7 +42,7 @@
 				    </div>
 				    
 				  </div>
-<!-- 				  </form> -->
+				  </form>
 			</div>
 
 			<div class="container">
@@ -75,27 +69,26 @@
 					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
 						<thead>
 							<tr>
-								<th>Nome</th>
-								<th>Valor</th>
+								<th>Id</th>
+								<th>Tipo</th>
+								<th>Descrição</th>
+								<th>Status</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="conta : ${contas}">
+							<tr th:each="equipamento : ${equipamentos}">
 
-								<td th:text=${conta.nome}>Nome</td>
+								<td th:text=${equipamento.id}>Id</td>
 								
-								<td th:text=${conta.valor}>Valor</td>
+								<td th:text=${equipamento.tipo}>Tipo</td>
 								
+								<td th:text=${equipamento.descricao}>Descrição</td>
 								
-							</tr>
-							
-							<tr th:if="${!contas.empty}">
-								<td><b>Total à pagar:</b></td>
-								<td th:text="${total}" ></td>
+								<td th:text=${equipamento.status}>Status</td>
 							</tr>
 
-							<tr th:if="${contas.empty}">
-								<td colspan="5">Nenhum relatorio com esse periodo</td>
+							<tr th:if="${equipamentos.empty}">
+								<td colspan="5">Nenhum equipamento encontrado!</td>
 							</tr>
 						</tbody>
 					</table>
@@ -117,23 +110,15 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form th:object="${filtroPdf}" th:action="@{/relatorios/movimento/gerarPdf}"
+					<form th:object="${filtroPdf}" th:action="@{/relatorios/equipamento/status/gerarPdf}"
 						method="POST" class="form-default form-horizontal">
 						<div class="modal-body">
 							<div class="form-group row justify-content-left">
-									<label for="dataInicioModal"
-										class="col-sm-4 col-form-label   text-right">Data de início</label>
+									<label for="tipoModal"
+										class="col-sm-4 col-form-label   text-right">Tipo</label>
 									<div class="controls col-sm-4">
-										<input type="text" th:field="*{dataInicio}"
-											class="form-control js-data" placeholder="dd/mm/yyyy"/>
-									</div>
-							</div>
-							<div class="form-group row justify-content-left">
-									<label for="dataFimModal"
-										class="col-sm-4 col-form-label   text-right">Data término</label>
-									<div class="controls col-sm-4 col-sm-4">
-										<input type="text"
-											class="form-control js-data" th:field="*{dataFim}" placeholder="dd/mm/yyyy"/>
+										<input type="text" th:field="*{tipo}"
+											class="form-control" placeholder=""/>
 									</div>
 							</div>
 						</div>
@@ -165,6 +150,7 @@
 				}
 			
 			</script>
+			
 			
 		</section>
 		

@@ -65,15 +65,15 @@
 						</div>
 					
 							<div id="cadastroM" class="form-group">
-								<a id="cadastroM_I" th:href="@{/blocos/vaga/novo/{bloco}/{tipo}/{num}(bloco=${bloco.id},tipo=1,num=${bloco.addVagas})}" class="btn btn-block  btn-primary" style="color: white;" th:if="${bloco.numVagas + bloco.addVagas <= bloco.maxVagas && bloco.addVagas > 0}"><i class="fa fa-motorcycle"></i> Adicionar <span th:text="${bloco.addVagas}">1</span> vaga<span th:if="${bloco.addVagas > 1}">s</span> para Motos</a>
+								<a id="cadastroM_I" th:href="@{/blocos/vaga/novo/{bloco}/{tipo}/{num}(bloco=${bloco.id},tipo=1,num=${bloco.addVagas})}" class="btn btn-block  btn-primary" style="color: white;" th:if="${bloco.numVagas + bloco.addVagas <= bloco.maxVagas && bloco.addVagas > 0 && bloco.numVagas >= 0}"><i class="fa fa-motorcycle"></i> Adicionar <span th:text="${bloco.addVagas}">1</span> vaga<span th:if="${bloco.addVagas > 1}">s</span> para Motos</a>
 							</div>
 							
 							<div id="cadastroC" class="form-group">
-								<a id="cadastroC_I" th:href="@{/blocos/vaga/novo/{bloco}/{tipo}/{num}(bloco=${bloco.id},tipo=2,num=${bloco.addVagas})}" class="btn btn-block  btn-success" style="color: white;" th:if="${bloco.numVagas + bloco.addVagas <= bloco.maxVagas && bloco.addVagas > 0}"><i class="fa fa-car"></i> Adicionar <span th:text="${bloco.addVagas}">1</span> vaga<span th:if="${bloco.addVagas > 1}">s</span> para Carros</a>
+								<a id="cadastroC_I" th:href="@{/blocos/vaga/novo/{bloco}/{tipo}/{num}(bloco=${bloco.id},tipo=2,num=${bloco.addVagas})}" class="btn btn-block  btn-success" style="color: white;" th:if="${bloco.numVagas + bloco.addVagas <= bloco.maxVagas && bloco.addVagas > 0 && bloco.numVagas >= 0}"><i class="fa fa-car"></i> Adicionar <span th:text="${bloco.addVagas}">1</span> vaga<span th:if="${bloco.addVagas > 1}">s</span> para Carros</a>
 							</div>
 							
 							<div id="cadastroD" class="form-group">
-								<a id="cadastroD_I" th:href="@{/blocos/vaga/novo/{bloco}/{tipo}/{num}(bloco=${bloco.id},tipo=3,num=${bloco.addVagas})}" class="btn btn-block  btn-warning" style="color: white;" th:if="${bloco.numVagas + bloco.addVagas <= bloco.maxVagas && bloco.addVagas > 0}"><i class="fab fa-accessible-icon" ></i> Adicionar <span th:text="${bloco.addVagas}">1</span> vaga<span th:if="${bloco.addVagas > 1}">s</span> para Deficientes Físicos</a>
+								<a id="cadastroD_I" th:href="@{/blocos/vaga/novo/{bloco}/{tipo}/{num}(bloco=${bloco.id},tipo=3,num=${bloco.addVagas})}" class="btn btn-block  btn-warning" style="color: white;" th:if="${bloco.numVagas + bloco.addVagas <= bloco.maxVagas && bloco.addVagas > 0 && bloco.numVagas >= 0}"><i class="fab fa-accessible-icon" ></i> Adicionar <span th:text="${bloco.addVagas}">1</span> vaga<span th:if="${bloco.addVagas > 1}">s</span> para Deficientes Físicos</a>
 							</div>
 						
 							<input type="hidden" th:field="*{id}" value="${bloco.id}" />
@@ -90,7 +90,7 @@
 							 
 							 <div class="form-group">
 							 <label >*Numero de vagas a serem adicionadas por vez</label>
-							  <input id="numA" type="text" class="form-control" th:field="*{addVagas}" placeholder="1">		  
+							  <input id="numA" type="text" onkeyup="isValid()" class="form-control" th:field="*{addVagas}" placeholder="1">		  
 							 </div>
 							 
 							 <div class="form-group">
@@ -101,7 +101,7 @@
 							<hr />
 		
 							<div class="btn-group">
-								<button class="btn  btn-success" type="submit"><i class="fa fa-save"></i> Salvar</button>
+								<button id="btn_cadastrar" class="btn  btn-success" type="submit"><i class="fa fa-save"></i> Salvar</button>
 								<a class="btn  btn-danger " role="group" th:href="@{/blocos}"><i class="fa fa-times"></i> Cancelar</a>
 							</div>
 						</form>
@@ -159,9 +159,16 @@
 					</div>
 				</div>
 			</div>
-			<script type="text/javascript" th:inline="javascript">
-			
-			</script>
+			<script type="text/javascript">
+			function isValid(){
+				var addVagas= document.getElementById("numA").value;
+				if(addVagas == "" || addVagas < 0 || addVagas > 5000){
+					document.getElementById("btn_cadastrar").disabled = true;
+				}else{
+					document.getElementById("btn_cadastrar").disabled = false;
+				}
+			}
+		</script>
 		</section>
 		
 

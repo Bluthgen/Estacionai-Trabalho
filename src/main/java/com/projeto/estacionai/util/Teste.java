@@ -1,5 +1,6 @@
 package com.projeto.estacionai.util;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import com.projeto.estacionai.model.Ticket;
@@ -13,7 +14,8 @@ public class Teste {
 		Ticket esta = new Ticket();
 		esta.setHorarioSaida(LocalDateTime.now().plusMinutes(150));
 		esta.setHorarioChegada(LocalDateTime.now());
-		System.out.println(new TicketService().calcularTotal(esta));
+		Double tempoGasto = Double.parseDouble(String.valueOf(Duration.between(esta.getHorarioChegada(), esta.getHorarioSaida()).toMinutes()));	
+		System.out.println(new TicketService().calcularTotal(tempoGasto));;
 
 	}
 

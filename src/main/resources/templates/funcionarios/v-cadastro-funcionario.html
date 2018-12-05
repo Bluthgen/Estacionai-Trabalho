@@ -144,7 +144,7 @@
 
 					<div class="btn-group">
 						<button id="btn_cadastrar" class="btn  btn-success" disabled="disabled" role="group" th:if="${funcionario.id == null}" type="submit"> <i class="fa fa-save"></i> Cadastrar</button>
-						<button class="btn  btn-success" th:if="${funcionario.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
+						<button id= "btn_atualizar" class="btn  btn-success" th:if="${funcionario.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
 						<a class="btn  btn-danger " role="group" th:href="@{/funcionarios}"><i class="fa fa-times"></i> Cancelar</a>
 					</div>
 				</form>
@@ -194,16 +194,19 @@
 					if(senha == senhaConfirm)
 						{
 							document.getElementById("btn_cadastrar").disabled = false;
+							document.getElementById("btn_atualizar").disabled = false;
 						
 						}
 						else
 						{
 							document.getElementById("btn_cadastrar").disabled = true;
+							document.getElementById("btn_atualizar").disabled = true;
 						}
 				}
 				else
 				{
 					document.getElementById("btn_cadastrar").disabled = true;
+					document.getElementById("btn_atualizar").disabled = true;
 				}
 				
 			}
