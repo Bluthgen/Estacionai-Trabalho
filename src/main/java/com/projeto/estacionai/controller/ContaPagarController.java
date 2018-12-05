@@ -47,6 +47,7 @@ public class ContaPagarController {
 	{	
 		//verifica e seta a conta como atrasada
 		LocalDate dataAtual = LocalDate.now();
+		filtro.setAtivo(true);
 		List<ContaPagar> contas = this.search.filtrar(filtro);
 		int i =0;
 		for (ContaPagar contaPagar : contas) {
@@ -58,7 +59,7 @@ public class ContaPagarController {
 		}
 		
 		ModelAndView mv = new ModelAndView("contas/pagar/v-conta-pagar");
-		filtro.setAtivo(true);
+		
 		mv.addObject("contas", contas);
 		mv.addObject("filtro", filtro);
 		

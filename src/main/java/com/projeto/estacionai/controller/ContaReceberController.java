@@ -48,6 +48,7 @@ public class ContaReceberController {
 	{	
 		//verifica e seta a conta como atrasada
 		LocalDate dataAtual = LocalDate.now();
+		filtro.setAtivo(true);
 		List<ContaReceber> contas = this.search.filtrar(filtro);
 		int i =0;
 		for (ContaReceber contaReceber : contas) {
@@ -59,7 +60,7 @@ public class ContaReceberController {
 		}
 		
 		ModelAndView mv = new ModelAndView("contas/receber/v-conta-receber");
-		filtro.setAtivo(true);
+		
 		mv.addObject("contas", contas);
 		mv.addObject("filtro", filtro);
 		return mv;

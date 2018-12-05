@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.projeto.estacionai.model.Cliente;
 import com.projeto.estacionai.model.Veiculo;
  
 /**
@@ -20,7 +21,7 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 	
 	public Veiculo findByPlaca(String placa);
 	
-	public List<Veiculo> findByCliente(Long id);
+	public List<Veiculo> findByCliente(Cliente cliente);
 	
 	public List<Veiculo> findByAtivoTrue();
 

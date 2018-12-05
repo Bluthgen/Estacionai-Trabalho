@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projeto.estacionai.model.Cliente;
 import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.repository.VeiculoRepository;
 
@@ -52,9 +53,9 @@ public class VeiculoService {
 		return this.repository.getOne(id);
 	}
 	
-	public List<Veiculo> buscarPorCliente(Long id)
+	public List<Veiculo> buscarPorCliente(Cliente cliente)
 	{
-		return this.repository.findByCliente(id);
+		return this.repository.findByCliente(cliente);
 	}
 	
 	public List<Veiculo> buscarEspecifico(Veiculo veiculo)

@@ -2,6 +2,8 @@ package com.projeto.estacionai;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +42,13 @@ public class VeiculoTeste extends EstacionaiApplicationTests {
 	}
 	
 	@Test
+	@Transactional
 	public void buscarVeiculoPorCliente()
 	{
 		Cliente cliente = new Cliente();
 		cliente.setId(2L);
 		
-		List<Veiculo> veiculos = service.buscarPorCliente(cliente.getId());
+		List<Veiculo> veiculos = service.buscarPorCliente(cliente);
 		for (Veiculo veiculo : veiculos) {
 			Assertions.assertThat(veiculo.getCliente().getId()).isEqualTo(cliente.getId());
 		}
@@ -53,6 +56,7 @@ public class VeiculoTeste extends EstacionaiApplicationTests {
 	}
 	
 	@Test
+	@Transactional
 	public void remover()
 	{
 		Long id = 3L;
@@ -60,10 +64,11 @@ public class VeiculoTeste extends EstacionaiApplicationTests {
 		
 		service.deletar(pesquisado);
 		Veiculo veiculo = service.buscar(id);
-		Assertions.assertThat(veiculo.getAtivo()).isEqualTo(0);
+		Assertions.assertThat(veiculo.getAtivo()).isEqualTo(false);
 	}
 	
 	@Test
+	@Transactional
 	public void atualizar()
 	{
 		
