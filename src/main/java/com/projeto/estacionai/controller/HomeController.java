@@ -132,7 +132,8 @@ public class HomeController {
 		Double tempoGasto = Double.parseDouble(String.valueOf(Duration.between(ticket.getHorarioChegada(), ticket.getHorarioSaida()).toMinutes()));	
 		Double total = this.service.calcularTotal(tempoGasto);
 		
-		if(total == (-1.0))
+		
+		if(total <= (0.0))
 		{
 			attributes.addFlashAttribute("erro", "Tempo Gasto inválido!");
 			return new ModelAndView("redirect:/home");

@@ -68,10 +68,6 @@ public class TicketService {
 		{		
 			total = (13.0 + (1.75 * ( (tempoGasto - 120) / 15.0)));
 		}
-		else
-		{
-			total = -1.0;
-		}
 		
 		return total;
 		

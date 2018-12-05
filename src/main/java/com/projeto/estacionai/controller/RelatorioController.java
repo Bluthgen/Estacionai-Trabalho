@@ -129,43 +129,34 @@ public class RelatorioController {
 		return gerarRelatorioMovimento(filtro, tipoRelatorio, mv);
 	}
 	
-	public  ModelAndView gerarRelatorioMovimento(MovimentoCliente filtro, Integer tipoRelatorio, ModelAndView mv)
-	{
-		if(tipoRelatorio == 1)
-		{
+	public  ModelAndView gerarRelatorioMovimento(MovimentoCliente filtro, Integer tipoRelatorio, ModelAndView mv) {
+		if(tipoRelatorio == 1) {
 			filtro.setCliente(null);
-			if(filtro.getDataFim() != null && filtro.getDataInicio() != null)
-			{
+			if(filtro.getDataFim() != null && filtro.getDataInicio() != null){
 				List<RelatorioMovimentoTipo1> lista= this.serviceMovimento.buscarMaisUtilizaramEstacionamentoComData(filtro.getDataInicio(), filtro.getDataFim());
 				mv.addObject("relatorio1", lista);
 			}
-			else
-			{
+			else {
 				List<RelatorioMovimentoTipo1> lista= this.serviceMovimento.buscarMaisUtilizaramEstacionamento();
 				mv.addObject("relatorio1", lista);
 			}
 			
 		}
-		else if(tipoRelatorio == 2)
-		{
+		else if(tipoRelatorio == 2){
 			
-			if(filtro.getCliente() != null && !filtro.getCliente().getCpf().equals(""))
-			{
+			if(filtro.getCliente() != null && !filtro.getCliente().getCpf().equals("")){
 				Cliente cliente = this.serviceCliente.buscarPorCpf(filtro.getCliente().getCpf());
 				filtro.setCliente(cliente);
 				mv.addObject("relatorio2", searchMovimento.filtrar(filtro));
 			}
-			else
-			{
+			else{
 				mv.addObject("relatorio2", new ArrayList<MovimentoCliente>());
 			}
 			
 		}
-		else if(tipoRelatorio == 3)
-		{
+		else if(tipoRelatorio == 3){
 			filtro.setCliente(null);
-			if(filtro.getDataFim() != null && filtro.getDataInicio() != null)
-			{
+			if(filtro.getDataFim() != null && filtro.getDataInicio() != null){
 				List<RelatorioMovimentoTipo3> lista= this.serviceMovimento.buscarClientesMaisUtilizaramEstacionamentoComData(filtro.getDataInicio(), filtro.getDataFim());
 				mv.addObject("relatorio3", lista);
 			}
@@ -175,8 +166,7 @@ public class RelatorioController {
 			mv.addObject("relatorio3", lista);
 			}
 		}
-		else if(tipoRelatorio == 4)
-		{
+		else{
 			filtro.setCliente(null);
 			mv.addObject("contas", searchMovimento.filtrar(filtro));
 		}

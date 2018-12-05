@@ -42,7 +42,7 @@ public class ObserverTeste extends EstacionaiApplicationTests {
 	{
 		String placa = "asd-2342";
 		this.ticket = this.service.buscarTicket(placa);
-	    Assertions.assertThat(ticket.getPlaca()).isEqualTo(placa);
+	    Assertions.assertThat(ticket.getPlaca()).isEqualTo("asd-2342");
 	}
 	
 	@Test
